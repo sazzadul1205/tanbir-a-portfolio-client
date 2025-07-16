@@ -17,3 +17,8 @@
 .Inter {
   font-family: "Inter", serif;
 }
+
+.writing-vertical {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
