@@ -4,7 +4,7 @@ import { useRef, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 // Assets
-import mouse from "../../../assets/Subtract.png";
+import mouse from "../../assets/Subtract.png";
 
 const Works = ({ setActiveDot, TOTAL_DOTS }) => {
   const scrollRef = useRef(null);

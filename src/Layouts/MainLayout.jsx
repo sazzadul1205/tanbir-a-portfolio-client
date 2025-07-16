@@ -1,10 +1,18 @@
 import { useState } from "react";
-import Works from "../Pages/Home/Works/Works";
-import Navbar from "../Shared/Navbar/Navbar";
+
+// Shared
 import PageNav from "../Shared/PageNav/PageNav";
+import Navbar from "../Shared/Navbar/Navbar";
+
+// Pages
+import Works from "../Pages/Works/Works";
+import Home from "../Pages/Home/Home";
 
 const MainLayout = () => {
+  // State
   const [activeDot, setActiveDot] = useState(0);
+
+  // Constants
   const TOTAL_DOTS = 6; // fixed number of dots
 
   return (
@@ -15,7 +23,7 @@ const MainLayout = () => {
 
       <PageNav TOTAL_DOTS={TOTAL_DOTS} activeDot={activeDot} />
 
-      
+      <Home />
     </div>
   );
 };

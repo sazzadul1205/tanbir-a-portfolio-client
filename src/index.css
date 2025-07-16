@@ -14,6 +14,11 @@
   }
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+
 .Inter {
   font-family: "Inter", serif;
 }
@@ -21,4 +26,19 @@
 .writing-vertical {
   writing-mode: vertical-rl;
   text-orientation: mixed;
+}
+
+
+.custom-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -10px;
+  /* Adjust distance below text */
+  height: 3px;
+  /* Thickness of underline */
+  background-color: #2FA94C;
+  /* Green underline */
+  border-radius: 2px;
 }
