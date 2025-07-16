@@ -1,5 +1,7 @@
 
+import Works from "../Pages/Home/Works/Works";
 import Navbar from "../Shared/Navbar/Navbar";
+import PageNav from "../Shared/PageNav/PageNav";
 
 const MainLayout = () => {
   return (
@@ -7,6 +9,9 @@ const MainLayout = () => {
       <Navbar />
 
       <Works />
+
+      <PageNav />
+
     </div>
   );
 };

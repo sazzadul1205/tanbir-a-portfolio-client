@@ -1,30 +1,31 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-const Navbar = () => {
+const PageNav = () => {
   const menuData = [
-    { label: "HTML5 DISPLAY", path: "/" },
-    { label: "HTML5 DYNAMIC", path: "/about" },
-    { label: "SOCIAL MEDIA", path: "/contact" },
-    { label: "GIF", path: "/gif" },
-    { label: "GENERATIVE AI", path: "/ai" },
-    { label: "ME", path: "/me" },
+    { label: "ABOUT ME", path: "/" },
+    { label: "MY SERVICES", path: "/about" },
+    { label: "TOOLS & TECHNOLOGIES", path: "/contact" },
+    { label: "CONTACT", path: "/gif" },
+    { label: "WHY HIRE ME?", path: "/ai" },
   ];
 
   return (
-    <div className="navbar bg-[#0F172A] border-b border-gray-600 shadow-sm text-white">
-      <div className="navbar max-w-[1200px] mx-auto h-[110px]">
+    <div className="shadow-sm text-white">
+      <div className="navbar py-1  max-w-[1200px] mx-auto">
         {/* Left Brand */}
-        <div className="navbar-start">
-          <p className="text-xl font-semibold tracking-wide">TANBIR A.</p>
+        <div className="navbar-start justify-end gap-2 pr-10">
+            <span className="p-1 bg-[#33BD51] rounded-full w-2 h-2" />
+            <span className="p-1 bg-gray-200 rounded-full w-2 h-2" />
+            <span className="p-1 bg-gray-200 rounded-full w-2 h-2" />
+            <span className="p-1 bg-gray-200 rounded-full w-2 h-2" />
+            <span className="p-1 bg-gray-200 rounded-full w-2 h-2" />
+            <span className="p-1 bg-gray-200 rounded-full w-2 h-2" />
         </div>
 
         {/* Center Menu */}
-        <div className="navbar-center hidden lg:flex flex-col">
-          <h3 className="text-[22px] font-medium uppercase">
-            Digital Advertising Production
-          </h3>
-          <ul className="flex items-center space-x-4 mt-2">
+        <div className="navbar-center hidden lg:flex flex-col py-1">
+          <ul className="flex items-center space-x-4">
             {menuData.map((item, index) => (
               <React.Fragment key={index}>
                 <li className="relative group">
@@ -32,7 +33,7 @@ const Navbar = () => {
                     to={item.path}
                     // eslint-disable-next-line no-unused-vars
                     className={({ isActive }) =>
-                      `relative text-sm tracking-wide px-2 py-1`
+                      `relative text-sm tracking-wide px-2`
                     }
                   >
                     {({ isActive }) => (
@@ -56,15 +57,10 @@ const Navbar = () => {
         </div>
 
         {/* Right Badge */}
-        <div className="navbar-end">
-          <div className="flex items-center gap-2 bg-white text-black py-1 px-5 rounded-full">
-            <span className="p-1 bg-[#33BD51] rounded-full w-2 h-2" />
-            <p className="text-sm font-medium">Available Now</p>
-          </div>
-        </div>
+        <div className="navbar-end" />
       </div>
     </div>
   );
 };
 
-export default Navbar;
+export default PageNav;
