@@ -1,7 +1,10 @@
-import React from "react";
 import { NavLink } from "react-router-dom";
+import React from "react";
 
-const PageNav = () => {
+// Prop Types
+import PropTypes from "prop-types";
+
+const PageNav = ({ TOTAL_DOTS, activeDot }) => {
   const menuData = [
     { label: "ABOUT ME", path: "/" },
     { label: "MY SERVICES", path: "/about" },
@@ -13,14 +16,16 @@ const PageNav = () => {
   return (
     <div className="shadow-sm text-white">
       <div className="navbar py-1  max-w-[1200px] mx-auto">
-        {/* Left Brand */}
-        <div className="navbar-start justify-end gap-2 pr-10">
-            <span className="p-1 bg-[#33BD51] rounded-full w-2 h-2" />
-            <span className="p-1 bg-gray-200 rounded-full w-2 h-2" />
-            <span className="p-1 bg-gray-200 rounded-full w-2 h-2" />
-            <span className="p-1 bg-gray-200 rounded-full w-2 h-2" />
-            <span className="p-1 bg-gray-200 rounded-full w-2 h-2" />
-            <span className="p-1 bg-gray-200 rounded-full w-2 h-2" />
+        {/* Left Brand - dot indicators */}
+        <div className="navbar-start justify-end gap-2 pr-10 flex mt-4">
+          {[...Array(TOTAL_DOTS)].map((_, i) => (
+            <span
+              key={i}
+              className={`p-1 rounded-full w-2 h-2 ${
+                i === activeDot ? "bg-[#33BD51]" : "bg-gray-200"
+              }`}
+            />
+          ))}
         </div>
 
         {/* Center Menu */}
@@ -61,6 +66,12 @@ const PageNav = () => {
       </div>
     </div>
   );
+};
+
+// Prop Validation
+PageNav.propTypes = {
+  TOTAL_DOTS: PropTypes.number.isRequired,
+  activeDot: PropTypes.number.isRequired,
 };
 
 export default PageNav;

@@ -13,6 +13,19 @@ const Navbar = () => {
 
   return (
     <div className="navbar bg-[#0F172A] border-b border-gray-600 shadow-sm text-white">
+      <style>{`
+        @keyframes blink {
+          0%, 100% {
+            opacity: 1;
+            box-shadow: 0 0 6px 2px #33BD51;
+          }
+          50% {
+            opacity: 0.3;
+            box-shadow: none;
+          }
+        }
+      `}</style>
+
       <div className="navbar max-w-[1200px] mx-auto h-[110px]">
         {/* Left Brand */}
         <div className="navbar-start">
@@ -30,8 +43,7 @@ const Navbar = () => {
                 <li className="relative group">
                   <NavLink
                     to={item.path}
-                    // eslint-disable-next-line no-unused-vars
-                    className={({ isActive }) =>
+                    className={() =>
                       `relative text-sm tracking-wide px-2 py-1`
                     }
                   >
@@ -58,7 +70,13 @@ const Navbar = () => {
         {/* Right Badge */}
         <div className="navbar-end">
           <div className="flex items-center gap-2 bg-white text-black py-1 px-5 rounded-full">
-            <span className="p-1 bg-[#33BD51] rounded-full w-2 h-2" />
+            <span
+              className="p-1 bg-[#33BD51] rounded-full w-2 h-2"
+              style={{
+                animation: "blink 1.5s infinite",
+                animationTimingFunction: "ease-in-out",
+              }}
+            />
             <p className="text-sm font-medium">Available Now</p>
           </div>
         </div>

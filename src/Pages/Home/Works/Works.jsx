@@ -1,25 +1,33 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
+
+// Prop Types
+import PropTypes from "prop-types";
+
+// Assets
 import mouse from "../../../assets/Subtract.png";
 
-const Works = () => {
+const Works = ({ setActiveDot, TOTAL_DOTS }) => {
   const scrollRef = useRef(null);
   const isScrolling = useRef(false);
   const scrollVelocity = useRef(0);
   const containerWidth = useRef(0);
+
+  // Modal state
+  // eslint-disable-next-line no-unused-vars
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
 
   const smoothScroll = () => {
     if (!scrollRef.current) return;
 
     const scrollEl = scrollRef.current;
 
-    // Infinite scroll wrap logic
     if (scrollEl.scrollLeft >= containerWidth.current) {
       scrollEl.scrollLeft -= containerWidth.current;
     } else if (scrollEl.scrollLeft < 0) {
       scrollEl.scrollLeft += containerWidth.current;
     }
 
-    // Stop scrolling if velocity is very low
     if (Math.abs(scrollVelocity.current) < 0.1) {
       scrollVelocity.current = 0;
       isScrolling.current = false;
@@ -27,26 +35,44 @@ const Works = () => {
     }
 
     scrollEl.scrollLeft += scrollVelocity.current;
-
-    // Friction for smooth slowdown
     scrollVelocity.current *= 0.92;
 
+    updateActiveDot(scrollEl.scrollLeft);
+
     requestAnimationFrame(smoothScroll);
+  };
+
+  const updateActiveDot = (scrollLeft) => {
+    if (!containerWidth.current || !scrollRef.current) return;
+
+    // Calculate scroll progress from 0 to 1 (wraps around containerWidth)
+    let progress = scrollLeft / containerWidth.current;
+    if (progress < 0) progress = 0;
+    if (progress > 1) progress = 1;
+
+    // Determine which dot is active
+    const dotIndex = Math.min(
+      TOTAL_DOTS - 1,
+      Math.floor(progress * TOTAL_DOTS)
+    );
+
+    setActiveDot(dotIndex);
   };
 
   useEffect(() => {
     const el = scrollRef.current;
     if (!el) return;
 
-    containerWidth.current = el.scrollWidth / 2; // doubled items
+    containerWidth.current = el.scrollWidth / 2;
+
+    // Initial active dot set
+    updateActiveDot(el.scrollLeft);
 
     const handleWheel = (e) => {
       e.preventDefault();
 
-      // Adjust scroll speed multiplier here to tune speed
       scrollVelocity.current += e.deltaY * 0.6;
 
-      // Clamp velocity for control
       if (scrollVelocity.current > 10) scrollVelocity.current = 10;
       if (scrollVelocity.current < -10) scrollVelocity.current = -10;
 
@@ -61,6 +87,7 @@ const Works = () => {
     return () => {
       el.removeEventListener("wheel", handleWheel);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Sample data
@@ -73,6 +100,13 @@ const Works = () => {
 
   // Double the items array for infinite scroll
   const doubledItems = [...items, ...items];
+
+  const openModal = (item) => {
+    setSelectedItem(item);
+    setIsModalOpen(true);
+    const modal = document.getElementById("my_modal_2");
+    if (modal) modal.showModal();
+  };
 
   return (
     <div className="relative pt-10 bg-[#0F172A] text-white">
@@ -105,7 +139,7 @@ const Works = () => {
 
       <div
         ref={scrollRef}
-        className="pb-10 overflow-hidden"
+        className="overflow-hidden"
         style={{
           overflowX: "auto",
           scrollbarWidth: "none",
@@ -119,27 +153,30 @@ const Works = () => {
           }
         `}</style>
 
-        <div className="flex gap-1 w-max">
+        <div className="flex gap-1 w-max items-center">
           {doubledItems.map((item, idx) =>
             item.type === "single" ? (
               <div
                 key={idx} // idx instead of item.id because of duplicates
-                className="h-[600px] w-[400px] flex items-center justify-center rounded text-black text-xl font-semibold"
+                className="h-[600px] w-[400px] flex items-center justify-center rounded text-black text-xl font-semibold cursor-pointer"
                 style={{ backgroundColor: item.color }}
+                onClick={() => openModal(item)}
               >
                 {item.label}
               </div>
             ) : (
               <div key={idx} className="flex flex-col gap-1">
                 <div
-                  className="h-[300px] w-[400px] flex items-center justify-center rounded text-black text-xl font-semibold"
+                  className="h-[300px] w-[400px] flex items-center justify-center rounded text-black text-xl font-semibold cursor-pointer"
                   style={{ backgroundColor: item.color }}
+                  onClick={() => openModal(item)}
                 >
                   {item.label} Top
                 </div>
                 <div
-                  className="h-[300px] w-[400px] flex items-center justify-center rounded text-black text-xl font-semibold"
+                  className="h-[300px] w-[400px] flex items-center justify-center rounded text-black text-xl font-semibold cursor-pointer"
                   style={{ backgroundColor: item.color }}
+                  onClick={() => openModal(item)}
                 >
                   {item.label} Bottom
                 </div>
@@ -148,8 +185,27 @@ const Works = () => {
           )}
         </div>
       </div>
+
+      {/* Modal */}
+      <dialog id="my_modal_2" className="modal">
+        <div className="modal-box">
+          <h3 className="font-bold text-lg">
+            {selectedItem ? selectedItem.label : "No item selected"}
+          </h3>
+          <p className="py-4">This is more detail about the block.</p>
+        </div>
+        <form method="dialog" className="modal-backdrop">
+          <button onClick={() => setIsModalOpen(false)}>close</button>
+        </form>
+      </dialog>
     </div>
   );
+};
+
+// Prop Validation
+Works.propTypes = {
+  TOTAL_DOTS: PropTypes.number.isRequired,
+  setActiveDot: PropTypes.number.isRequired,
 };
 
 export default Works;
