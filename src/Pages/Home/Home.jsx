@@ -1,6 +1,8 @@
+// Components
+import Tools from "./Tools/Tools";
 import AboutMe from "./AboutMe/AboutMe";
 import MyServices from "./MyServices/MyServices";
-import Tools from "./Tools/Tools";
+import WhyHireMe from "./WhyHireMe/WhyHireMe";
 
 const Home = () => {
   return (
@@ -10,6 +12,8 @@ const Home = () => {
       <MyServices id="my-services" />
 
       <Tools id="tools" />
+
+      <WhyHireMe id="why-hire-me" />
     </div>
   );
 };

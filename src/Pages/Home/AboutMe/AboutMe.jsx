@@ -40,9 +40,9 @@ const AboutMe = () => {
       </div>
 
       {/* Button */}
-      <div className="flex justify-center gap-3">
+      <div className="flex justify-center gap-3 pt-10">
         {/* Start Your Project */}
-        <div className="flex items-center gap-2 bg-white text-black py-[6px] px-10 rounded-full">
+        <div className="flex items-center gap-2 bg-white text-black py-[8px] px-7 rounded-full">
           <span
             className="p-1 bg-[#33BD51] rounded-full w-2 h-2"
             style={{
@@ -50,11 +50,11 @@ const AboutMe = () => {
               animationTimingFunction: "ease-in-out",
             }}
           />
-          <p className="text-sm font-medium">Start Your Project</p>
+          <p className="text-sm font-semibold inter">Hire Me Now</p>
         </div>
 
         {/* Whats App Now */}
-        <div className="flex items-center gap-2 bg-white text-black py-[6px] px-10 rounded-full">
+        <div className="flex items-center gap-2 bg-white text-black py-[8px] px-7 rounded-full">
           <span
             className="p-1 bg-[#33BD51] rounded-full w-2 h-2"
             style={{
@@ -62,7 +62,7 @@ const AboutMe = () => {
               animationTimingFunction: "ease-in-out",
             }}
           />
-          <p className="text-sm font-medium">WhatsApp Now</p>
+          <p className="text-sm font-semibold inter">WhatsApp Now</p>
         </div>
       </div>
 
