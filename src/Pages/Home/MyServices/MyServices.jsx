@@ -37,7 +37,7 @@ const services = [
 
 const MyServices = () => {
   return (
-    <div>
+    <div className="pb-10" >
       {/* Title */}
       <h3 className="inter text-[40px] font-semibold text-center py-10">
         My Services Include
