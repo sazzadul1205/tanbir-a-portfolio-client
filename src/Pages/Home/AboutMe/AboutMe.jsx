@@ -1,3 +1,5 @@
+import Desktop from "../../../assets/Desktop.png";
+
 const AboutMe = () => {
   return (
     <div className="py-10">
@@ -62,6 +64,15 @@ const AboutMe = () => {
           />
           <p className="text-sm font-medium">WhatsApp Now</p>
         </div>
+      </div>
+
+      {/* images */}
+      <div className="mx-auto max-w-7xl px-4">
+        <img
+          src={Desktop}
+          alt="Default Desktop"
+          className="w-full max-w-[1200px] mx-auto rounded-md shadow-md"
+        />
       </div>
     </div>
   );
