@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Italianno&display=swap');
 
 @import "tailwindcss";
 @plugin "daisyui";
@@ -41,4 +42,9 @@ html {
   background-color: #2FA94C;
   /* Green underline */
   border-radius: 2px;
+}
+
+.italianno-regular {
+  font-family: "Italianno", cursive;
+  font-weight: 400;
 }
