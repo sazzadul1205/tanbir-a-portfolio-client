@@ -1,10 +1,11 @@
 // Assets
 import Icon from "../../../assets/Tools/Icon.png";
 import Frame from "../../../assets/Tools/Frame.png";
+import PropTypes from "prop-types";
 
-const Tools = () => {
+const Tools = ({ id }) => {
   return (
-    <div className="bg-white">
+    <section id={id} className="bg-white">
       {/* Title */}
       <h3 className="inter font-semibold text-[40px] text-center text-black pt-10">
         Tools & Technologies I Use
@@ -28,8 +29,12 @@ const Tools = () => {
           className="absolute w-[800px] h-[400px] -translate-x-1/2 -translate-y-[55%] left-1/2 -bottom-8 z-10"
         />
       </div>
-    </div>
+    </section>
   );
+};
+
+Tools.propTypes = {
+  id: PropTypes.string.isRequired,
 };
 
 export default Tools;

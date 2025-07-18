@@ -1,16 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const PageNav = ({ TOTAL_DOTS, activeDot }) => {
-  // menuData should be passed as props, something like:
-  const menuData = [
-    { label: "ABOUT ME", id: "about-me" },
-    { label: "MY SERVICES", id: "my-services" },
-    { label: "TOOLS & TECHNOLOGIES", id: "tools-tech" },
-    { label: "CONTACT", id: "contact" },
-    { label: "WHY HIRE ME?", id: "why-hire-me" },
-  ];
-
+const PageNav = ({ TOTAL_DOTS, activeDot, menuData }) => {
   return (
     <div className="shadow-sm text-white">
       <div className="flex items-center justify-center gap-10 py-4 max-w-[1200px] mx-auto w-full">

@@ -15,13 +15,26 @@ const MainLayout = () => {
   // Constants
   const TOTAL_DOTS = 6; // fixed number of dots
 
+  // menuData should be passed as props, something like:
+  const menuData = [
+    { label: "ABOUT ME", id: "about-me" },
+    { label: "MY SERVICES", id: "my-services" },
+    { label: "TOOLS & TECHNOLOGIES", id: "tools-tech" },
+    { label: "CONTACT", id: "contact" },
+    { label: "WHY HIRE ME?", id: "why-hire-me" },
+  ];
+
   return (
     <div className="bg-[#0F172A]">
       <Navbar />
 
       <Works setActiveDot={setActiveDot} TOTAL_DOTS={TOTAL_DOTS} />
 
-      <PageNav TOTAL_DOTS={TOTAL_DOTS} activeDot={activeDot} />
+      <PageNav
+        TOTAL_DOTS={TOTAL_DOTS}
+        activeDot={activeDot}
+        menuData={menuData}
+      />
 
       <Home />
     </div>

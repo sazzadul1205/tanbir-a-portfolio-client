@@ -1,8 +1,8 @@
 import Desktop from "../../../assets/Desktop.png";
 
-const AboutMe = () => {
+const AboutMe = ({ id }) => {
   return (
-    <div className="py-10">
+    <section id={id} className="py-10">
       {/* Title */}
       <h4 className="text-[40px] font-semibold inter max-w-5xl text-center mx-auto leading-tight">
         Motion Graphics & High-Impact
@@ -74,7 +74,7 @@ const AboutMe = () => {
           className="w-full max-w-[1200px] mx-auto rounded-md shadow-md"
         />
       </div>
-    </div>
+    </section>
   );
 };
 

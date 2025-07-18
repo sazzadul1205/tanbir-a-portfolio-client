@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { FaArrowRight } from "react-icons/fa6";
 
 const whyHireMeData = [
@@ -35,9 +36,9 @@ const whyHireMeData = [
   },
 ];
 
-const WhyHireMe = () => {
+const WhyHireMe = ({ id }) => {
   return (
-    <div>
+    <section id={id}>
       {/* Title */}
       <h3 className="inter font-semibold text-[40px] text-center text-white pt-10">
         Why Hire Me?
@@ -97,8 +98,12 @@ const WhyHireMe = () => {
           <p className="text-sm font-semibold inter">WhatsApp Now</p>
         </div>
       </div>
-    </div>
+    </section>
   );
+};
+
+WhyHireMe.propTypes = {
+  id: PropTypes.string.isRequired,
 };
 
 export default WhyHireMe;

@@ -6,6 +6,7 @@ import Animation from "../../../assets/Services/Animation.png";
 import Scientific from "../../../assets/Services/Scientific.png";
 import SocialMedia from "../../../assets/Services/SocialMedia.png";
 import MotionGraphics from "../../../assets/Services/MotionGraphics.png";
+import PropTypes from "prop-types";
 
 const services = [
   {
@@ -35,9 +36,9 @@ const services = [
   },
 ];
 
-const MyServices = () => {
+const MyServices = ({ id }) => {
   return (
-    <div className="pb-10" >
+    <section id={id} className="pb-10">
       {/* Title */}
       <h3 className="inter text-[40px] font-semibold text-center py-10">
         My Services Include
@@ -55,14 +56,18 @@ const MyServices = () => {
               {service.title}
             </h3>
             <p className="w-[500px] text-lg inter">{service.desc}</p>
-            <div className="border border-gray-300 p-2 rounded-full transition-transform duration-500 rotate-[-45deg] hover:rotate-0 cursor-pointer">
-              <FaArrowRight />
+            <div className="border border-gray-300 p-4 rounded-full transition-transform duration-500 rotate-[-45deg] hover:rotate-0 cursor-pointer">
+              <FaArrowRight className="text-xl" />
             </div>
           </div>
         ))}
       </div>
-    </div>
+    </section>
   );
+};
+
+MyServices.propTypes = {
+  id: PropTypes.string.isRequired,
 };
 
 export default MyServices;
