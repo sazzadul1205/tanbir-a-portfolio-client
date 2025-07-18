@@ -177,6 +177,7 @@ const Testimonials = () => {
         </div>
       </div>
 
+      {/* Good To know  */}
       <div className="flex items-center justify-around py-7">
         <div className="flex flex-col text-center">
           <p className="italianno-regular text-5xl">1500 +</p>

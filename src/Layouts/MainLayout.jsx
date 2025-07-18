@@ -7,6 +7,7 @@ import Navbar from "../Shared/Navbar/Navbar";
 // Pages
 import Works from "../Pages/Works/Works";
 import Home from "../Pages/Home/Home";
+import Footer from "../Shared/Footer/Footer";
 
 const MainLayout = () => {
   // State
@@ -37,6 +38,8 @@ const MainLayout = () => {
       />
 
       <Home />
+
+    <Footer />
     </div>
   );
 };
