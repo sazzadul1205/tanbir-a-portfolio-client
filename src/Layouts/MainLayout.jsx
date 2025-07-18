@@ -19,9 +19,9 @@ const MainLayout = () => {
   const menuData = [
     { label: "ABOUT ME", id: "about-me" },
     { label: "MY SERVICES", id: "my-services" },
-    { label: "TOOLS & TECHNOLOGIES", id: "tools-tech" },
-    { label: "CONTACT", id: "contact" },
+    { label: "TOOLS & TECHNOLOGIES", id: "tools" },
     { label: "WHY HIRE ME?", id: "why-hire-me" },
+    { label: "TESTIMONIALS", id: "testimonials" },
   ];
 
   return (

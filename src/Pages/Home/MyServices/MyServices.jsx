@@ -6,8 +6,12 @@ import Animation from "../../../assets/Services/Animation.png";
 import Scientific from "../../../assets/Services/Scientific.png";
 import SocialMedia from "../../../assets/Services/SocialMedia.png";
 import MotionGraphics from "../../../assets/Services/MotionGraphics.png";
+
+// Prop Validation
 import PropTypes from "prop-types";
 
+
+// Services Data
 const services = [
   {
     icon: Animation,
