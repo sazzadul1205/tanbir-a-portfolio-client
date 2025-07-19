@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
+
+// Icons
 import { FaArrowRight, FaStar } from "react-icons/fa6";
 import { IoLocationOutline } from "react-icons/io5";
 import { MdOutlineShare } from "react-icons/md";
+
+// Assets
 import UpWorkICon from "../../../assets/UpWorkSymbol1.png";
 
 // Testimonial data
@@ -75,10 +79,12 @@ const Testimonials = () => {
       <div className="flex gap-4">
         {/* Sidebar */}
         <div className="w-1/4 flex flex-col gap-2">
+          {/* Title */}
           <h3 className="inter font-semibold text-lg bg-[#156E27] py-5 px-10">
             WHAT CUSTOMER SAY ABOUT ME
           </h3>
 
+          {/* Up Work Icon */}
           <div className="bg-[#174153]">
             <img
               src={UpWorkICon}
@@ -89,12 +95,16 @@ const Testimonials = () => {
 
           {/* Image */}
           <div className="bg-white py-1 px-3 flex items-center gap-3">
+            {/* Avatar */}
             <div className="avatar avatar-online">
               <div className="w-24 rounded-full">
                 <img src="https://img.daisyui.com/images/profile/demo/gordon@192.webp" />
               </div>
             </div>
+
+            {/* Information */}
             <div className="text-black">
+              
               <h3 className="font-semibold text-lg">TANBIR A.</h3>
               <div className="flex items-center gap-1">
                 <IoLocationOutline />
@@ -156,12 +166,17 @@ const Testimonials = () => {
                   <p>{testimonialData[currentIndex].priceType}</p>
                 </div>
 
-                <div className="absolute top-0 right-0 bg-[#0F172A] p-2">
-                  <div className="bg-white p-4 rounded-full">
-                    <FaArrowRight className="text-black text-xl transition-transform duration-300 rotate-[-45deg] hover:rotate-0" />
+                {/* Top-right arrow button */}
+                {/* Arrow at top-right */}
+                <div className="absolute top-0 right-0 z-20">
+                  <div className="bg-[#0F172A]  p-2">
+                    <div className="bg-white p-4 rounded-full cursor-pointer transition-transform duration-300 rotate-[-45deg] hover:rotate-0">
+                      <FaArrowRight className="text-black text-xl  " />
+                    </div>
                   </div>
                 </div>
 
+                {/* Available Now */}
                 <div className="absolute bottom-0 right-10 bg-[#0F172A] rounded-tl-3xl rounded-tr-3xl px-2 pt-2 overflow-hidden">
                   <div className="relative flex items-center gap-2 bg-white text-black py-[8px] px-7 rounded-full">
                     <span

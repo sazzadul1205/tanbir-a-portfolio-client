@@ -39,7 +39,7 @@ const MainLayout = () => {
 
       <Home />
 
-    <Footer />
+      <Footer />
     </div>
   );
 };
