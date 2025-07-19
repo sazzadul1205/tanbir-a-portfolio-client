@@ -1,62 +1,93 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
+import { FiMenu, FiX } from "react-icons/fi"; // ✅ React Icons
 
 const PageNav = ({ TOTAL_DOTS, activeDot, menuData }) => {
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  const scrollToSection = (id) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+      setMobileOpen(false);
+    }
+  };
+
   return (
-    <div className="shadow-sm text-white">
-      <div className="flex items-center justify-center gap-10 py-4 max-w-[1200px] mx-auto w-full">
-        {/* Dot Indicators */}
-        <div className="flex items-center justify-center gap-2">
+    <div className="bg-[#0F172A] text-white w-full z-40 shadow-sm">
+      <div className="flex items-center justify-between px-4 py-4 max-w-[1200px] mx-auto">
+        {/* Dot Indicators (Always Visible) */}
+        <div className="flex items-center gap-2">
           {[...Array(TOTAL_DOTS)].map((_, i) => (
             <span
               key={i}
-              className={`p-1 rounded-full w-2 h-2 ${
-                i === activeDot ? "bg-[#33BD51]" : "bg-gray-200"
+              className={`p-1 rounded-full w-2 h-2 transition ${
+                i === activeDot ? "bg-[#33BD51]" : "bg-gray-400"
               }`}
             />
           ))}
         </div>
 
-        {/* Navigation Menu */}
-        <div className="hidden lg:flex flex-col">
-          <ul className="flex items-center space-x-4">
-            {menuData.map((item, index) => (
-              <React.Fragment key={index}>
-                <li className="relative group">
-                  <a
-                    href={`#${item.id}`}
-                    className={`relative text-sm tracking-wide px-2 ${
-                      activeDot === index ? "font-bold" : ""
-                    }`}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      const el = document.getElementById(item.id);
-                      if (el) {
-                        el.scrollIntoView({
-                          behavior: "smooth",
-                          block: "start",
-                        });
-                      }
-                    }}
-                  >
-                    {item.label}
-                    <span
-                      className={`absolute left-1/2 -translate-x-1/2 bottom-[-4px] h-[1.5px] bg-white/50 transition-all duration-300 ${
-                        activeDot === index
-                          ? "w-full"
-                          : "w-0 group-hover:w-full"
-                      }`}
-                    />
-                  </a>
-                </li>
-                {index !== menuData.length - 1 && (
-                  <span className="text-gray-500 select-none">|</span>
-                )}
-              </React.Fragment>
-            ))}
-          </ul>
+        {/* Desktop Navigation */}
+        <div className="hidden lg:flex items-center space-x-4">
+          {menuData.map((item, index) => (
+            <React.Fragment key={index}>
+              <a
+                href={`#${item.id}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection(item.id);
+                }}
+                className={`relative text-sm tracking-wide px-2 ${
+                  activeDot === index ? "font-bold" : ""
+                }`}
+              >
+                {item.label}
+                <span
+                  className={`absolute left-1/2 -translate-x-1/2 bottom-[-4px] h-[1.5px] bg-white/50 transition-all duration-300 ${
+                    activeDot === index ? "w-full" : "w-0 hover:w-full"
+                  }`}
+                />
+              </a>
+              {index !== menuData.length - 1 && (
+                <span className="text-gray-500 select-none">|</span>
+              )}
+            </React.Fragment>
+          ))}
         </div>
+
+        {/* Mobile Menu Button */}
+        <button
+          className="lg:hidden text-white"
+          onClick={() => setMobileOpen((prev) => !prev)}
+        >
+          {mobileOpen ? <FiX size={24} /> : <FiMenu size={24} />}
+        </button>
       </div>
+
+      {/* Mobile Dropdown Menu */}
+      {mobileOpen && (
+        <div className="lg:hidden px-4 pb-4 space-y-3 border-t border-white/10 bg-[#0F172A]">
+          {menuData.map((item, index) => (
+            <div key={index}>
+              <a
+                href={`#${item.id}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection(item.id);
+                }}
+                className={`block text-sm tracking-wide ${
+                  activeDot === index
+                    ? "font-bold text-[#33BD51]"
+                    : "text-white"
+                }`}
+              >
+                {item.label}
+              </a>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

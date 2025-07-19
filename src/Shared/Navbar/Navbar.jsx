@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { FiMenu } from "react-icons/fi";
 
 const Navbar = () => {
   const menuData = [
@@ -12,7 +13,7 @@ const Navbar = () => {
   ];
 
   return (
-    <div className="navbar bg-[#0F172A] border-b border-gray-600 shadow-sm text-white">
+    <div className="bg-[#0F172A] border-b border-gray-600 shadow-sm text-white">
       <style>{`
         @keyframes blink {
           0%, 100% {
@@ -26,14 +27,19 @@ const Navbar = () => {
         }
       `}</style>
 
-      <div className="navbar max-w-[1200px] mx-auto h-[110px]">
+      {/* Top Navbar */}
+      <div className="max-w-[1200px] mx-auto h-[110px] flex justify-between items-center px-4">
         {/* Left Brand */}
-        <div className="navbar-start">
+        <div className="flex items-center gap-3">
+          {/* Mobile Drawer Toggle */}
+          <label htmlFor="mobile-drawer" className="lg:hidden cursor-pointer">
+            <FiMenu className="text-2xl" />
+          </label>
           <p className="text-xl font-semibold tracking-wide">TANBIR A.</p>
         </div>
 
-        {/* Center Menu */}
-        <div className="navbar-center hidden lg:flex flex-col">
+        {/* Center Menu (Desktop Only) */}
+        <div className="hidden lg:flex flex-col items-center">
           <h3 className="text-[22px] font-medium uppercase">
             Digital Advertising Production
           </h3>
@@ -43,9 +49,7 @@ const Navbar = () => {
                 <li className="relative group">
                   <NavLink
                     to={item.path}
-                    className={() =>
-                      `relative text-sm tracking-wide px-2 py-1`
-                    }
+                    className={() => `relative text-sm tracking-wide px-2 py-1`}
                   >
                     {({ isActive }) => (
                       <>
@@ -68,7 +72,7 @@ const Navbar = () => {
         </div>
 
         {/* Right Badge */}
-        <div className="navbar-end">
+        <div>
           <div className="flex items-center gap-2 bg-white text-black py-1 px-5 rounded-full">
             <span
               className="p-1 bg-[#33BD51] rounded-full w-2 h-2"
@@ -79,6 +83,36 @@ const Navbar = () => {
             />
             <p className="text-sm font-medium">Available Now</p>
           </div>
+        </div>
+      </div>
+
+      {/* Mobile Drawer */}
+      <div className="drawer lg:hidden">
+        <input id="mobile-drawer" type="checkbox" className="drawer-toggle" />
+        <div className="drawer-side z-50">
+          <label
+            htmlFor="mobile-drawer"
+            aria-label="close sidebar"
+            className="drawer-overlay"
+          />
+          <ul className="menu p-4 w-[80%] min-h-full bg-[#1E293B] text-white space-y-2">
+            <h2 className="text-md font-semibold mb-3">
+              Digital Advertising Production
+            </h2>
+            {menuData.map((item, index) => (
+              <li key={index}>
+                <NavLink
+                  to={item.path}
+                  className="text-sm tracking-wide"
+                  onClick={() =>
+                    (document.getElementById("mobile-drawer").checked = false)
+                  }
+                >
+                  {item.label}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </div>

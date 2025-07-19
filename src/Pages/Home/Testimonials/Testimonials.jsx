@@ -104,7 +104,6 @@ const Testimonials = () => {
 
             {/* Information */}
             <div className="text-black">
-              
               <h3 className="font-semibold text-lg">TANBIR A.</h3>
               <div className="flex items-center gap-1">
                 <IoLocationOutline />
@@ -122,10 +121,12 @@ const Testimonials = () => {
               className="absolute inset-0 transition-all duration-1000 ease-in-out opacity-100 animate-fade-slide"
             >
               <div className="bg-white px-5 py-3 rounded-md h-[360px] shadow-md relative w-full">
+                {/* Title */}
                 <h3 className="text-green-600 text-lg font-semibold">
                   {testimonialData[currentIndex].title}
                 </h3>
 
+                {/* Stars */}
                 <div className="pt-2 flex items-center gap-5">
                   <div className="flex items-center gap-1">
                     {Array(5)
@@ -135,19 +136,23 @@ const Testimonials = () => {
                       ))}
                   </div>
 
+                  {/* Divider */}
                   <p className="text-gray-500">|</p>
 
+                  {/* Date From - Date To */}
                   <div className="flex text-gray-600 font-medium items-center gap-1">
                     <p>{testimonialData[currentIndex].dateFrom}</p>
                     <p>-</p>
                     <p>{testimonialData[currentIndex].dateTo}</p>
                   </div>
 
+                  {/* Share Icon */}
                   <div className="rounded-full text-green-700 border-2 border-green-700 p-1">
                     <MdOutlineShare className="text-2xl" />
                   </div>
                 </div>
 
+                {/* Testimonial Content */}
                 <div>
                   {formatTestimonial(
                     testimonialData[currentIndex].text,
@@ -161,6 +166,7 @@ const Testimonials = () => {
                   )}
                 </div>
 
+                {/* Price & Price Type */}
                 <div className="font-semibold text-gray-600 flex items-center justify-between w-1/2 py-2">
                   <p>{testimonialData[currentIndex].price}</p>
                   <p>{testimonialData[currentIndex].priceType}</p>
@@ -168,8 +174,8 @@ const Testimonials = () => {
 
                 {/* Top-right arrow button */}
                 {/* Arrow at top-right */}
-                <div className="absolute top-0 right-0 z-20">
-                  <div className="bg-[#0F172A]  p-2">
+                <div className="absolute -top-3 -right-3 z-20">
+                  <div className="bg-[#0F172A] rounded-full p-4">
                     <div className="bg-white p-4 rounded-full cursor-pointer transition-transform duration-300 rotate-[-45deg] hover:rotate-0">
                       <FaArrowRight className="text-black text-xl  " />
                     </div>

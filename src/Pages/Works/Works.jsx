@@ -101,6 +101,7 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
   // Double the items array for infinite scroll
   const doubledItems = [...items, ...items];
 
+  // Modal functions
   const openModal = (item) => {
     setSelectedItem(item);
     setIsModalOpen(true);
@@ -109,20 +110,24 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
   };
 
   return (
-    <div className="relative pt-10 bg-[#0F172A] text-white">
+    <div className="relative pt-2 md:pt-10 bg-[#0F172A] text-white">
+      {/* Gradient Background */}
       <div
-        className="pointer-events-none absolute top-0 right-0 h-full w-[300px]"
+        className="pointer-events-none absolute top-0 right-0 md:h-full w-[100px] md:w-[300px]"
         style={{
           background: "linear-gradient(to left, rgba(0,0,0,1), rgba(0,0,0,0))",
           zIndex: 5,
         }}
       />
 
-      <div className="absolute right-0 top-2/3 -translate-y-1/2 z-10 pr-6 flex flex-col items-end gap-6">
+      {/* Scroll Container */}
+      <div className="absolute -right-4 md:right-0 top-1/2 md:top-2/3 -translate-y-1/2 z-10 pr-6 flex flex-col items-end gap-6">
+        {/* Title */}
         <div className="writing-vertical text-[30px] inter font-bold tracking-widest text-white rotate-180">
           EXPLORE WORKS
         </div>
 
+        {/* Scroll Text */}
         <div className="absolute right-15 bottom-15 flex space-x-2">
           <span className="text-white uppercase tracking-widest text-[16px] font-medium inter">
             SCROLL
@@ -132,49 +137,57 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
           </span>
         </div>
 
+        {/* Mouse Icon */}
         <div className="mt-auto pb-2 pr-2">
           <img src={mouse} alt="mouse icon" className="w-[35px]" />
         </div>
       </div>
 
+      {/* Scroll Container */}
       <div
         ref={scrollRef}
         className="overflow-hidden"
         style={{
           overflowX: "auto",
+          scrollBehavior: "auto",
           scrollbarWidth: "none",
           msOverflowStyle: "none",
-          scrollBehavior: "auto", // Important for immediate jump in scrollLeft reset
         }}
       >
+        {/* Scroll Items */}
         <style>{`
           div::-webkit-scrollbar {
             display: none;
           }
         `}</style>
 
+        {/* Scroll Items */}
         <div className="flex gap-1 w-max items-center">
+          {/* Loop through doubled items */}
           {doubledItems.map((item, idx) =>
             item.type === "single" ? (
+              // Single item
               <div
-                key={idx} // idx instead of item.id because of duplicates
-                className="h-[600px] w-[400px] flex items-center justify-center rounded text-black text-xl font-semibold cursor-pointer"
+                key={idx}
+                className="h-[400px] md:h-[600px] w-[400px] flex items-center justify-center rounded text-black text-xl font-semibold cursor-pointer"
                 style={{ backgroundColor: item.color }}
                 onClick={() => openModal(item)}
               >
                 {item.label}
               </div>
             ) : (
+              // Stacked item
               <div key={idx} className="flex flex-col gap-1">
+                {/* Two blocks */}
                 <div
-                  className="h-[300px] w-[400px] flex items-center justify-center rounded text-black text-xl font-semibold cursor-pointer"
+                  className="h-[200px] md:h-[300px] w-[400px] flex items-center justify-center rounded text-black text-xl font-semibold cursor-pointer"
                   style={{ backgroundColor: item.color }}
                   onClick={() => openModal(item)}
                 >
                   {item.label} Top
                 </div>
                 <div
-                  className="h-[300px] w-[400px] flex items-center justify-center rounded text-black text-xl font-semibold cursor-pointer"
+                  className="h-[200px] md:h-[300px] w-[400px] flex items-center justify-center rounded text-black text-xl font-semibold cursor-pointer"
                   style={{ backgroundColor: item.color }}
                   onClick={() => openModal(item)}
                 >
