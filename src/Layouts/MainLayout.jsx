@@ -37,9 +37,9 @@ const MainLayout = () => {
         menuData={menuData}
       />
 
-      {/* <Home /> */}
+      <Home />
 
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 };

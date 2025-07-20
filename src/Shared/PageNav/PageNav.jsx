@@ -1,10 +1,16 @@
 import React, { useState } from "react";
+
+// Packages
 import PropTypes from "prop-types";
-import { FiMenu, FiX } from "react-icons/fi"; // ✅ React Icons
+
+// Icons
+import { FiMenu, FiX } from "react-icons/fi";
 
 const PageNav = ({ TOTAL_DOTS, activeDot, menuData }) => {
+  // State for mobile menu
   const [mobileOpen, setMobileOpen] = useState(false);
 
+  // Scroll to a specific section
   const scrollToSection = (id) => {
     const el = document.getElementById(id);
     if (el) {
@@ -15,6 +21,7 @@ const PageNav = ({ TOTAL_DOTS, activeDot, menuData }) => {
 
   return (
     <div className="bg-[#0F172A] text-white w-full z-40 shadow-sm">
+      {/* Desktop Navigation */}
       <div className="flex items-center justify-between px-4 py-4 max-w-[1200px] mx-auto">
         {/* Dot Indicators (Always Visible) */}
         <div className="flex items-center gap-2">

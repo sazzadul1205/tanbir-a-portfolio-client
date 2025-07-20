@@ -10,13 +10,13 @@ const Home = () => {
     <div>
       <AboutMe id="about-me" />
 
-      <MyServices id="my-services" />
+      {/* <MyServices id="my-services" /> */}
 
-      <Tools id="tools" />
+      {/* <Tools id="tools" /> */}
 
-      <WhyHireMe id="why-hire-me" />
+      {/* <WhyHireMe id="why-hire-me" /> */}
 
-      <Testimonials id="testimonials" />
+      {/* <Testimonials id="testimonials" /> */}
     </div>
   );
 };

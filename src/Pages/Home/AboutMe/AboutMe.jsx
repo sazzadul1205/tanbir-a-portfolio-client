@@ -1,24 +1,25 @@
+import PropTypes from "prop-types";
 import Desktop from "../../../assets/Desktop.png";
 
 const AboutMe = ({ id }) => {
   return (
-    <section id={id} className="py-10">
+    <section id={id} className="py-1 md:py-10 px-1 md:px-4">
       {/* Title */}
-      <h4 className="text-[40px] font-semibold inter max-w-5xl text-center mx-auto leading-tight">
+      <h4 className="text-2xl sm:text-3xl md:text-4xl font-semibold inter max-w-5xl text-center mx-auto leading-snug md:leading-tight">
         Motion Graphics & High-Impact
-        <span className="overline decoration-[#2FA94C] decoration-3 ml-2">
+        <span className="overline decoration-[#2FA94C] decoration-2 sm:decoration-3 ml-1 sm:ml-2">
           Ad Creative
-        </span>{" "}
-        <br />
+        </span>
+        <br className="hidden sm:block" />
         for
-        <span className="relative inline-block ml-2 custom-underline">
+        <span className="relative inline-block ml-1 sm:ml-2 custom-underline">
           Digital Marketing
         </span>{" "}
         Success
       </h4>
 
       {/* About Me */}
-      <div className="py-9 max-w-4xl mx-auto text-center inter">
+      <div className="py-8 max-w-3xl mx-auto text-center inter text-sm sm:text-base leading-relaxed">
         <p className="pt-2">
           Looking for motion graphics services that deliver fast, look stunning,
           and drive results?
@@ -39,10 +40,10 @@ const AboutMe = ({ id }) => {
         </p>
       </div>
 
-      {/* Button */}
-      <div className="flex justify-center gap-3 pt-10">
+      {/* Buttons */}
+      <div className="flex flex-col sm:flex-row justify-center items-center gap-4 pt-8">
         {/* Start Your Project */}
-        <div className="flex items-center gap-2 bg-white text-black py-[8px] px-7 rounded-full">
+        <button className="flex items-center gap-2 bg-white text-black py-2 px-6 rounded-full shadow hover:shadow-lg transition">
           <span
             className="p-1 bg-[#33BD51] rounded-full w-2 h-2"
             style={{
@@ -51,10 +52,10 @@ const AboutMe = ({ id }) => {
             }}
           />
           <p className="text-sm font-semibold inter">Hire Me Now</p>
-        </div>
+        </button>
 
-        {/* Whats App Now */}
-        <div className="flex items-center gap-2 bg-white text-black py-[8px] px-7 rounded-full">
+        {/* WhatsApp Now */}
+        <button className="flex items-center gap-2 bg-white text-black py-2 px-6 rounded-full shadow hover:shadow-lg transition">
           <span
             className="p-1 bg-[#33BD51] rounded-full w-2 h-2"
             style={{
@@ -63,19 +64,24 @@ const AboutMe = ({ id }) => {
             }}
           />
           <p className="text-sm font-semibold inter">WhatsApp Now</p>
-        </div>
+        </button>
       </div>
 
-      {/* images */}
-      <div className="mx-auto max-w-7xl px-4">
+      {/* Image */}
+      <div className="mt-10 mx-auto w-full md:max-w-7xl px-0 md:px-4">
         <img
           src={Desktop}
-          alt="Default Desktop"
-          className="w-full max-w-[1200px] mx-auto rounded-md shadow-md"
+          alt="Desktop Visual"
+          className="w-full md:max-w-[1200px] mx-auto rounded-md shadow-md"
         />
       </div>
     </section>
   );
+};
+
+// Prop Validation
+AboutMe.propTypes = {
+  id: PropTypes.string.isRequired,
 };
 
 export default AboutMe;

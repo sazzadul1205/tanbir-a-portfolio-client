@@ -110,92 +110,95 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
   };
 
   return (
-    <div className="relative pt-2 md:pt-10 bg-[#0F172A] text-white">
-      {/* Gradient Background */}
-      <div
-        className="pointer-events-none absolute top-0 right-0 md:h-full w-[100px] md:w-[300px]"
-        style={{
-          background: "linear-gradient(to left, rgba(0,0,0,1), rgba(0,0,0,0))",
-          zIndex: 5,
-        }}
-      />
+    <>
+      <div className="relative pt-2 md:pt-10 bg-[#0F172A] text-white">
+        {/* Gradient Background */}
+        <div
+          className="pointer-events-none absolute top-0 right-0 md:h-full w-[100px] md:w-[300px]"
+          style={{
+            background:
+              "linear-gradient(to left, rgba(0,0,0,1), rgba(0,0,0,0))",
+            zIndex: 5,
+          }}
+        />
 
-      {/* Scroll Container */}
-      <div className="absolute -right-4 md:right-0 top-1/2 md:top-2/3 -translate-y-1/2 z-10 pr-6 flex flex-col items-end gap-6">
-        {/* Title */}
-        <div className="writing-vertical text-[30px] inter font-bold tracking-widest text-white rotate-180">
-          EXPLORE WORKS
+        {/* Scroll Container */}
+        <div className="absolute right-0 top-1/2 md:top-2/3 -translate-y-1/2 z-10 md:pr-6 flex flex-col items-end gap-6">
+          {/* Title */}
+          <div className="writing-vertical text-[30px] inter font-bold tracking-widest text-white rotate-180">
+            EXPLORE WORKS
+          </div>
+
+          {/* Scroll Text */}
+          <div className="absolute right-10 md:right-15 bottom-15 flex space-x-2">
+            <span className="text-white uppercase tracking-widest text-[16px] font-medium inter">
+              SCROLL
+            </span>
+            <span className="text-white uppercase tracking-widest text-[16px] font-medium inter">
+              TO
+            </span>
+          </div>
+
+          {/* Mouse Icon */}
+          <div className="mt-auto pb-2 pr-2">
+            <img src={mouse} alt="mouse icon" className="w-[35px]" />
+          </div>
         </div>
 
-        {/* Scroll Text */}
-        <div className="absolute right-15 bottom-15 flex space-x-2">
-          <span className="text-white uppercase tracking-widest text-[16px] font-medium inter">
-            SCROLL
-          </span>
-          <span className="text-white uppercase tracking-widest text-[16px] font-medium inter">
-            TO
-          </span>
-        </div>
-
-        {/* Mouse Icon */}
-        <div className="mt-auto pb-2 pr-2">
-          <img src={mouse} alt="mouse icon" className="w-[35px]" />
-        </div>
-      </div>
-
-      {/* Scroll Container */}
-      <div
-        ref={scrollRef}
-        className="overflow-hidden"
-        style={{
-          overflowX: "auto",
-          scrollBehavior: "auto",
-          scrollbarWidth: "none",
-          msOverflowStyle: "none",
-        }}
-      >
-        {/* Scroll Items */}
-        <style>{`
+        {/* Scroll Container */}
+        <div
+          ref={scrollRef}
+          className="overflow-hidden"
+          style={{
+            overflowX: "auto",
+            scrollBehavior: "auto",
+            scrollbarWidth: "none",
+            msOverflowStyle: "none",
+          }}
+        >
+          {/* Scroll Items */}
+          <style>{`
           div::-webkit-scrollbar {
             display: none;
           }
         `}</style>
 
-        {/* Scroll Items */}
-        <div className="flex gap-1 w-max items-center">
-          {/* Loop through doubled items */}
-          {doubledItems.map((item, idx) =>
-            item.type === "single" ? (
-              // Single item
-              <div
-                key={idx}
-                className="h-[400px] md:h-[600px] w-[400px] flex items-center justify-center rounded text-black text-xl font-semibold cursor-pointer"
-                style={{ backgroundColor: item.color }}
-                onClick={() => openModal(item)}
-              >
-                {item.label}
-              </div>
-            ) : (
-              // Stacked item
-              <div key={idx} className="flex flex-col gap-1">
-                {/* Two blocks */}
+          {/* Scroll Items */}
+          <div className="flex gap-1 w-max items-center">
+            {/* Loop through doubled items */}
+            {doubledItems.map((item, idx) =>
+              item.type === "single" ? (
+                // Single item
                 <div
-                  className="h-[200px] md:h-[300px] w-[400px] flex items-center justify-center rounded text-black text-xl font-semibold cursor-pointer"
+                  key={idx}
+                  className="h-[400px] md:h-[600px] w-[400px] flex items-center justify-center rounded text-black text-xl font-semibold cursor-pointer"
                   style={{ backgroundColor: item.color }}
                   onClick={() => openModal(item)}
                 >
-                  {item.label} Top
+                  {item.label}
                 </div>
-                <div
-                  className="h-[200px] md:h-[300px] w-[400px] flex items-center justify-center rounded text-black text-xl font-semibold cursor-pointer"
-                  style={{ backgroundColor: item.color }}
-                  onClick={() => openModal(item)}
-                >
-                  {item.label} Bottom
+              ) : (
+                // Stacked item
+                <div key={idx} className="flex flex-col gap-1">
+                  {/* Two blocks */}
+                  <div
+                    className="h-[200px] md:h-[300px] w-[400px] flex items-center justify-center rounded text-black text-xl font-semibold cursor-pointer"
+                    style={{ backgroundColor: item.color }}
+                    onClick={() => openModal(item)}
+                  >
+                    {item.label} Top
+                  </div>
+                  <div
+                    className="h-[200px] md:h-[300px] w-[400px] flex items-center justify-center rounded text-black text-xl font-semibold cursor-pointer"
+                    style={{ backgroundColor: item.color }}
+                    onClick={() => openModal(item)}
+                  >
+                    {item.label} Bottom
+                  </div>
                 </div>
-              </div>
-            )
-          )}
+              )
+            )}
+          </div>
         </div>
       </div>
 
@@ -211,7 +214,7 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
           <button onClick={() => setIsModalOpen(false)}>close</button>
         </form>
       </dialog>
-    </div>
+    </>
   );
 };
 
