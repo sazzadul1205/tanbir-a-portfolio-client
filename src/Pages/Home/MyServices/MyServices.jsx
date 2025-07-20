@@ -1,4 +1,5 @@
 import { FaArrowRight } from "react-icons/fa6";
+import PropTypes from "prop-types";
 
 // Assets
 import HTML5 from "../../../assets/Services/HTML5.png";
@@ -6,10 +7,6 @@ import Animation from "../../../assets/Services/Animation.png";
 import Scientific from "../../../assets/Services/Scientific.png";
 import SocialMedia from "../../../assets/Services/SocialMedia.png";
 import MotionGraphics from "../../../assets/Services/MotionGraphics.png";
-
-// Prop Validation
-import PropTypes from "prop-types";
-
 
 // Services Data
 const services = [
@@ -42,26 +39,41 @@ const services = [
 
 const MyServices = ({ id }) => {
   return (
-    <section id={id} className="pb-10">
+    <section id={id} className="pb-10 px-4">
       {/* Title */}
-      <h3 className="inter text-[40px] font-semibold text-center py-10">
+      <h3 className="inter text-2xl sm:text-3xl md:text-4xl font-semibold text-center py-10">
         My Services Include
       </h3>
 
-      {/* List */}
-      <div className="max-w-7xl mx-auto">
+      {/* Services List */}
+      <div className="max-w-7xl mx-auto flex flex-col">
         {services.map((service, idx) => (
           <div
             key={idx}
-            className="flex justify-between gap-11 items-center border-y border-gray-600 py-3 px-20"
+            className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 md:gap-6 border-y border-gray-300 py-6 px-4 sm:px-8 md:px-12"
           >
-            <img src={service.icon} alt={service.title} className="w-11 h-11" />
-            <h3 className="inter font-bold text-[23px] w-56">
+            {/* Icon */}
+            <img
+              src={service.icon}
+              alt={service.title}
+              className="w-10 h-10 shrink-0"
+            />
+
+            {/* Title */}
+            <h3 className="inter font-bold text-lg sm:text-xl md:text-[20px] md:w-64">
               {service.title}
             </h3>
-            <p className="w-[500px] text-lg inter">{service.desc}</p>
-            <div className="border border-gray-300 p-4 rounded-full transition-transform duration-500 rotate-[-45deg] hover:rotate-0 cursor-pointer">
-              <FaArrowRight className="text-xl" />
+
+            {/* Description */}
+            <p className="text-sm sm:text-base md:text-[17px] flex-1">
+              {service.desc}
+            </p>
+
+            {/* Bottom (Mobile) / Right (Desktop): Arrow */}
+            <div className="self-end md:self-center mt-2 md:mt-0">
+              <div className="border border-gray-300 p-3 rounded-full transition-transform duration-500 rotate-[-45deg] hover:rotate-0 cursor-pointer">
+                <FaArrowRight className="text-lg sm:text-xl" />
+              </div>
             </div>
           </div>
         ))}
