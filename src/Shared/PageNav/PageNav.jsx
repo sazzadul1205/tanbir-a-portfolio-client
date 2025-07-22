@@ -1,16 +1,12 @@
 import React, { useState } from "react";
-
-// Packages
 import PropTypes from "prop-types";
 
 // Icons
 import { FiMenu, FiX } from "react-icons/fi";
 
-const PageNav = ({ TOTAL_DOTS, activeDot, menuData }) => {
-  // State for mobile menu
+const PageNav = ({ TOTAL_DOTS, activeDot, activeSection, menuData }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  // Scroll to a specific section
   const scrollToSection = (id) => {
     const el = document.getElementById(id);
     if (el) {
@@ -21,9 +17,8 @@ const PageNav = ({ TOTAL_DOTS, activeDot, menuData }) => {
 
   return (
     <div className="bg-[#0F172A] text-white w-full z-40 shadow-sm">
-      {/* Desktop Navigation */}
       <div className="flex items-center justify-between px-4 py-4 max-w-[1200px] mx-auto">
-        {/* Dot Indicators (Always Visible) */}
+        {/* Dot Indicators */}
         <div className="flex items-center gap-2">
           {[...Array(TOTAL_DOTS)].map((_, i) => (
             <span
@@ -35,7 +30,7 @@ const PageNav = ({ TOTAL_DOTS, activeDot, menuData }) => {
           ))}
         </div>
 
-        {/* Desktop Navigation */}
+        {/* Desktop Nav */}
         <div className="hidden lg:flex items-center space-x-4">
           {menuData.map((item, index) => (
             <React.Fragment key={index}>
@@ -45,14 +40,16 @@ const PageNav = ({ TOTAL_DOTS, activeDot, menuData }) => {
                   e.preventDefault();
                   scrollToSection(item.id);
                 }}
-                className={`relative text-sm tracking-wide px-2 ${
-                  activeDot === index ? "font-bold" : ""
+                className={`group relative text-sm tracking-wide px-2 ${
+                  activeSection === index ? "font-bold" : ""
                 }`}
               >
                 {item.label}
                 <span
                   className={`absolute left-1/2 -translate-x-1/2 bottom-[-4px] h-[1.5px] bg-white/50 transition-all duration-300 ${
-                    activeDot === index ? "w-full" : "w-0 hover:w-full"
+                    activeSection === index
+                      ? "w-full"
+                      : "w-0 group-hover:w-full"
                   }`}
                 />
               </a>
@@ -63,7 +60,7 @@ const PageNav = ({ TOTAL_DOTS, activeDot, menuData }) => {
           ))}
         </div>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile Menu Toggle */}
         <button
           className="lg:hidden text-white"
           onClick={() => setMobileOpen((prev) => !prev)}
@@ -72,7 +69,7 @@ const PageNav = ({ TOTAL_DOTS, activeDot, menuData }) => {
         </button>
       </div>
 
-      {/* Mobile Dropdown Menu */}
+      {/* Mobile Dropdown */}
       {mobileOpen && (
         <div className="lg:hidden px-4 pb-4 space-y-3 border-t border-white/10 bg-[#0F172A]">
           {menuData.map((item, index) => (
@@ -84,7 +81,7 @@ const PageNav = ({ TOTAL_DOTS, activeDot, menuData }) => {
                   scrollToSection(item.id);
                 }}
                 className={`block text-sm tracking-wide ${
-                  activeDot === index
+                  activeSection === index
                     ? "font-bold text-[#33BD51]"
                     : "text-white"
                 }`}
@@ -102,6 +99,7 @@ const PageNav = ({ TOTAL_DOTS, activeDot, menuData }) => {
 PageNav.propTypes = {
   TOTAL_DOTS: PropTypes.number.isRequired,
   activeDot: PropTypes.number.isRequired,
+  activeSection: PropTypes.number.isRequired,
   menuData: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string.isRequired,
