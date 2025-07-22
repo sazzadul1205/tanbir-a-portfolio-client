@@ -39,38 +39,38 @@ const Tools = ({ id }) => {
         {/* Icons Container */}
         <div className="absolute w-[800px] h-[400px] mx-auto inset-0">
           {/* HTML5 */}
-          <div className="absolute bg-[#172C5C] p-3 rounded-full bottom-[100px]  group cursor-pointer">
+          <div className="absolute w-20 h-20 flex items-center justify-center bg-[#172C5C] rounded-full bottom-[100px] group cursor-pointer">
             <img
               src={HTML5}
               alt="HTML5"
-              className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 group-hover:animate-spin"
+              className="w-12 h-12 group-hover:animate-spin"
             />
           </div>
 
           {/* CSS */}
-          <div className="absolute bg-[#172C5C] p-4 rounded-full bottom-[220px] left-[41px]  group cursor-pointer">
+          <div className="absolute w-20 h-20 flex items-center justify-center bg-[#172C5C] rounded-full bottom-[202px] left-[52px] group cursor-pointer">
             <img
               src={CSS}
               alt="CSS"
-              className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 group-hover:animate-spin"
+              className="w-10 h-10 group-hover:animate-spin"
             />
           </div>
 
           {/* Meta */}
-          <div className="absolute bg-[#172C5C] p-3 rounded-full bottom-[330px] left-[122px]">
+          <div className="absolute w-20 h-20 flex items-center justify-center bg-[#172C5C] rounded-full bottom-[292px] left-[122px] group cursor-pointer">
             <img
               src={Meta}
               alt="Meta"
-              className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 group-hover:animate-spin"
+              className="w-10 h-10 group-hover:animate-spin"
             />
           </div>
 
           {/* JS */}
-          <div className="absolute bg-[#172C5C] p-4 rounded-full bottom-[390px] left-[220px] group cursor-pointer">
+          <div className="absolute w-20 h-20 flex items-center justify-center bg-[#172C5C] rounded-full bottom-[352px] left-[212px] group cursor-pointer">
             <img
               src={JS}
               alt="JS"
-              className="w-8 h-8 sm:w-10 sm:h-10 md:w-11 md:h-11 group-hover:animate-spin"
+              className="w-10 h-10 group-hover:animate-spin"
             />
           </div>
 
