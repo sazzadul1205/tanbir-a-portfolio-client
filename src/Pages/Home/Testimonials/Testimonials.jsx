@@ -79,14 +79,15 @@ const Testimonials = () => {
     <div className="max-w-7xl mx-auto py-20">
       <div className="flex flex-col md:flex-row gap-4">
         {/* Sidebar */}
-        <div className="w-full md:w-1/4 flex flex-col gap-1 md:gap-2 px-2">
+        <div className="w-full md:w-1/4 flex flex-col gap-1 md:gap-5">
           {/* Title */}
-          <h3 className="inter font-semibold text-lg bg-[#156E27] py-5 px-10">
-            WHAT CUSTOMER SAY ABOUT ME
+          <h3 className="inter font-semibold bg-[#156E27] h-[100px] flex flex-col px-4 justify-center text-white">
+            <span className="text-[20px]">WHAT CUSTOMER SAY</span>
+            <span className="text-[22px]">ABOUT ME</span>
           </h3>
 
           {/* Up Work Icon */}
-          <div className="bg-[#174153]">
+          <div className="bg-[#174153] h-[142px]">
             <img
               src={UpWorkICon}
               alt="Up Work Icon"
@@ -121,7 +122,7 @@ const Testimonials = () => {
               key={testimonialData[currentIndex].id}
               className="absolute inset-0 transition-all duration-1000 ease-in-out opacity-100 animate-fade-slide"
             >
-              <div className="bg-white px-5 py-3 rounded-md md:h-[360px] shadow-md relative w-full pb-10 md:pb-0">
+              <div className="bg-white px-5 py-3 h-[383px] shadow-md relative w-full pb-10 md:pb-0">
                 {/* Title */}
                 <h3 className="text-green-600 text-lg font-semibold">
                   {testimonialData[currentIndex].title}
@@ -176,12 +177,36 @@ const Testimonials = () => {
                 </div>
 
                 {/* Arrow at top-right */}
-                <div className="absolute -top-3 -right-3 z-20">
-                  <div className="bg-[#0F172A] rounded-full p-4">
+                <div className="absolute -top-2 -right-2 z-20">
+                  <div className="bg-[#0F172A] rounded-bl-2xl  p-2">
                     <div className="bg-white p-4 rounded-full cursor-pointer transition-transform duration-300 rotate-[-45deg] hover:rotate-0">
                       <FaArrowRight className="text-black text-xl  " />
                     </div>
                   </div>
+                </div>
+
+                {/* Sticky Corner */}
+                <div className="pbmit-sticky-corner top-0 right-15 bg-white z-30 ">
+                  <svg
+                    width="30"
+                    height="30"
+                    viewBox="0 0 30 30"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M30 30V0C30 16 16 30 0 30H30Z"></path>
+                  </svg>
+                </div>
+
+                {/* Sticky Corner */}
+                <div className="pbmit-sticky-corner top-15 right-0 bg-white z-30 ">
+                  <svg
+                    width="30"
+                    height="30"
+                    viewBox="0 0 30 30"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M30 30V0C30 16 16 30 0 30H30Z"></path>
+                  </svg>
                 </div>
 
                 {/* Available Now */}
@@ -193,6 +218,30 @@ const Testimonials = () => {
                     />
                     <p className="text-sm font-semibold">Available Now</p>
                   </div>
+                </div>
+
+                {/* Sticky Corner */}
+                <div className="pbmit-sticky-corner-bottom bottom-0 right-[11px] bg-white z-30 ">
+                  <svg
+                    width="30"
+                    height="30"
+                    viewBox="0 0 30 30"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M30 30V0C30 16 16 30 0 30H30Z"></path>
+                  </svg>
+                </div>
+
+                {/* Sticky Corner */}
+                <div className="pbmit-sticky-corner-bottom-2 bottom-0 right-[218px] bg-white z-30 ">
+                  <svg
+                    width="30"
+                    height="30"
+                    viewBox="0 0 30 30"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M30 30V0C30 16 16 30 0 30H30Z"></path>
+                  </svg>
                 </div>
               </div>
             </div>
@@ -238,7 +287,7 @@ const formatTestimonial = (text, showMore, toggle) => {
     .slice(1)
     .map((s) => (s.trim().endsWith(".") ? s.trim() : s.trim() + "."));
 
-  const displayed = showMore ? rest : rest.slice(0, 4);
+  const displayed = showMore ? rest : rest.slice(0, 5);
 
   return (
     <div className="text-gray-600 text-md inter font-medium leading-6 mt-3">

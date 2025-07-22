@@ -48,3 +48,32 @@ html {
   font-family: "Italianno", cursive;
   font-weight: 400;
 }
+
+
+.pbmit-sticky-corner {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  transform: rotate(-90deg);
+}
+
+.pbmit-sticky-center {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  transform: rotate(-180deg);
+}
+
+.pbmit-sticky-corner-bottom {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  transform: rotate(90deg);
+}
+
+.pbmit-sticky-corner-bottom-2 {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  transform: rotate(-360deg);
+}
