@@ -14,9 +14,9 @@ const Home = () => {
 
       <Tools id="tools" />
 
-      {/* <WhyHireMe id="why-hire-me" /> */}
+      <WhyHireMe id="why-hire-me" />
 
-      {/* <Testimonials id="testimonials" /> */}
+      <Testimonials id="testimonials" />
     </div>
   );
 };

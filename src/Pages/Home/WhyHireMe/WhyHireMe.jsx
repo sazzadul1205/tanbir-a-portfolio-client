@@ -38,34 +38,38 @@ const whyHireMeData = [
 
 const WhyHireMe = ({ id }) => {
   return (
-    <section id={id}>
+    <section id={id} className="px-4 md:px-10">
       {/* Title */}
-      <h3 className="inter font-semibold text-[40px] text-center text-white pt-10">
+      <h3 className="inter font-semibold text-3xl md:text-4xl text-center text-white pt-10">
         Why Hire Me?
       </h3>
 
       {/* Sub Title */}
-      <p className="inter text-[18px] text-center text-white pt-2 max-w-xl mx-auto">
+      <p className="inter text-base md:text-lg text-center text-white pt-2 max-w-xl mx-auto">
         To deliver performance-driven creative, I work with industry-standard
         platforms and next-gen generative tools
       </p>
 
       {/* Content */}
-      <div className="grid grid-cols-2 flex-col md:flex-row pt-10 gap-5 max-w-7xl mx-auto pb-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 max-w-7xl mx-auto pt-10 pb-4">
         {whyHireMeData.map((item, index) => (
           <div
             key={index}
-            className={`relative ${item.bgColor} ${item.textColor} p-4 w-full h-[150px] rounded-md`}
+            className={`relative ${item.bgColor} ${item.textColor} p-5 md:p-6 rounded-md h-full`}
           >
-            <h3 className="inter text-[22px] font-medium">{item.title}</h3>
-            <p className="inter pt-2 text-[16px]">{item.description}</p>
+            <h3 className="inter text-lg md:text-xl font-medium">
+              {item.title}
+            </h3>
+            <p className="inter pt-2 text-sm md:text-base">
+              {item.description}
+            </p>
 
             {/* Icon */}
-            <div className="absolute p-2 -right-2 -bottom-2 cursor-pointer">
+            <div className="absolute p-2 -right-4 -bottom-5 cursor-pointer">
               <div
-                className={`border border-gray-300 p-4 rounded-full ${item.iconBg}`}
+                className={`border border-gray-300 p-3 md:p-4 rounded-full ${item.iconBg}`}
               >
-                <FaArrowRight className="text-white text-xl transition-transform duration-300 rotate-[-45deg] hover:rotate-0" />
+                <FaArrowRight className="text-white text-base md:text-xl transition-transform duration-300 rotate-[-45deg] hover:rotate-0" />
               </div>
             </div>
           </div>
@@ -73,28 +77,16 @@ const WhyHireMe = ({ id }) => {
       </div>
 
       {/* Button */}
-      <div className="flex justify-center gap-3 pt-10">
+      <div className="flex flex-col sm:flex-row justify-center gap-4 pt-10">
         {/* Start Your Project */}
-        <div className="flex items-center gap-2 bg-white text-black py-[8px] px-7 rounded-full">
-          <span
-            className="p-1 bg-[#33BD51] rounded-full w-2 h-2"
-            style={{
-              animation: "blink 1.5s infinite",
-              animationTimingFunction: "ease-in-out",
-            }}
-          />
+        <div className="flex items-center gap-2 bg-white text-black py-2 px-6 rounded-full">
+          <span className="p-1 bg-[#33BD51] rounded-full w-2 h-2 animate-ping" />
           <p className="text-sm font-semibold inter">Hire Me Now</p>
         </div>
 
         {/* Whats App Now */}
-        <div className="flex items-center gap-2 bg-white text-black py-[8px] px-7 rounded-full">
-          <span
-            className="p-1 bg-[#33BD51] rounded-full w-2 h-2"
-            style={{
-              animation: "blink 1.5s infinite",
-              animationTimingFunction: "ease-in-out",
-            }}
-          />
+        <div className="flex items-center gap-2 bg-white text-black py-2 px-6 rounded-full">
+          <span className="p-1 bg-[#33BD51] rounded-full w-2 h-2 animate-ping" />
           <p className="text-sm font-semibold inter">WhatsApp Now</p>
         </div>
       </div>
