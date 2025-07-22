@@ -39,7 +39,7 @@ const Tools = ({ id }) => {
             <img
               src={HTML5}
               alt="HTML5"
-              className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 group-hover:animate-bounce"
+              className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 group-hover:animate-spin"
             />
           </div>
 
@@ -48,7 +48,7 @@ const Tools = ({ id }) => {
             <img
               src={CSS}
               alt="CSS"
-              className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 group-hover:animate-bounce"
+              className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 group-hover:animate-spin"
             />
           </div>
 
@@ -57,7 +57,7 @@ const Tools = ({ id }) => {
             <img
               src={Meta}
               alt="Meta"
-              className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 group-hover:animate-bounce"
+              className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 group-hover:animate-spin"
             />
           </div>
 
@@ -66,7 +66,7 @@ const Tools = ({ id }) => {
             <img
               src={JS}
               alt="JS"
-              className="w-8 h-8 sm:w-10 sm:h-10 md:w-11 md:h-11 group-hover:animate-bounce"
+              className="w-8 h-8 sm:w-10 sm:h-10 md:w-11 md:h-11 group-hover:animate-spin"
             />
           </div>
 
@@ -75,7 +75,7 @@ const Tools = ({ id }) => {
             <img
               src={Adobe}
               alt="Adobe"
-              className="w-8 h-8 sm:w-10 sm:h-10 md:w-11 md:h-11 group-hover:animate-bounce"
+              className="w-8 h-8 sm:w-10 sm:h-10 md:w-11 md:h-11 group-hover:animate-spin"
             />
           </div>
 
@@ -84,7 +84,7 @@ const Tools = ({ id }) => {
             <img
               src={GWD}
               alt="GWD"
-              className="w-8 h-8 sm:w-10 sm:h-10 md:w-11 md:h-11 group-hover:animate-bounce"
+              className="w-8 h-8 sm:w-10 sm:h-10 md:w-11 md:h-11 group-hover:animate-spin"
             />
           </div>
 
@@ -93,7 +93,7 @@ const Tools = ({ id }) => {
             <img
               src={Double}
               alt="Double"
-              className="w-8 h-8 sm:w-10 sm:h-10 md:w-11 md:h-11 group-hover:animate-bounce"
+              className="w-8 h-8 sm:w-10 sm:h-10 md:w-11 md:h-11 group-hover:animate-spin"
             />
           </div>
 
@@ -102,7 +102,7 @@ const Tools = ({ id }) => {
             <img
               src={Midjourney}
               alt="Midjourney"
-              className="w-8 h-8 sm:w-10 sm:h-10 md:w-11 md:h-11 group-hover:animate-bounce"
+              className="w-8 h-8 sm:w-10 sm:h-10 md:w-11 md:h-11 group-hover:animate-spin"
             />
           </div>
 
@@ -111,7 +111,7 @@ const Tools = ({ id }) => {
             <img
               src={AdRoll}
               alt="AdRoll"
-              className="w-16 h-4 sm:w-[71px] sm:h-[13px] group-hover:animate-bounce"
+              className="w-16 h-4 sm:w-[71px] sm:h-[13px] group-hover:animate-spin"
             />
           </div>
         </div>

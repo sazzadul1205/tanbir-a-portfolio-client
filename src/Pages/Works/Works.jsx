@@ -91,7 +91,7 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
   }, []);
 
   // Sample data
-  const items = Array.from({ length: 20 }, (_, i) => ({
+  const items = Array.from({ length: 10 }, (_, i) => ({
     id: i + 1,
     type: i % 2 === 0 ? "single" : "stacked",
     color: i % 2 === 0 ? "#A7F3D0" : "#BFDBFE",
@@ -171,7 +171,7 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
                 // Single item
                 <div
                   key={idx}
-                  className="h-[400px] md:h-[600px] w-[400px] flex items-center justify-center rounded text-black text-xl font-semibold cursor-pointer"
+                  className="h-[400px] md:h-[600px] w-[300px] flex items-center justify-center rounded text-black text-xl font-semibold cursor-pointer"
                   style={{ backgroundColor: item.color }}
                   onClick={() => openModal(item)}
                 >
@@ -182,14 +182,14 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
                 <div key={idx} className="flex flex-col gap-1">
                   {/* Two blocks */}
                   <div
-                    className="h-[200px] md:h-[300px] w-[400px] flex items-center justify-center rounded text-black text-xl font-semibold cursor-pointer"
+                    className="h-[200px] md:h-[300px] w-[300px] flex items-center justify-center rounded text-black text-xl font-semibold cursor-pointer"
                     style={{ backgroundColor: item.color }}
                     onClick={() => openModal(item)}
                   >
                     {item.label} Top
                   </div>
                   <div
-                    className="h-[200px] md:h-[300px] w-[400px] flex items-center justify-center rounded text-black text-xl font-semibold cursor-pointer"
+                    className="h-[200px] md:h-[300px] w-[300px] flex items-center justify-center rounded text-black text-xl font-semibold cursor-pointer"
                     style={{ backgroundColor: item.color }}
                     onClick={() => openModal(item)}
                   >

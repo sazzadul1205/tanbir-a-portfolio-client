@@ -39,7 +39,7 @@ const services = [
 
 const MyServices = ({ id }) => {
   return (
-    <section id={id} className="pb-10 px-4">
+    <section id={id} className="pb-10 px-4 text-white">
       {/* Title */}
       <h3 className="inter text-2xl sm:text-3xl md:text-4xl font-semibold text-center py-10">
         My Services Include
@@ -65,7 +65,7 @@ const MyServices = ({ id }) => {
             </h3>
 
             {/* Description */}
-            <p className="text-sm sm:text-base md:text-[17px] flex-1">
+            <p className="text-sm sm:text-white md:text-[17px] flex-1">
               {service.desc}
             </p>
 
