@@ -2,14 +2,16 @@
 import PropTypes from "prop-types";
 
 // Assets
-import Icon from "../../../assets/Tools/Icon.png";
+import Midjourney from "../../../assets/Tools/Midjourney.png";
+import AdRoll from "../../../assets/Tools/AdRoll.png";
+import Double from "../../../assets/Tools/Double.png";
 import HTML5 from "../../../assets/Tools/HTML5.png";
 import Frame from "../../../assets/Tools/Frame.png";
-import CSS from "../../../assets/Tools/CSS.png";
-import Meta from "../../../assets/Tools/Meta.png";
-import JS from "../../../assets/Tools/JS.png";
 import Adobe from "../../../assets/Tools/Adobe.png";
+import Meta from "../../../assets/Tools/Meta.png";
+import CSS from "../../../assets/Tools/CSS.png";
 import GWD from "../../../assets/Tools/GWD.png";
+import JS from "../../../assets/Tools/JS.png";
 
 const Tools = ({ id }) => {
   return (
@@ -30,13 +32,7 @@ const Tools = ({ id }) => {
         {/* Primary Image */}
         <img src={Frame} alt="Frame" className="w-[600px] h-[500px] mx-auto" />
 
-        {/* Secondary Image */}
-        <img
-          src={Icon}
-          alt="Icon"
-          className="absolute w-[800px] h-[400px] -translate-x-1/2 -translate-y-[55%] left-1/2 -bottom-8 z-10"
-        />
-
+        {/* Icons */}
         <div className="absolute  w-4xl h-full mx-auto">
           {/* HTML5 Box */}
           <div className="absolute bottom-[230px] left-12 bg-[#172C5C] p-3 z-20 rounded-full group cursor-pointer">
@@ -66,7 +62,7 @@ const Tools = ({ id }) => {
           </div>
 
           {/* JS Box */}
-          <div className="absolute bottom-[510px] left-[260px] bg-[#172C5C] p-3 z-20 rounded-full group cursor-pointer">
+          <div className="absolute bottom-[510px] left-[260px] bg-[#172C5C] p-4 z-20 rounded-full group cursor-pointer">
             <img
               src={JS}
               alt="JS"
@@ -75,7 +71,7 @@ const Tools = ({ id }) => {
           </div>
 
           {/* Adobe Box */}
-          <div className="absolute bottom-[550px] left-[380px] bg-[#172C5C] p-3 z-20 rounded-full group cursor-pointer">
+          <div className="absolute bottom-[550px] left-[380px] bg-[#172C5C] p-4 z-20 rounded-full group cursor-pointer">
             <img
               src={Adobe}
               alt="Adobe"
@@ -89,6 +85,33 @@ const Tools = ({ id }) => {
               src={GWD}
               alt="GWD"
               className="w-11 h-11 group-hover:animate-bounce"
+            />
+          </div>
+
+          {/* Double Box */}
+          <div className="absolute bottom-[500px] right-[220px] bg-[#172C5C] p-4 z-20 rounded-full group cursor-pointer">
+            <img
+              src={Double}
+              alt="Double"
+              className="w-11 h-11 group-hover:animate-bounce"
+            />
+          </div>
+
+          {/* Midjourney Box */}
+          <div className="absolute bottom-[430px] right-[120px] bg-[#172C5C] p-4 z-20 rounded-full group cursor-pointer">
+            <img
+              src={Midjourney}
+              alt="Midjourney"
+              className="w-11 h-11 group-hover:animate-bounce"
+            />
+          </div>
+
+          {/* AdRoll Box */}
+          <div className="absolute bottom-[330px] right-[50px] bg-[#172C5C] py-8 px-1 z-20 rounded-full group cursor-pointer">
+            <img
+              src={AdRoll}
+              alt="AdRoll"
+              className="w-[71px] h-[13px] group-hover:animate-bounce"
             />
           </div>
         </div>
