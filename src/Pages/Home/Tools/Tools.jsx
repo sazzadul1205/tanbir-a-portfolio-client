@@ -15,29 +15,29 @@ import JS from "../../../assets/Tools/JS.png";
 
 const Tools = ({ id }) => {
   return (
-    <section id={id} className="bg-white pt-[76px]">
+    <section id={id} className="bg-white pt-10 md:pt-[76px]">
       {/* Title */}
       <h3 className="inter font-semibold text-3xl md:text-4xl text-center text-black">
         Tools & Technologies I Use
       </h3>
 
       {/* Sub Title */}
-      <p className="inter text-base md:text-lg text-center text-black mt-2 max-w-2xl mx-auto px-4 pb-[110px]">
+      <p className="inter text-base md:text-lg text-center text-black mt-2 max-w-2xl mx-auto px-4 pb-5 md:pb-[110px]">
         To deliver performance-driven creative, I work with industry-standard
         platforms and next-gen generative tools
       </p>
 
       {/* Images */}
-      <div className="relative w-full max-w-4xl mx-auto mt-28 ">
+      <div className="relative w-full max-w-4xl mx-auto md:mt-28 ">
         {/* Primary Image */}
         <img
           src={Frame}
           alt="Frame"
-          className="w-[682px] h-[512px] mx-auto object-contain"
+          className="w-[682px] md:h-[512px] mx-auto object-contain"
         />
 
         {/* Icons Container */}
-        <div className="absolute w-[823px] h-[406px] mx-auto inset-0">
+        <div className="absolute w-[823px] h-[406px] mx-auto inset-0 hidden md:flex">
           {/* HTML5 */}
           <div className="absolute w-20 h-20 flex items-center justify-center bg-[#172C5C] rounded-full bottom-[100px] group cursor-pointer">
             <img
