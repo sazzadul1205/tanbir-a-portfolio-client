@@ -12,7 +12,7 @@ const Home = () => {
 
       <MyServices id="my-services" />
 
-      {/* <Tools id="tools" /> */}
+      <Tools id="tools" />
 
       {/* <WhyHireMe id="why-hire-me" /> */}
 

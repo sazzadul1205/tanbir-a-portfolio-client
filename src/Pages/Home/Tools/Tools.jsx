@@ -1,7 +1,15 @@
+// Packages
+import PropTypes from "prop-types";
+
 // Assets
 import Icon from "../../../assets/Tools/Icon.png";
+import HTML5 from "../../../assets/Tools/HTML5.png";
 import Frame from "../../../assets/Tools/Frame.png";
-import PropTypes from "prop-types";
+import CSS from "../../../assets/Tools/CSS.png";
+import Meta from "../../../assets/Tools/Meta.png";
+import JS from "../../../assets/Tools/JS.png";
+import Adobe from "../../../assets/Tools/Adobe.png";
+import GWD from "../../../assets/Tools/GWD.png";
 
 const Tools = ({ id }) => {
   return (
@@ -18,7 +26,7 @@ const Tools = ({ id }) => {
       </p>
 
       {/* Images */}
-      <div className="relative w-full flex justify-center items-center pt-28">
+      <div className="relative w-full flex justify-center items-center pt-24">
         {/* Primary Image */}
         <img src={Frame} alt="Frame" className="w-[600px] h-[500px] mx-auto" />
 
@@ -28,6 +36,62 @@ const Tools = ({ id }) => {
           alt="Icon"
           className="absolute w-[800px] h-[400px] -translate-x-1/2 -translate-y-[55%] left-1/2 -bottom-8 z-10"
         />
+
+        <div className="absolute  w-4xl h-full mx-auto">
+          {/* HTML5 Box */}
+          <div className="absolute bottom-[230px] left-12 bg-[#172C5C] p-3 z-20 rounded-full group cursor-pointer">
+            <img
+              src={HTML5}
+              alt="HTML5"
+              className="w-16 h-16 group-hover:animate-bounce"
+            />
+          </div>
+
+          {/* CSS Box */}
+          <div className="absolute bottom-[350px] left-22 bg-[#172C5C] p-3 z-20 rounded-full group cursor-pointer">
+            <img
+              src={CSS}
+              alt="CSS"
+              className="w-14 h-14 group-hover:animate-bounce"
+            />
+          </div>
+
+          {/* Meta Box */}
+          <div className="absolute bottom-[440px] left-[160px] bg-[#172C5C] p-3 z-20 rounded-full group cursor-pointer">
+            <img
+              src={Meta}
+              alt="Meta"
+              className="w-14 h-14 group-hover:animate-bounce"
+            />
+          </div>
+
+          {/* JS Box */}
+          <div className="absolute bottom-[510px] left-[260px] bg-[#172C5C] p-3 z-20 rounded-full group cursor-pointer">
+            <img
+              src={JS}
+              alt="JS"
+              className="w-11 h-11 group-hover:animate-bounce"
+            />
+          </div>
+
+          {/* Adobe Box */}
+          <div className="absolute bottom-[550px] left-[380px] bg-[#172C5C] p-3 z-20 rounded-full group cursor-pointer">
+            <img
+              src={Adobe}
+              alt="Adobe"
+              className="w-11 h-11 group-hover:animate-bounce"
+            />
+          </div>
+
+          {/* GWD Box */}
+          <div className="absolute bottom-[550px] right-[330px] bg-[#172C5C] p-4 z-20 rounded-full group cursor-pointer">
+            <img
+              src={GWD}
+              alt="GWD"
+              className="w-11 h-11 group-hover:animate-bounce"
+            />
+          </div>
+        </div>
       </div>
     </section>
   );
