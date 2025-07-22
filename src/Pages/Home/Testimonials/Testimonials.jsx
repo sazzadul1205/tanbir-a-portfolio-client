@@ -7,6 +7,7 @@ import { MdOutlineShare } from "react-icons/md";
 
 // Assets
 import UpWorkICon from "../../../assets/UpWorkSymbol1.png";
+import CountUpOnView from "./CountUpOnView/CountUpOnView ";
 
 // Testimonial data
 const testimonialData = [
@@ -136,7 +137,7 @@ const Testimonials = () => {
                       ))}
                   </div>
 
-                  <div className="flex items-center gap-5" >
+                  <div className="flex items-center gap-5">
                     {/* Divider */}
                     <p className="text-gray-500">|</p>
 
@@ -202,15 +203,24 @@ const Testimonials = () => {
       {/* Good To know  */}
       <div className="flex flex-col md:flex-row gap-5 items-center justify-around py-7">
         <div className="flex flex-col text-center">
-          <p className="italianno-regular text-5xl">1500 +</p>
+          <CountUpOnView
+            targetNumber={1500}
+            className="italianno-regular text-5xl"
+          />
           <p>Project Completed</p>
         </div>
         <div className="flex flex-col text-center">
-          <p className="italianno-regular text-5xl">17 +</p>
+          <CountUpOnView
+            targetNumber={17}
+            className="italianno-regular text-5xl"
+          />
           <p>Years Of Experience</p>
         </div>
         <div className="flex flex-col text-center">
-          <p className="italianno-regular text-5xl">98 +</p>
+          <CountUpOnView
+            targetNumber={98}
+            className="italianno-regular text-5xl"
+          />
           <p>Client Satisfaction</p>
         </div>
       </div>

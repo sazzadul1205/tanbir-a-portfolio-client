@@ -15,7 +15,7 @@ import JS from "../../../assets/Tools/JS.png";
 
 const Tools = ({ id }) => {
   return (
-    <section id={id} className="bg-white py-10">
+    <section id={id} className="bg-white pt-10">
       {/* Title */}
       <h3 className="inter font-semibold text-3xl md:text-4xl text-center text-black">
         Tools & Technologies I Use
@@ -28,14 +28,18 @@ const Tools = ({ id }) => {
       </p>
 
       {/* Images */}
-      <div className="relative w-full max-w-4xl mx-auto mt-8">
+      <div className="relative w-full max-w-4xl mx-auto mt-28 ">
         {/* Primary Image */}
-        <img src={Frame} alt="Frame" className="w-full h-auto object-contain" />
+        <img
+          src={Frame}
+          alt="Frame"
+          className="w-[600px] h-[500px] mx-auto object-contain"
+        />
 
         {/* Icons Container */}
-        <div className="absolute inset-0">
+        <div className="absolute w-[800px] h-[400px] mx-auto inset-0">
           {/* HTML5 */}
-          <div className="absolute bg-[#172C5C] p-3 rounded-full bottom-1/3 left-4 sm:left-8 md:left-12 group cursor-pointer">
+          <div className="absolute bg-[#172C5C] p-3 rounded-full bottom-[100px]  group cursor-pointer">
             <img
               src={HTML5}
               alt="HTML5"
@@ -44,7 +48,7 @@ const Tools = ({ id }) => {
           </div>
 
           {/* CSS */}
-          <div className="absolute bg-[#172C5C] p-3 rounded-full bottom-1/2 left-8 sm:left-16 md:left-22 group cursor-pointer">
+          <div className="absolute bg-[#172C5C] p-4 rounded-full bottom-[220px] left-[41px]  group cursor-pointer">
             <img
               src={CSS}
               alt="CSS"
@@ -53,7 +57,7 @@ const Tools = ({ id }) => {
           </div>
 
           {/* Meta */}
-          <div className="absolute bg-[#172C5C] p-3 rounded-full bottom-2/3 left-1/3 md:left-[160px] group cursor-pointer">
+          <div className="absolute bg-[#172C5C] p-3 rounded-full bottom-[330px] left-[122px]">
             <img
               src={Meta}
               alt="Meta"
@@ -62,7 +66,7 @@ const Tools = ({ id }) => {
           </div>
 
           {/* JS */}
-          <div className="absolute bg-[#172C5C] p-4 rounded-full bottom-3/4 left-1/2 md:left-[260px] group cursor-pointer">
+          <div className="absolute bg-[#172C5C] p-4 rounded-full bottom-[390px] left-[220px] group cursor-pointer">
             <img
               src={JS}
               alt="JS"
@@ -71,49 +75,49 @@ const Tools = ({ id }) => {
           </div>
 
           {/* Adobe */}
-          <div className="absolute bg-[#172C5C] p-4 rounded-full bottom-4/5 left-2/3 md:left-[380px] group cursor-pointer">
+          {/* <div className="absolute bg-[#172C5C] p-4 rounded-full bottom-4/5 left-2/3 md:left-[380px] group cursor-pointer">
             <img
               src={Adobe}
               alt="Adobe"
               className="w-8 h-8 sm:w-10 sm:h-10 md:w-11 md:h-11 group-hover:animate-spin"
             />
-          </div>
+          </div> */}
 
           {/* GWD */}
-          <div className="absolute bg-[#172C5C] p-4 rounded-full bottom-4/5 right-2/3 md:right-[330px] group cursor-pointer">
+          {/* <div className="absolute bg-[#172C5C] p-4 rounded-full bottom-4/5 right-2/3 md:right-[330px] group cursor-pointer">
             <img
               src={GWD}
               alt="GWD"
               className="w-8 h-8 sm:w-10 sm:h-10 md:w-11 md:h-11 group-hover:animate-spin"
             />
-          </div>
+          </div> */}
 
           {/* Double */}
-          <div className="absolute bg-[#172C5C] p-4 rounded-full bottom-3/4 right-1/2 md:right-[220px] group cursor-pointer">
+          {/* <div className="absolute bg-[#172C5C] p-4 rounded-full bottom-3/4 right-1/2 md:right-[220px] group cursor-pointer">
             <img
               src={Double}
               alt="Double"
               className="w-8 h-8 sm:w-10 sm:h-10 md:w-11 md:h-11 group-hover:animate-spin"
             />
-          </div>
+          </div> */}
 
           {/* Midjourney */}
-          <div className="absolute bg-[#172C5C] p-4 rounded-full bottom-2/3 right-1/3 md:right-[120px] group cursor-pointer">
+          {/* <div className="absolute bg-[#172C5C] p-4 rounded-full bottom-2/3 right-1/3 md:right-[120px] group cursor-pointer">
             <img
               src={Midjourney}
               alt="Midjourney"
               className="w-8 h-8 sm:w-10 sm:h-10 md:w-11 md:h-11 group-hover:animate-spin"
             />
-          </div>
+          </div> */}
 
           {/* AdRoll */}
-          <div className="absolute bg-[#172C5C] px-1 py-8 rounded-full bottom-1/2 right-4 sm:right-8 md:right-12 group cursor-pointer">
+          {/* <div className="absolute bg-[#172C5C] px-1 py-8 rounded-full bottom-1/2 right-4 sm:right-8 md:right-12 group cursor-pointer">
             <img
               src={AdRoll}
               alt="AdRoll"
               className="w-16 h-4 sm:w-[71px] sm:h-[13px] group-hover:animate-spin"
             />
-          </div>
+          </div> */}
         </div>
       </div>
     </section>
