@@ -116,7 +116,7 @@ const Testimonials = () => {
         </div>
 
         {/* Single Testimonial */}
-        <div className="w-full md:w-3/4 relative md:overflow-hidden">
+        <div className="w-full md:w-3/4 relative">
           <div className="relative w-full">
             <div
               key={testimonialData[currentIndex].id}
@@ -177,36 +177,39 @@ const Testimonials = () => {
                 </div>
 
                 {/* Arrow at top-right */}
-                <div className="absolute -top-2 -right-2 z-20">
-                  <div className="bg-[#0F172A] rounded-bl-2xl  p-2">
-                    <div className="bg-white p-4 rounded-full cursor-pointer transition-transform duration-300 rotate-[-45deg] hover:rotate-0">
-                      <FaArrowRight className="text-black text-xl  " />
+                <div>
+                  {/* Arrow */}
+                  <div className="absolute -top-2 -right-2 z-20">
+                    <div className="bg-[#0F172A] rounded-bl-2xl  p-2">
+                      <div className="bg-white p-4 rounded-full cursor-pointer relative transition-all duration-300 transform rotate-[-45deg] hover:rotate-0 hover:translate-x-2 z-50">
+                        <FaArrowRight className="text-black text-xl" />
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                {/* Sticky Corner */}
-                <div className="pbmit-sticky-corner top-0 right-15 bg-white z-30 ">
-                  <svg
-                    width="30"
-                    height="30"
-                    viewBox="0 0 30 30"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M30 30V0C30 16 16 30 0 30H30Z"></path>
-                  </svg>
-                </div>
+                  {/* Sticky Corner */}
+                  <div className="pbmit-sticky-corner top-0 right-15 bg-white z-30 ">
+                    <svg
+                      width="30"
+                      height="30"
+                      viewBox="0 0 30 30"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M30 30V0C30 16 16 30 0 30H30Z"></path>
+                    </svg>
+                  </div>
 
-                {/* Sticky Corner */}
-                <div className="pbmit-sticky-corner top-15 right-0 bg-white z-30 ">
-                  <svg
-                    width="30"
-                    height="30"
-                    viewBox="0 0 30 30"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M30 30V0C30 16 16 30 0 30H30Z"></path>
-                  </svg>
+                  {/* Sticky Corner */}
+                  <div className="pbmit-sticky-corner top-15 right-0 bg-white z-30 ">
+                    <svg
+                      width="30"
+                      height="30"
+                      viewBox="0 0 30 30"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M30 30V0C30 16 16 30 0 30H30Z"></path>
+                    </svg>
+                  </div>
                 </div>
 
                 {/* Available Now */}
