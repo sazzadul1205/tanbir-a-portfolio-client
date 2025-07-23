@@ -77,3 +77,10 @@ html {
   position: absolute;
   transform: rotate(-360deg);
 }
+
+.WHM-sticky-corner {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  transform: rotate(360deg);
+}

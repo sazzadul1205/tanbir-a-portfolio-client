@@ -194,6 +194,7 @@ const Testimonials = () => {
                       height="30"
                       viewBox="0 0 30 30"
                       xmlns="http://www.w3.org/2000/svg"
+                      fill="#0F172A"
                     >
                       <path d="M30 30V0C30 16 16 30 0 30H30Z"></path>
                     </svg>
@@ -206,6 +207,7 @@ const Testimonials = () => {
                       height="30"
                       viewBox="0 0 30 30"
                       xmlns="http://www.w3.org/2000/svg"
+                      fill="#0F172A"
                     >
                       <path d="M30 30V0C30 16 16 30 0 30H30Z"></path>
                     </svg>
@@ -230,6 +232,7 @@ const Testimonials = () => {
                     height="30"
                     viewBox="0 0 30 30"
                     xmlns="http://www.w3.org/2000/svg"
+                    fill="#0F172A"
                   >
                     <path d="M30 30V0C30 16 16 30 0 30H30Z"></path>
                   </svg>
@@ -242,6 +245,7 @@ const Testimonials = () => {
                     height="30"
                     viewBox="0 0 30 30"
                     xmlns="http://www.w3.org/2000/svg"
+                    fill="#0F172A"
                   >
                     <path d="M30 30V0C30 16 16 30 0 30H30Z"></path>
                   </svg>

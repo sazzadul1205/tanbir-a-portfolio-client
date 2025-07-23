@@ -51,25 +51,55 @@ const WhyHireMe = ({ id }) => {
       </p>
 
       {/* Content */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 max-w-7xl mx-auto pt-10 pb-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 max-w-7xl mx-auto pt-10 pb-4 bg-[#0F172A]">
         {whyHireMeData.map((item, index) => (
           <div
             key={index}
-            className={`relative ${item.bgColor} ${item.textColor} p-5 md:p-6 rounded-md h-full`}
+            className={`relative ${item.bgColor} ${item.textColor} px-3.5 pt-5 pb-9 rounded-md h-full`}
           >
-            <h3 className="inter text-lg md:text-xl font-medium">
-              {item.title}
-            </h3>
-            <p className="inter pt-2 text-sm md:text-base">
+            <h3 className="inter text-[22px] font-medium">{item.title}</h3>
+            <p className="inter pt-2 text-sm md:text-base pr-8">
               {item.description}
             </p>
 
-            {/* Icon */}
-            <div className="absolute p-2 -right-4 -bottom-5 cursor-pointer">
+            <div>
+              {/* Icon */}
+              <div className="absolute p-2 -right-2 -bottom-2 cursor-pointer">
+                <div className="bg-[#0F172A] rounded-tl-2xl p-2">
+                  <div className="bg-[#0F172A] border border-white p-3 rounded-full flex items-center justify-center cursor-pointer relative transition-all duration-300 transform rotate-[-45deg] hover:rotate-0 hover:translate-x-2 z-50">
+                    <FaArrowRight className="text-white text-xl" />
+                  </div>
+                </div>
+              </div>
+
+              {/* Sticky Corner */}
               <div
-                className={`border border-gray-300 p-3 md:p-4 rounded-full ${item.iconBg}`}
+                className={`WHM-sticky-corner bottom-0 right-[62px] ${item.bgColor} z-30`}
               >
-                <FaArrowRight className="text-white text-base md:text-xl transition-transform duration-300 rotate-[-45deg] hover:rotate-0" />
+                <svg
+                  width="30"
+                  height="30"
+                  viewBox="0 0 30 30"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="#0F172A"
+                >
+                  <path d="M30 30V0C30 16 16 30 0 30H30Z"></path>
+                </svg>
+              </div>
+
+              {/* Sticky Corner */}
+              <div
+                className={`WHM-sticky-corner bottom-[62px] right-0 ${item.bgColor} z-30`}
+              >
+                <svg
+                  width="30"
+                  height="30"
+                  viewBox="0 0 30 30"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="#0F172A"
+                >
+                  <path d="M30 30V0C30 16 16 30 0 30H30Z"></path>
+                </svg>
               </div>
             </div>
           </div>
