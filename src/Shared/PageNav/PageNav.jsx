@@ -4,7 +4,13 @@ import PropTypes from "prop-types";
 // Icons
 import { FiMenu, FiX } from "react-icons/fi";
 
-const PageNav = ({ TOTAL_DOTS, activeDot, activeSection, menuData }) => {
+const PageNav = ({
+  TOTAL_DOTS,
+  activeDot,
+  activeSection,
+  menuData,
+  scrollToWorkDot,
+}) => {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const scrollToSection = (id) => {
@@ -19,13 +25,15 @@ const PageNav = ({ TOTAL_DOTS, activeDot, activeSection, menuData }) => {
     <div className="bg-[#0F172A] text-white w-full z-40 shadow-sm">
       <div className="flex items-center justify-between px-4 py-4 max-w-[1200px] mx-auto">
         {/* Dot Indicators */}
-        <div className="flex items-center gap-2">
+        <div className="flex gap-3" >
           {[...Array(TOTAL_DOTS)].map((_, i) => (
-            <span
+            <button
               key={i}
-              className={`p-1 rounded-full w-2 h-2 transition ${
-                i === activeDot ? "bg-[#33BD51]" : "bg-gray-400"
+              onClick={() => scrollToWorkDot(i)}
+              className={`w-3 h-3 rounded-full transition-all duration-300 cursor-pointer ${
+                i === activeDot ? "bg-[#33BD51]" : "bg-gray-400 hover:bg-[#33BD51] hover:opacity-80"
               }`}
+              aria-label={`Scroll to item ${i + 1}`}
             />
           ))}
         </div>
@@ -96,6 +104,7 @@ const PageNav = ({ TOTAL_DOTS, activeDot, activeSection, menuData }) => {
   );
 };
 
+// Prop Validation
 PageNav.propTypes = {
   TOTAL_DOTS: PropTypes.number.isRequired,
   activeDot: PropTypes.number.isRequired,
@@ -106,6 +115,7 @@ PageNav.propTypes = {
       id: PropTypes.string.isRequired,
     })
   ).isRequired,
+  scrollToWorkDot: PropTypes.func.isRequired,
 };
 
 export default PageNav;

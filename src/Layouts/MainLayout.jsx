@@ -1,3 +1,4 @@
+// MainLayout.jsx
 import { useEffect, useState } from "react";
 
 // Shared
@@ -45,6 +46,22 @@ const MainLayout = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const scrollToWorkDot = (dotIndex) => {
+    const worksContainer = document.getElementById("works-scroll");
+
+    if (!worksContainer) return;
+
+    const scrollWidth = worksContainer.scrollWidth / 2; // since you're doubling items
+    const scrollTo = (scrollWidth / TOTAL_DOTS) * dotIndex;
+
+    worksContainer.scrollTo({
+      left: scrollTo,
+      behavior: "smooth",
+    });
+
+    setActiveDot(dotIndex); // ✅ Update active dot on click
+  };
+
   return (
     <div className="bg-[#0F172A]">
       <Navbar />
@@ -54,6 +71,7 @@ const MainLayout = () => {
         activeDot={activeDot}
         activeSection={activeSection}
         menuData={menuData}
+        scrollToWorkDot={scrollToWorkDot}
       />
       <Home />
       <Footer />
