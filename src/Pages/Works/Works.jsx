@@ -29,7 +29,7 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
     }
 
     scrollEl.scrollLeft += scrollVelocity.current;
-    scrollVelocity.current *= 0.85; // Faster deceleration
+    scrollVelocity.current *= 0.35; // Faster deceleration
     updateActiveDot(scrollEl.scrollLeft);
     requestAnimationFrame(smoothScroll);
   };
@@ -73,6 +73,7 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
       el.removeEventListener("wheel", handleWheel);
       el.removeEventListener("scroll", handleScroll);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const items = Array.from({ length: 10 }, (_, i) => ({
