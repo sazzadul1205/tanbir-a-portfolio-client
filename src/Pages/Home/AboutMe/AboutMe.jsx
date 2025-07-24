@@ -43,7 +43,7 @@ const AboutMe = ({ id }) => {
       {/* Buttons */}
       <div className="flex flex-col sm:flex-row justify-center items-center gap-4 pt-8">
         {/* Start Your Project */}
-        <button className="flex items-center gap-2 bg-white text-black py-2 px-6 rounded-full shadow hover:shadow-lg transition">
+        <button className="flex items-center gap-2 bg-white text-black py-2 px-6 rounded-full shadow hover:shadow-lg transition cursor-pointer">
           <span
             className="p-1 bg-[#33BD51] rounded-full w-2 h-2"
             style={{
@@ -55,7 +55,7 @@ const AboutMe = ({ id }) => {
         </button>
 
         {/* WhatsApp Now */}
-        <button className="flex items-center gap-2 bg-white text-black py-2 px-6 rounded-full shadow hover:shadow-lg transition">
+        <button className="flex items-center gap-2 bg-white text-black py-2 px-6 rounded-full shadow hover:shadow-lg transition cursor-pointer">
           <span
             className="p-1 bg-[#33BD51] rounded-full w-2 h-2"
             style={{

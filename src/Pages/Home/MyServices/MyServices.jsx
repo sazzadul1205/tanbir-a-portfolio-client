@@ -71,7 +71,7 @@ const MyServices = ({ id }) => {
 
             {/* Bottom (Mobile) / Right (Desktop): Arrow */}
             <div className="self-end md:self-center mt-2 md:mt-0">
-              <div className="border border-gray-300 p-3 rounded-full cursor-pointer transform transition-all duration-500 rotate-[-45deg] hover:rotate-0 hover:translate-x-2">
+              <div className="border border-gray-300 p-3 rounded-full cursor-pointer transform transition-all duration-500 rotate-[-45deg] hover:rotate-0">
                 <FaArrowRight className="text-lg sm:text-xl" />
               </div>
             </div>

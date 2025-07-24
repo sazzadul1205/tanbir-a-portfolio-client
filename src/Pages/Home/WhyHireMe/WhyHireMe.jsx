@@ -66,7 +66,7 @@ const WhyHireMe = ({ id }) => {
               {/* Icon */}
               <div className="absolute p-2 -right-2 -bottom-2 cursor-pointer">
                 <div className="bg-[#0F172A] rounded-tl-2xl p-2">
-                  <div className="bg-[#0F172A] border border-white p-3 rounded-full flex items-center justify-center cursor-pointer relative transition-all duration-300 transform rotate-[-45deg] hover:rotate-0 hover:translate-x-2 z-50">
+                  <div className="bg-[#0F172A] border border-white p-3 rounded-full flex items-center justify-center cursor-pointer relative transition-all duration-300 transform rotate-[-45deg] hover:rotate-0 z-50">
                     <FaArrowRight className="text-white text-xl" />
                   </div>
                 </div>
@@ -109,16 +109,16 @@ const WhyHireMe = ({ id }) => {
       {/* Button */}
       <div className="flex flex-col sm:flex-row justify-center gap-4 pt-10">
         {/* Start Your Project */}
-        <div className="flex items-center gap-2 bg-white text-black py-2 px-6 rounded-full">
+        <button className="flex items-center gap-2 bg-white text-black py-2 px-6 rounded-full cursor-pointer">
           <span className="p-1 bg-[#33BD51] rounded-full w-2 h-2 animate-ping" />
           <p className="text-sm font-semibold inter">Hire Me Now</p>
-        </div>
+        </button>
 
         {/* Whats App Now */}
-        <div className="flex items-center gap-2 bg-white text-black py-2 px-6 rounded-full">
+        <button className="flex items-center gap-2 bg-white text-black py-2 px-6 rounded-full cursor-pointer">
           <span className="p-1 bg-[#33BD51] rounded-full w-2 h-2 animate-ping" />
           <p className="text-sm font-semibold inter">WhatsApp Now</p>
-        </div>
+        </button>
       </div>
     </section>
   );

@@ -181,7 +181,7 @@ const Testimonials = () => {
                   {/* Arrow */}
                   <div className="absolute -top-2 -right-2 z-20">
                     <div className="bg-[#0F172A] rounded-bl-2xl  p-2">
-                      <div className="bg-white p-4 rounded-full cursor-pointer relative transition-all duration-300 transform rotate-[-45deg] hover:rotate-0 hover:translate-x-2 z-50">
+                      <div className="bg-white p-4 rounded-full cursor-pointer relative transition-all duration-300 transform rotate-[-45deg] hover:rotate-0 z-50">
                         <FaArrowRight className="text-black text-xl" />
                       </div>
                     </div>
@@ -216,13 +216,13 @@ const Testimonials = () => {
 
                 {/* Available Now */}
                 <div className="absolute bottom-0 right-10 bg-[#0F172A] rounded-tl-3xl rounded-tr-3xl px-2 pt-2 overflow-hidden">
-                  <div className="relative flex items-center gap-2 bg-white text-black py-[8px] px-7 rounded-full">
+                  <button className="relative flex items-center gap-2 bg-white text-black py-[8px] px-7 rounded-full cursor-pointer">
                     <span
                       className="w-2 h-2 bg-[#33BD51] rounded-full"
                       style={{ animation: "blink 1.5s infinite ease-in-out" }}
                     />
                     <p className="text-sm font-semibold">Available Now</p>
-                  </div>
+                  </button>
                 </div>
 
                 {/* Sticky Corner */}
