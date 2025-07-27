@@ -28,7 +28,7 @@ const Tools = ({ id }) => {
       </p>
 
       {/* Icons Container – Mobile Only */}
-      <div className="grid grid-cols-2 justify-items-center gap-y-6 gap-x-4 mx-auto md:hidden">
+      <div className="grid grid-cols-3 justify-items-center gap-y-6 gap-x-4 mx-auto md:hidden">
         {/* Icon Item */}
         {[HTML5, CSS, Meta, JS, Adobe, GWD, Double, Midjourney, AdRoll].map(
           (icon, idx) => (
