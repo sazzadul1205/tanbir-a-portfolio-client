@@ -51,7 +51,7 @@ const MainLayout = () => {
 
     if (!worksContainer) return;
 
-    const scrollWidth = worksContainer.scrollWidth / 2; // since you're doubling items
+    const scrollWidth = worksContainer.scrollWidth / 2;
     const scrollTo = (scrollWidth / TOTAL_DOTS) * dotIndex;
 
     worksContainer.scrollTo({
@@ -59,13 +59,15 @@ const MainLayout = () => {
       behavior: "smooth",
     });
 
-    setActiveDot(dotIndex); // ✅ Update active dot on click
+    setActiveDot(dotIndex); 
   };
 
   return (
     <div className="bg-[#0F172A]">
       <Navbar />
+
       <Works setActiveDot={setActiveDot} TOTAL_DOTS={TOTAL_DOTS} />
+
       <PageNav
         TOTAL_DOTS={TOTAL_DOTS}
         activeDot={activeDot}
@@ -73,7 +75,9 @@ const MainLayout = () => {
         menuData={menuData}
         scrollToWorkDot={scrollToWorkDot}
       />
+
       <Home />
+
       <Footer />
     </div>
   );

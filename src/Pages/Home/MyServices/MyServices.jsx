@@ -39,24 +39,24 @@ const services = [
 
 const MyServices = ({ id }) => {
   return (
-    <section id={id} className="pb-10 px-4 text-white">
+    <section id={id} className="pb-[101px] px-4 text-white">
       {/* Title */}
-      <h3 className="inter text-2xl sm:text-3xl md:text-4xl font-semibold text-center py-10">
+      <h3 className="inter text-[40px] font-semibold text-center pb-[106px]">
         My Services Include
       </h3>
 
       {/* Services List */}
-      <div className="max-w-7xl mx-auto flex flex-col">
+      <div className="max-w-[1100px] mx-auto flex flex-col">
         {services.map((service, idx) => (
           <div
             key={idx}
-            className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 md:gap-6 border-y border-gray-300 py-6 px-4 sm:px-8 md:px-12"
+            className="flex flex-col md:flex-row items-start md:items-center justify-between gap-[45px] border-y border-gray-300 py-4 px-9"
           >
             {/* Icon */}
             <img
               src={service.icon}
               alt={service.title}
-              className="w-10 h-10 shrink-0"
+              className="w-[45px] h-[45px] shrink-0"
             />
 
             {/* Title */}
@@ -70,10 +70,11 @@ const MyServices = ({ id }) => {
             </p>
 
             {/* Bottom (Mobile) / Right (Desktop): Arrow */}
-            <div className="self-end md:self-center mt-2 md:mt-0">
-              <div className="border border-gray-300 p-3 rounded-full cursor-pointer transform transition-all duration-500 rotate-[-45deg] hover:rotate-0">
-                <FaArrowRight className="text-lg sm:text-xl" />
-              </div>
+            <div
+              className="border border-gray-300 w-[35px] h-[35px] rounded-full cursor-pointer flex items-center justify-center transform transition-all duration-500 rotate-[-45deg] hover:rotate-0"
+              style={{ boxSizing: "border-box", padding: 0, margin: 0 }}
+            >
+              <FaArrowRight className="text-md" />
             </div>
           </div>
         ))}

@@ -139,27 +139,28 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
               item.type === "single" ? (
                 <div
                   key={idx}
-                  className="h-[400px] md:h-[600px] w-[300px] flex items-center justify-center rounded text-black text-xl font-semibold cursor-pointer hover:opacity-90 transition"
+                  className="h-[600px] w-[300px] flex items-center justify-center rounded text-black text-xl font-semibold cursor-pointer hover:opacity-90 transition"
                   style={{ backgroundColor: item.color }}
                   onClick={() => openModal(item)}
                 >
                   {item.label}
                 </div>
               ) : (
-                <div key={idx} className="flex flex-col gap-1">
-                  <div
-                    className="h-[200px] md:h-[300px] w-[300px] flex items-center justify-center rounded text-black text-xl font-semibold cursor-pointer hover:opacity-90 transition"
-                    style={{ backgroundColor: item.color }}
-                    onClick={() => openModal(item)}
-                  >
-                    {item.label} Top
-                  </div>
-                  <div
-                    className="h-[200px] md:h-[300px] w-[300px] flex items-center justify-center rounded text-black text-xl font-semibold cursor-pointer hover:opacity-90 transition"
-                    style={{ backgroundColor: item.color }}
-                    onClick={() => openModal(item)}
-                  >
-                    {item.label} Bottom
+                <div
+                  key={idx}
+                  className="relative w-[300px] h-[600px] overflow-hidden"
+                >
+                  <div className="flex flex-col gap-1 absolute top-0 left-0">
+                    {[1, 2, 3].map((blockNum) => (
+                      <div
+                        key={blockNum}
+                        className="h-[250px] w-[300px] flex items-center justify-center rounded text-black text-xl font-semibold cursor-pointer hover:opacity-90 transition"
+                        style={{ backgroundColor: item.color }}
+                        onClick={() => openModal(item)}
+                      >
+                        {item.label} Part {blockNum}
+                      </div>
+                    ))}
                   </div>
                 </div>
               )
