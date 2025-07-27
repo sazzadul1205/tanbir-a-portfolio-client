@@ -38,86 +38,97 @@ const whyHireMeData = [
 
 const WhyHireMe = ({ id }) => {
   return (
-    <section id={id} className="px-4 md:px-10">
+    <section id={id} className="pt-9">
       {/* Title */}
       <h3 className="inter font-semibold text-3xl md:text-4xl text-center text-white pt-10">
         Why Hire Me?
       </h3>
 
       {/* Sub Title */}
-      <p className="inter text-base md:text-lg text-center text-white pt-2 max-w-xl mx-auto">
+      <p className="inter text-base md:text-lg text-center text-white pt-4 max-w-xl mx-auto">
         To deliver performance-driven creative, I work with industry-standard
         platforms and next-gen generative tools
       </p>
 
       {/* Content */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 max-w-7xl mx-auto pt-10 pb-4 bg-[#0F172A]">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-5 gap-x-6 max-w-7xl mx-auto pt-[76px] pb-4 bg-[#0F172A] px-4 sm:px-6">
         {whyHireMeData.map((item, index) => (
           <div
             key={index}
-            className={`relative ${item.bgColor} ${item.textColor} px-3.5 pt-5 pb-9 rounded-md h-full`}
+            className={`relative ${item.bgColor} ${item.textColor} px-4 py-6 h-full`}
           >
             <h3 className="inter text-[22px] font-medium">{item.title}</h3>
-            <p className="inter pt-2 text-sm md:text-base pr-8">
+
+            <p className="inter pt-2 text-sm md:text-base pr-8 max-w-full md:max-w-[500px]">
               {item.description}
             </p>
 
-            <div>
-              {/* Icon */}
-              <div className="absolute p-2 -right-2 -bottom-2 cursor-pointer">
-                <div className="bg-[#0F172A] rounded-tl-2xl p-2">
-                  <div className="bg-[#0F172A] border border-white p-3 rounded-full flex items-center justify-center cursor-pointer relative transition-all duration-300 transform rotate-[-45deg] hover:rotate-0 z-50">
-                    <FaArrowRight className="text-white text-xl" />
-                  </div>
+            {/* Icon */}
+            <div className="absolute p-2 -right-2 -bottom-2 cursor-pointer">
+              <div className="bg-[#0F172A] rounded-tl-2xl p-2">
+                <div className="bg-[#0F172A] border border-white p-3 rounded-full flex items-center justify-center cursor-pointer relative transition-all duration-300 transform rotate-[-45deg] hover:rotate-0 z-50">
+                  <FaArrowRight className="text-white text-xl" />
                 </div>
               </div>
+            </div>
 
-              {/* Sticky Corner */}
-              <div
-                className={`WHM-sticky-corner bottom-0 right-[62px] ${item.bgColor} z-30`}
+            {/* Sticky Corner - Bottom Left */}
+            <div
+              className={`WHM-sticky-corner bottom-0 right-[62px] ${item.bgColor} z-30`}
+            >
+              <svg
+                width="30"
+                height="30"
+                viewBox="0 0 30 30"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="#0F172A"
               >
-                <svg
-                  width="30"
-                  height="30"
-                  viewBox="0 0 30 30"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="#0F172A"
-                >
-                  <path d="M30 30V0C30 16 16 30 0 30H30Z"></path>
-                </svg>
-              </div>
+                <path d="M30 30V0C30 16 16 30 0 30H30Z"></path>
+              </svg>
+            </div>
 
-              {/* Sticky Corner */}
-              <div
-                className={`WHM-sticky-corner bottom-[62px] right-0 ${item.bgColor} z-30`}
+            {/* Sticky Corner - Top Right */}
+            <div
+              className={`WHM-sticky-corner bottom-[62px] right-0 ${item.bgColor} z-30`}
+            >
+              <svg
+                width="30"
+                height="30"
+                viewBox="0 0 30 30"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="#0F172A"
               >
-                <svg
-                  width="30"
-                  height="30"
-                  viewBox="0 0 30 30"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="#0F172A"
-                >
-                  <path d="M30 30V0C30 16 16 30 0 30H30Z"></path>
-                </svg>
-              </div>
+                <path d="M30 30V0C30 16 16 30 0 30H30Z"></path>
+              </svg>
             </div>
           </div>
         ))}
       </div>
 
       {/* Button */}
-      <div className="flex flex-col sm:flex-row justify-center gap-4 pt-10">
+      <div className="flex flex-col md:flex-row justify-center items-center gap-4 pt-11">
         {/* Start Your Project */}
-        <button className="flex items-center gap-2 bg-white text-black py-2 px-6 rounded-full cursor-pointer">
-          <span className="p-1 bg-[#33BD51] rounded-full w-2 h-2 animate-ping" />
-          <p className="text-sm font-semibold inter">Hire Me Now</p>
+        <button className="flex items-center gap-2 bg-white text-black py-2 px-6 rounded-full cursor-pointer w-auto self-center">
+          <span
+            className="p-1 bg-[#33BD51] rounded-full w-2 h-2"
+            style={{
+              animation: "blink 1.5s infinite",
+              animationTimingFunction: "ease-in-out",
+            }}
+          />
+          <p className="text-sm font-medium">Hire Me Now</p>
         </button>
 
-        {/* Whats App Now */}
-        <button className="flex items-center gap-2 bg-white text-black py-2 px-6 rounded-full cursor-pointer">
-          <span className="p-1 bg-[#33BD51] rounded-full w-2 h-2 animate-ping" />
-          <p className="text-sm font-semibold inter">WhatsApp Now</p>
+        {/* WhatsApp Now */}
+        <button className="flex items-center gap-2 bg-white text-black py-2 px-6 rounded-full cursor-pointer w-auto self-center">
+          <span
+            className="p-1 bg-[#33BD51] rounded-full w-2 h-2"
+            style={{
+              animation: "blink 1.5s infinite",
+              animationTimingFunction: "ease-in-out",
+            }}
+          />
+          <p className="text-sm font-medium">WhatsApp Now</p>
         </button>
       </div>
     </section>
