@@ -1,5 +1,7 @@
-import { FaArrowRight } from "react-icons/fa6";
 import PropTypes from "prop-types";
+
+// Icons
+import { FaArrowRightLong } from "react-icons/fa6";
 
 // Assets
 import HTML5 from "../../../assets/Services/HTML5.png";
@@ -12,27 +14,27 @@ import MotionGraphics from "../../../assets/Services/MotionGraphics.png";
 const services = [
   {
     icon: Animation,
-    title: "Social Media Video Ads",
+    title: "Social Media <br /> Video Ads",
     desc: "I design and animate high-converting video ads for Facebook, Instagram, and LinkedIn, optimized for engagement and fast load times.",
   },
   {
     icon: HTML5,
-    title: "HTML5 Display & Rich-Media Ads",
+    title: "HTML5 Display & <br /> Rich-Media Ads",
     desc: "Fully responsive, interactive HTML5 banner ads built for top ad platforms: Google Ads, DV360, DoubleClick, AdForm, Celtra, Sizmek (Amazon), Flashtalking, and more.",
   },
   {
     icon: SocialMedia,
-    title: "Motion Graphics & Video Production",
+    title: "Motion Graphics & <br /> Video Production",
     desc: "From explainer videos and product animations to kinetic typography and film title sequences — my work blends storytelling with visual clarity.",
   },
   {
     icon: MotionGraphics,
-    title: "Scientific & Medical Animations",
+    title: "Scientific & Medical <br /> Animations",
     desc: "I simplify complex subjects through motion — ideal for biotech, medical, or academic communications.",
   },
   {
     icon: Scientific,
-    title: "Animated UI Prototypes & SVGs",
+    title: "Animated UI <br /> Prototypes & SVGs",
     desc: "Using Lottie and Bodymovin, I animate clean SVG assets for web and mobile — enhancing your UI/UX with smooth micro-interactions.",
   },
 ];
@@ -50,31 +52,58 @@ const MyServices = ({ id }) => {
         {services.map((service, idx) => (
           <div
             key={idx}
-            className="flex flex-col md:flex-row items-start md:items-center justify-between gap-[45px] border-y border-gray-300 py-4 px-9"
+            className="relative group flex flex-col md:flex-row items-start md:items-center justify-between gap-[45px] 
+    py-[27.5px] px-[36.5px] 
+    first:border-t first:border-gray-500 
+    border-b border-gray-500 
+    overflow-hidden"
           >
-            {/* Icon */}
-            <img
-              src={service.icon}
-              alt={service.title}
-              className="w-[45px] h-[45px] shrink-0"
-            />
+            {/* Animated Bottom Border */}
+            <span className="pointer-events-none absolute bottom-0 left-0 h-[1px] bg-[#ffb539] w-0 group-hover:w-full transition-all duration-500 ease-in-out" />
 
-            {/* Title */}
-            <h3 className="inter font-bold text-lg sm:text-xl md:text-[20px] md:w-64">
-              {service.title}
-            </h3>
+            {/* Content */}
+            <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between w-full gap-[45px]">
+              {/* Icon */}
+              <img
+                src={service.icon}
+                alt={service.title.replace(/<br\s*\/?>/gi, " ")}
+                className="w-[45px] h-[45px]"
+              />
 
-            {/* Description */}
-            <p className="text-sm sm:text-white md:text-[17px] flex-1">
-              {service.desc}
-            </p>
+              {/* Title */}
+              <h3
+                className="inter font-bold text-[23px] md:w-[264px] text-white hover:text-[#ddb166] transition-colors duration-300 cursor-pointer"
+                dangerouslySetInnerHTML={{ __html: service.title }}
+              />
 
-            {/* Bottom (Mobile) / Right (Desktop): Arrow */}
-            <div
-              className="border border-gray-300 w-[35px] h-[35px] rounded-full cursor-pointer flex items-center justify-center transform transition-all duration-500 rotate-[-45deg] hover:rotate-0"
-              style={{ boxSizing: "border-box", padding: 0, margin: 0 }}
-            >
-              <FaArrowRight className="text-md" />
+              {/* Description */}
+              <p className="text-sm sm:text-white md:text-[17px] flex-1">
+                {service.desc}
+              </p>
+
+              {/* Arrow Icon */}
+              <div className="relative w-[47px] h-[47px] rounded-full border border-gray-500 group-hover:border-[#ddb166] transition-colors duration-300 overflow-hidden group cursor-pointer">
+                {/* Original White Arrow */}
+                <div
+                  className="absolute inset-0 flex items-center justify-center 
+          transition-all duration-500 ease-in-out 
+          group-hover:translate-x-[150%] group-hover:-translate-y-[150%] 
+          group-hover:opacity-0"
+                >
+                  <FaArrowRightLong className="text-md text-white rotate-[-45deg] transition-all duration-500" />
+                </div>
+
+                {/* Incoming Yellow Arrow */}
+                <div
+                  className="absolute left-[-100%] bottom-[-100%] opacity-0 
+          group-hover:left-0 group-hover:bottom-0 
+          group-hover:opacity-100 
+          transition-all duration-500 ease-in-out 
+          flex items-center justify-center w-full h-full"
+                >
+                  <FaArrowRightLong className="text-md text-[#ddb166] rotate-[-45deg] transition-all duration-500" />
+                </div>
+              </div>
             </div>
           </div>
         ))}
