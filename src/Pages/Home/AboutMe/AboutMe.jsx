@@ -3,7 +3,7 @@ import Desktop from "../../../assets/Desktop.png";
 
 const AboutMe = ({ id }) => {
   return (
-    <section id={id} className="py-1 md:py-10 px-1 md:px-4">
+    <section id={id} className="py-1 md:pt-16 md:py-10 px-1 md:px-4">
       {/* Title */}
       <h4 className="text-2xl sm:text-3xl md:text-4xl font-semibold inter max-w-5xl text-center mx-auto leading-snug md:leading-tight">
         Motion Graphics & High-Impact
@@ -19,29 +19,29 @@ const AboutMe = ({ id }) => {
       </h4>
 
       {/* About Me */}
-      <div className="py-8 max-w-3xl mx-auto text-center inter text-sm sm:text-base leading-relaxed">
-        <p className="pt-2">
+      <div className="inter pt-10 pb-9 max-w-[986px] mx-auto text-center inter text-lg sm:text-base leading-relaxed">
+        <p className="pt-1">
           Looking for motion graphics services that deliver fast, look stunning,
           and drive results?
         </p>
-        <p className="pt-2">
+        <p className="pt-1">
           I help brands, agencies, and marketing teams bring their ideas to life
-          with dynamic visuals, scroll-stopping ads, and compelling video
+          with dynamic visuals, scroll-stopping ads, and <br /> compelling video
           content — all tailored for today’s top platforms.
         </p>
-        <p className="pt-2">
+        <p className="pt-1">
           With years of hands-on experience in After Effects animation, HTML5
-          banner design, and social media ad production, I specialize in
+          banner design, and social media ad <br /> production, I specialize in
           creating digital campaigns that not only perform — they convert.
         </p>
-        <p className="pt-2">
+        <p className="pt-1">
           Need it done fast? No problem. I deliver top-level creative with
           express turnaround — without sacrificing quality.
         </p>
       </div>
 
       {/* Buttons */}
-      <div className="flex flex-col sm:flex-row justify-center items-center gap-4 pt-8">
+      <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
         {/* Start Your Project */}
         <button className="flex items-center gap-2 bg-white text-black py-2 px-6 rounded-full shadow hover:shadow-lg transition cursor-pointer">
           <span
