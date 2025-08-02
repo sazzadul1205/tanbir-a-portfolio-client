@@ -52,17 +52,13 @@ const MyServices = ({ id }) => {
         {services.map((service, idx) => (
           <div
             key={idx}
-            className="relative group flex flex-col md:flex-row items-start md:items-center justify-between gap-[45px] 
-    py-[27.5px] px-[36.5px] 
-    first:border-t first:border-gray-500 
-    border-b border-gray-500 
-    overflow-hidden"
+            className="relative group flex flex-col items-center md:flex-row md:items-center justify-center md:justify-between  md:gap-[45px] py-[15px] md:py-[27.5px] px-[36.5px] first:border-t first:border-gray-500 border-b border-gray-500 overflow-hidden"
           >
             {/* Animated Bottom Border */}
             <span className="pointer-events-none absolute bottom-0 left-0 h-[1px] bg-[#ffb539] w-0 group-hover:w-full transition-all duration-500 ease-in-out" />
 
             {/* Content */}
-            <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between w-full gap-[45px]">
+            <div className="relative z-10 flex flex-col items-center md:flex-row md:items-center justify-center md:justify-between w-full gap-[20px] md:gap-[45px]">
               {/* Icon */}
               <img
                 src={service.icon}
@@ -72,35 +68,24 @@ const MyServices = ({ id }) => {
 
               {/* Title */}
               <h3
-                className="inter font-bold text-[23px] md:w-[264px] text-white hover:text-[#ddb166] transition-colors duration-300 cursor-pointer"
+                className="inter font-bold text-[23px] md:w-[264px] text-white hover:text-[#ddb166] transition-colors duration-300 cursor-pointer text-center md:text-left"
                 dangerouslySetInnerHTML={{ __html: service.title }}
               />
 
               {/* Description */}
-              <p className="text-sm sm:text-white md:text-[17px] flex-1">
+              <p className="text-sm sm:text-white md:text-[17px] flex-1 cursor-default text-center md:text-left">
                 {service.desc}
               </p>
 
               {/* Arrow Icon */}
-              <div className="relative w-[47px] h-[47px] rounded-full border border-gray-500 group-hover:border-[#ddb166] transition-colors duration-300 overflow-hidden group cursor-pointer">
+              <div className="relative w-[47px] h-[47px] rounded-full border border-gray-500 group-hover:border-[#ddb166] transition-colors duration-300 overflow-hidden group cursor-pointer flex-shrink-0">
                 {/* Original White Arrow */}
-                <div
-                  className="absolute inset-0 flex items-center justify-center 
-          transition-all duration-500 ease-in-out 
-          group-hover:translate-x-[150%] group-hover:-translate-y-[150%] 
-          group-hover:opacity-0"
-                >
+                <div className="absolute inset-0 flex items-center justify-center transition-all duration-500 ease-in-out group-hover:translate-x-[150%] group-hover:-translate-y-[150%] group-hover:opacity-0">
                   <FaArrowRightLong className="text-md text-white rotate-[-45deg] transition-all duration-500" />
                 </div>
 
                 {/* Incoming Yellow Arrow */}
-                <div
-                  className="absolute left-[-100%] bottom-[-100%] opacity-0 
-          group-hover:left-0 group-hover:bottom-0 
-          group-hover:opacity-100 
-          transition-all duration-500 ease-in-out 
-          flex items-center justify-center w-full h-full"
-                >
+                <div className="absolute left-[-100%] bottom-[-100%] opacity-0 group-hover:left-0 group-hover:bottom-0 group-hover:opacity-100 transition-all duration-500 ease-in-out flex items-center justify-center w-full h-full">
                   <FaArrowRightLong className="text-md text-[#ddb166] rotate-[-45deg] transition-all duration-500" />
                 </div>
               </div>
