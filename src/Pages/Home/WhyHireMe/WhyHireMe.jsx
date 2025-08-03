@@ -55,11 +55,11 @@ const WhyHireMe = ({ id }) => {
         {whyHireMeData.map((item, index) => (
           <div
             key={index}
-            className={`relative ${item.bgColor} ${item.textColor} px-4 py-6 h-full`}
+            className={`relative ${item.bgColor} ${item.textColor} px-4 py-4 h-full`}
           >
             <h3 className="inter text-[22px] font-medium">{item.title}</h3>
 
-            <p className="inter pt-2 text-sm md:text-base pr-8 max-w-full md:max-w-[500px]">
+            <p className="inter pt-2 text-sm md:text-base pr-14 max-w-full md:max-w-[500px]">
               {item.description}
             </p>
 
@@ -106,7 +106,7 @@ const WhyHireMe = ({ id }) => {
       </div>
 
       {/* Button */}
-      <div className="flex flex-col md:flex-row justify-center items-center gap-4 pt-11">
+      <div className="flex flex-col md:flex-row justify-center items-center gap-4 py-11">
         {/* Start Your Project */}
         <button className="flex items-center gap-2 bg-white text-black py-2 px-6 rounded-full cursor-pointer w-auto self-center">
           <span

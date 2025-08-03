@@ -1,4 +1,7 @@
+// Packages
 import PropTypes from "prop-types";
+
+// Assets
 import Desktop from "../../../assets/Desktop.png";
 
 const AboutMe = ({ id }) => {
