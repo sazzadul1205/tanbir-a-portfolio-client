@@ -45,7 +45,7 @@ const WhyHireMe = ({ id }) => {
       </h3>
 
       {/* Sub Title */}
-      <p className="inter text-base md:text-lg text-center text-white pt-4 max-w-xl mx-auto">
+      <p className="inter text-base md:text-lg text-center text-white pt-4 px-5 max-w-xl mx-auto">
         To deliver performance-driven creative, I work with industry-standard
         platforms and next-gen generative tools
       </p>

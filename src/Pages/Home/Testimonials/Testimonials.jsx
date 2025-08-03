@@ -171,27 +171,27 @@ const Testimonials = () => {
       </div>
 
       {/* Good To Know - Mobile */}
-      <div className="flex md:hidden flex-row flex-wrap gap-4 items-center justify-center px-4 py-12 pt-[200px] md:p-24 md:pb-44">
+      <div className="flex md:hidden flex-col gap-5 items-center justify-center px-4 py-20 pt-[260px] md:p-24 md:pb-44">
         <div className="flex flex-col text-center">
           <CountUpOnView
             targetNumber={1500}
-            className="italianno-regular text-5xl"
+            className="italianno-regular text-7xl"
           />
-          <p>Project Completed</p>
+          <p className="text-lg" >Project Completed</p>
         </div>
         <div className="flex flex-col text-center">
           <CountUpOnView
             targetNumber={17}
-            className="italianno-regular text-5xl"
+            className="italianno-regular text-7xl"
           />
-          <p>Years Of Experience</p>
+          <p className="text-lg" >Years Of Experience</p>
         </div>
         <div className="flex flex-col text-center">
           <CountUpOnView
             targetNumber={98}
-            className="italianno-regular text-5xl"
+            className="italianno-regular text-7xl"
           />
-          <p>Client Satisfaction</p>
+          <p className="text-lg" >Client Satisfaction</p>
         </div>
       </div>
     </div>
