@@ -6,7 +6,7 @@ import Desktop from "../../../assets/Desktop.png";
 
 const AboutMe = ({ id }) => {
   return (
-    <section id={id} className="py-1 md:pt-16 md:py-10 px-1 md:px-4">
+    <section id={id} className="py-1 pt-10 md:pt-16 md:py-10 px-1 md:px-4">
       {/* Title */}
       <h4 className="text-2xl sm:text-3xl md:text-4xl font-semibold inter max-w-5xl text-center mx-auto leading-snug md:leading-tight">
         Motion Graphics & High-Impact
@@ -22,7 +22,7 @@ const AboutMe = ({ id }) => {
       </h4>
 
       {/* About Me */}
-      <div className="inter pt-10 pb-9 max-w-[986px] mx-auto text-center inter text-lg sm:text-base leading-relaxed">
+      <div className="inter pt-10 pb-9 px-5 max-w-[986px] mx-auto text-center inter text-lg sm:text-base leading-relaxed">
         <p className="pt-1">
           Looking for motion graphics services that deliver fast, look stunning,
           and drive results?
