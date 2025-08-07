@@ -2,8 +2,8 @@
 import PropTypes from "prop-types";
 
 // Assets
-import Midjourney from "../../../assets/Tools/Midjourney.png";
-import AdRoll from "../../../assets/Tools/AdRoll.png";
+// import Midjourney from "../../../assets/Tools/Midjourney.png";
+// import AdRoll from "../../../assets/Tools/AdRoll.png";
 import Double from "../../../assets/Tools/Double.png";
 import HTML5 from "../../../assets/Tools/HTML5.png";
 import Frame from "../../../assets/Tools/Frame.png";
@@ -12,6 +12,9 @@ import Meta from "../../../assets/Tools/Meta.png";
 import CSS from "../../../assets/Tools/CSS.png";
 import GWD from "../../../assets/Tools/GWD.png";
 import JS from "../../../assets/Tools/JS.png";
+
+import Midjourney from "../../../assets/Tool/Midjourney.svg";
+import AdRoll from "../../../assets/Tool/AdRoll.svg";
 
 const Tools = ({ id }) => {
   return (
@@ -93,13 +96,37 @@ const Tools = ({ id }) => {
           </div>
 
           {/* Midjourney */}
-          <div className="absolute w-20 h-20 flex items-center justify-center bg-[#172C5C] rounded-full bottom-[292px] right-[92px] group cursor-pointer hover:[animation:spinOnce_1.2s_ease-in-out]">
-            <img src={Midjourney} alt="Midjourney" className="w-10 h-10" />
+          <div className="absolute bottom-[292px] left-[652px] group cursor-pointer">
+            <div className="bg-[#172C5C] rounded-full h-20 w-20 group-hover:w-[220px] transition-all duration-500 ease-in-out overflow-hidden flex items-center justify-end px-2 origin-left">
+              <div className="flex items-center gap-2">
+                <img
+                  src={Midjourney}
+                  alt="Midjourney"
+                  className="w-[70px] h-[40px] flex-shrink-0"
+                />
+                <p className="text-white text-[12px] leading-4 hidden group-hover:block w-[120px]">
+                  Lorem Ipsum is simply dummy text of the printing and
+                  typesetting industry.
+                </p>
+              </div>
+            </div>
           </div>
 
           {/* AdRoll */}
-          <div className="absolute w-20 h-20 flex items-center justify-center bg-[#172C5C] rounded-full bottom-[192px] right-[22px] group cursor-pointer hover:[animation:spinOnce_1.2s_ease-in-out]">
-            <img src={AdRoll} alt="AdRoll" className="w-[71px] h-[11px]" />
+          <div className="absolute bottom-[192px] left-[722px] group cursor-pointer">
+            <div className="bg-[#172C5C] rounded-full h-20 w-20 group-hover:w-[220px] transition-all duration-500 ease-in-out overflow-hidden flex items-center justify-end px-2 origin-left">
+              <div className="flex items-center gap-2">
+                <img
+                  src={AdRoll}
+                  alt="AdRoll"
+                  className="w-[71px] h-[11px] flex-shrink-0"
+                />
+                <p className="text-white text-[12px] leading-4 hidden group-hover:block w-[120px]">
+                  Lorem Ipsum is simply dummy text of the printing and
+                  typesetting industry.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
