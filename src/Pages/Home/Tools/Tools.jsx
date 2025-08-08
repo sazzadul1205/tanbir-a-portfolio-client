@@ -161,17 +161,17 @@ const Tools = ({ id }) => {
 
           {/* GWD */}
           <div className="absolute bottom-[392px] left-[452px] group cursor-pointer hover:z-20">
-            <div className="bg-[#172C5C] rounded-full h-20 w-20 group-hover:w-[220px] transition-all duration-500 ease-in-out overflow-hidden flex items-center px-2 origin-left relative">
+            <div className="bg-[#172C5C] rounded-full h-20 w-20 transition-all duration-500 ease-in-out overflow-hidden flex items-center px-2 origin-left relative group-hover:delay-[300ms] group-hover:w-[220px]">
               <div className="relative w-full h-full flex items-center">
-                {/* Icon with controlled slide (stays visible) */}
+                {/* Icon scales to 80% first */}
                 <img
                   src={GWD}
                   alt="GWD"
-                  className="w-[70px] h-[40px] flex-shrink-0 z-10 transition-transform duration-500 ease-in-out group-hover:translate-x-[-0px]"
+                  className="w-[70px] h-[40px] flex-shrink-0 z-10 transition-transform duration-300 ease-in-out group-hover:scale-[0.8]"
                 />
 
-                {/* Text appears after expansion, positioned properly */}
-                <p className="absolute left-[80px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-500 group-hover:delay-500 pointer-events-none text-white text-[12px] leading-4 w-[120px] z-0">
+                {/* Text fades in last */}
+                <p className="absolute left-[80px] opacity-0 transition-opacity duration-300 ease-in-out delay-[800ms] group-hover:opacity-100 pointer-events-none text-white text-[10px] leading-4 w-[120px] z-0 pr-2 py-3">
                   Lorem Ipsum is simply dummy text of the printing and
                   typesetting industry.
                 </p>
@@ -181,17 +181,17 @@ const Tools = ({ id }) => {
 
           {/* Double */}
           <div className="absolute bottom-[352px] left-[552px] group cursor-pointer hover:z-20">
-            <div className="bg-[#172C5C] rounded-full h-20 w-20 group-hover:w-[220px] transition-all duration-500 ease-in-out overflow-hidden flex items-center px-2 origin-left relative">
+            <div className="bg-[#172C5C] rounded-full h-20 w-20 transition-all duration-500 ease-in-out overflow-hidden flex items-center px-2 origin-left relative group-hover:delay-[300ms] group-hover:w-[220px]">
               <div className="relative w-full h-full flex items-center">
-                {/* Icon with controlled slide (stays visible) */}
+                {/* Icon scales to 80% first */}
                 <img
                   src={Double}
                   alt="Double"
-                  className="w-[70px] h-[40px] flex-shrink-0 z-10 transition-transform duration-500 ease-in-out group-hover:translate-x-[-0px]"
+                  className="w-[70px] h-[40px] flex-shrink-0 z-10 transition-transform duration-300 ease-in-out group-hover:scale-[0.8]"
                 />
 
-                {/* Text appears after expansion, positioned properly */}
-                <p className="absolute left-[80px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-500 group-hover:delay-500 pointer-events-none text-white text-[12px] leading-4 w-[120px] z-0">
+                {/* Text fades in last */}
+                <p className="absolute left-[80px] opacity-0 transition-opacity duration-300 ease-in-out delay-[800ms] group-hover:opacity-100 pointer-events-none text-white text-[10px] leading-4 w-[120px] z-0 pr-2 py-3">
                   Lorem Ipsum is simply dummy text of the printing and
                   typesetting industry.
                 </p>
@@ -201,17 +201,17 @@ const Tools = ({ id }) => {
 
           {/* Midjourney */}
           <div className="absolute bottom-[292px] left-[652px] group cursor-pointer hover:z-20">
-            <div className="bg-[#172C5C] rounded-full h-20 w-20 group-hover:w-[220px] transition-all duration-500 ease-in-out overflow-hidden flex items-center px-2 origin-left relative">
+            <div className="bg-[#172C5C] rounded-full h-20 w-20 transition-all duration-500 ease-in-out overflow-hidden flex items-center px-2 origin-left relative group-hover:delay-[300ms] group-hover:w-[220px]">
               <div className="relative w-full h-full flex items-center">
-                {/* Icon with controlled slide (stays visible) */}
+                {/* Icon scales to 80% first */}
                 <img
                   src={Midjourney}
                   alt="Midjourney"
-                  className="w-[70px] h-[40px] flex-shrink-0 z-10 transition-transform duration-500 ease-in-out group-hover:translate-x-[-0px]"
+                  className="w-[70px] h-[40px] flex-shrink-0 z-10 transition-transform duration-300 ease-in-out group-hover:scale-80"
                 />
 
-                {/* Text appears after expansion, positioned properly */}
-                <p className="absolute left-[80px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-500 group-hover:delay-500 pointer-events-none text-white text-[12px] leading-4 w-[120px] z-0">
+                {/* Text fades in last */}
+                <p className="absolute left-[80px] opacity-0 transition-opacity duration-300 ease-in-out delay-[800ms] group-hover:opacity-100 pointer-events-none text-white text-[10px] leading-4 w-[120px] z-0 pr-2 py-3">
                   Lorem Ipsum is simply dummy text of the printing and
                   typesetting industry.
                 </p>
@@ -221,17 +221,17 @@ const Tools = ({ id }) => {
 
           {/* AdRoll */}
           <div className="absolute bottom-[192px] left-[722px] group cursor-pointer hover:z-20">
-            <div className="bg-[#172C5C] rounded-full h-20 w-20 group-hover:w-[220px] transition-all duration-500 ease-in-out overflow-hidden flex items-center px-2 origin-left relative">
+            <div className="bg-[#172C5C] rounded-full h-20 w-20 transition-all duration-500 ease-in-out overflow-hidden flex items-center px-2 origin-left relative group-hover:delay-[300ms] group-hover:w-[220px]">
               <div className="relative w-full h-full flex items-center">
-                {/* Icon with controlled slide (stays visible) */}
+                {/* Icon scales to 80% first */}
                 <img
                   src={AdRoll}
                   alt="AdRoll"
-                  className="w-[71px] h-[11px] flex-shrink-0 z-10 transition-transform duration-500 ease-in-out group-hover:translate-x-[-0px]"
+                  className="w-[71px] h-[11px] flex-shrink-0 z-10 transition-transform duration-300 ease-in-out group-hover:scale-[0.8]"
                 />
 
-                {/* Text appears after expansion, positioned properly */}
-                <p className="absolute left-[80px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-500 group-hover:delay-500 pointer-events-none text-white text-[12px] leading-4 w-[120px] z-0">
+                {/* Text fades in last */}
+                <p className="absolute left-[80px] opacity-0 transition-opacity duration-300 ease-in-out delay-[800ms] group-hover:opacity-100 pointer-events-none text-white text-[10px] leading-4 w-[120px] z-0 pr-2 py-3">
                   Lorem Ipsum is simply dummy text of the printing and
                   typesetting industry.
                 </p>
