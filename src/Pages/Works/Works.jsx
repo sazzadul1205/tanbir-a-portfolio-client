@@ -14,24 +14,30 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
   const scrollVelocity = useRef(0);
   const containerWidth = useRef(0);
 
-  const [, setVideoDimensions] = useState({});
-  const [, setIsModalOpen] = useState(false);
+  // eslint-disable-next-line no-unused-vars
+  const [videoDimensions, setVideoDimensions] = useState({});
+  // eslint-disable-next-line no-unused-vars
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  // eslint-disable-next-line no-unused-vars
   const [selectedItem, setSelectedItem] = useState(null);
 
-  // Explicit mapping: Single = video or null, Stacked = [top, middle, bottom]
+  // NEW: Track loading state for each container and sub-video uniquely
+  const [loadingStates, setLoadingStates] = useState({});
+
+  // Layout with single and stacked video groups
   const layoutMap = [
-    video2, // Single
-    [video1, video1, video1], // Stacked
-    video3, // Single
-    [video1, video1, video1], // Stacked
-    video4, // Single
-    [video1, video1, video1], // Stacked
-    video2, // Single
-    [video1, video1, video1], // Stacked
-    video3, // Single
-    [video1, video1, video1], // Stacked
-    video4, // Single
-    [video1, video1, video1], // Stacked
+    video2,
+    [video1, video1, video1],
+    video3,
+    [video1, video1, video1],
+    video4,
+    [video1, video1, video1],
+    video2,
+    [video1, video1, video1],
+    video3,
+    [video1, video1, video1],
+    video4,
+    [video1, video1, video1],
   ];
 
   const smoothScroll = () => {
@@ -97,22 +103,50 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
     };
   }, []);
 
-  const handleMetadata = (index, e) => {
+  // Initialize loading states for each single video and for each sub-video in stacked groups
+  useEffect(() => {
+    const initialLoadingStates = {};
+    layoutMap.forEach((entry, i) => {
+      if (Array.isArray(entry)) {
+        // For stacked container, set loader true for each sub-video
+        entry.forEach((_, subIdx) => {
+          initialLoadingStates[`${i}-${subIdx}`] = true;
+        });
+      } else {
+        // For single video container
+        initialLoadingStates[i] = true;
+      }
+    });
+    setLoadingStates(initialLoadingStates);
+
+    // Clear loaders after 2 seconds for all videos
+    const timer = setTimeout(() => {
+      setLoadingStates({});
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  const handleMetadata = (key, e) => {
     const { videoWidth, videoHeight } = e.target;
     setVideoDimensions((prev) => ({
       ...prev,
-      [index]: { width: videoWidth, height: videoHeight },
+      [key]: { width: videoWidth, height: videoHeight },
+    }));
+    // Optional: Remove loader on metadata loaded (can override timeout if you want)
+    setLoadingStates((prev) => ({
+      ...prev,
+      [key]: false,
     }));
   };
 
-  // Build layout items based on mapping length
   const items = layoutMap.map((entry, i) => ({
     id: i + 1,
     type: Array.isArray(entry) ? "stacked" : "single",
     content: entry,
   }));
 
-  // Repeat for infinite scroll
+  // Duplicate items for infinite scroll effect
   const doubledItems = [...items, ...items];
 
   const openModal = (item) => {
@@ -125,7 +159,6 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
   return (
     <>
       <div className="relative pt-2 md:pt-10 bg-[#0F172A] text-white">
-        {/* Fade right effect */}
         <div
           className="pointer-events-none absolute top-0 right-0 md:h-full w-[100px] md:w-[300px]"
           style={{
@@ -135,7 +168,7 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
           }}
         />
 
-        {/* Side text + mouse */}
+        {/* Side text */}
         <div className="absolute right-0 top-1/2 md:top-2/3 -translate-y-1/2 z-10 md:pr-6 flex flex-col items-end gap-6">
           <div className="writing-vertical text-[30px] inter font-bold tracking-widest text-white rotate-180">
             EXPLORE WORKS
@@ -171,22 +204,25 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
                 return (
                   <div
                     key={idx}
-                    className="h-[600px] w-[300px] flex items-center justify-center rounded bg-gray-300 text-black text-xl font-semibold cursor-pointer overflow-hidden"
+                    className="h-[600px] w-[300px] flex items-center justify-center rounded bg-[#0F172A] text-black border border-gray-700 text-xl font-semibold cursor-pointer overflow-hidden relative"
                     onClick={() => openModal(item)}
                   >
-                    {item.content ? (
-                      <video
-                        src={item.content}
-                        onLoadedMetadata={(e) => handleMetadata(idx, e)}
-                        autoPlay
-                        muted
-                        playsInline
-                        loop
-                        className="h-full w-full object-cover"
-                      />
-                    ) : (
-                      `Box ${item.id}`
+                    {/* Spinner Overlay */}
+                    {loadingStates[idx] && (
+                      <div className="absolute inset-0 flex items-center justify-center bg-[#0F172A] bg-opacity-50 z-10">
+                        <div className="w-10 h-10 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+                      </div>
                     )}
+
+                    <video
+                      src={item.content}
+                      onLoadedMetadata={(e) => handleMetadata(idx, e)}
+                      autoPlay
+                      muted
+                      playsInline
+                      loop
+                      className="h-full w-full object-cover"
+                    />
                   </div>
                 );
               } else {
@@ -195,18 +231,27 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
                     key={idx}
                     className="relative w-[300px] h-[600px] overflow-hidden"
                   >
-                    <div className="flex flex-col gap-1 absolute top-0 left-0">
-                      {item.content.map((subVideo, subIdx) => (
-                        <div
-                          key={subIdx}
-                          className="h-[200px] w-[300px] flex items-center justify-center rounded bg-gray-400 text-black text-xl font-semibold cursor-pointer overflow-hidden"
-                          onClick={() => openModal(item)}
-                        >
-                          {subVideo ? (
+                    <div className="flex flex-col absolute top-0 left-0 space-y-3.5">
+                      {item.content.map((subVideo, subIdx) => {
+                        const flatIndex = `${idx}-${subIdx}`; // unique per sub-video
+
+                        return (
+                          <div
+                            key={subIdx}
+                            className="h-[250px] w-[300px] flex items-center justify-center rounded bg-[#0F172A] text-black border border-gray-700 text-xl font-semibold cursor-pointer overflow-hidden relative"
+                            onClick={() => openModal(item)}
+                          >
+                            {/* Loader overlay per sub-video */}
+                            {loadingStates[flatIndex] && (
+                              <div className="absolute inset-0 flex items-center justify-center bg-[#0F172A] bg-opacity-50 z-10">
+                                <div className="w-8 h-8 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+                              </div>
+                            )}
+
                             <video
                               src={subVideo}
                               onLoadedMetadata={(e) =>
-                                handleMetadata(`${idx}-${subIdx}`, e)
+                                handleMetadata(flatIndex, e)
                               }
                               autoPlay
                               muted
@@ -214,11 +259,9 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
                               loop
                               className="h-full w-full object-cover"
                             />
-                          ) : (
-                            `Box ${item.id} Part ${subIdx + 1}`
-                          )}
-                        </div>
-                      ))}
+                          </div>
+                        );
+                      })}
                     </div>
                   </div>
                 );
@@ -227,19 +270,6 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
           </div>
         </div>
       </div>
-
-      {/* Modal */}
-      <dialog id="my_modal_2" className="modal">
-        <div className="modal-box">
-          <h3 className="font-bold text-lg">
-            {selectedItem ? `Item ${selectedItem.id}` : "No item selected"}
-          </h3>
-          <p className="py-4">This is more detail about the item.</p>
-        </div>
-        <form method="dialog" className="modal-backdrop">
-          <button onClick={() => setIsModalOpen(false)}>close</button>
-        </form>
-      </dialog>
     </>
   );
 };
