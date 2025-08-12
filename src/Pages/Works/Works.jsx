@@ -2,15 +2,37 @@ import { useRef, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import mouse from "../../assets/Subtract.png";
 
+// Import videos
+import video1 from "../../assets/Videos/Vid-1.mp4";
+import video2 from "../../assets/Videos/Vid-2.mp4";
+import video3 from "../../assets/Videos/Vid-3.mp4";
+import video4 from "../../assets/Videos/Vid-4.mp4";
+
 const Works = ({ setActiveDot, TOTAL_DOTS }) => {
   const scrollRef = useRef(null);
   const isScrolling = useRef(false);
   const scrollVelocity = useRef(0);
   const containerWidth = useRef(0);
 
-  // eslint-disable-next-line no-unused-vars
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [, setVideoDimensions] = useState({});
+  const [, setIsModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
+
+  // Explicit mapping: Single = video or null, Stacked = [top, middle, bottom]
+  const layoutMap = [
+    video2, // Single
+    [video1, video1, video1], // Stacked
+    video3, // Single
+    [video1, video1, video1], // Stacked
+    video4, // Single
+    [video1, video1, video1], // Stacked
+    video2, // Single
+    [video1, video1, video1], // Stacked
+    video3, // Single
+    [video1, video1, video1], // Stacked
+    video4, // Single
+    [video1, video1, video1], // Stacked
+  ];
 
   const smoothScroll = () => {
     if (!scrollRef.current) return;
@@ -29,7 +51,7 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
     }
 
     scrollEl.scrollLeft += scrollVelocity.current;
-    scrollVelocity.current *= 0.35; // Faster deceleration
+    scrollVelocity.current *= 0.35;
     updateActiveDot(scrollEl.scrollLeft);
     requestAnimationFrame(smoothScroll);
   };
@@ -53,7 +75,7 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
 
     const handleWheel = (e) => {
       e.preventDefault();
-      scrollVelocity.current += e.deltaY * 1.1; // Faster response
+      scrollVelocity.current += e.deltaY * 1.1;
       scrollVelocity.current = Math.max(
         -50,
         Math.min(50, scrollVelocity.current)
@@ -73,16 +95,24 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
       el.removeEventListener("wheel", handleWheel);
       el.removeEventListener("scroll", handleScroll);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const items = Array.from({ length: 10 }, (_, i) => ({
+  const handleMetadata = (index, e) => {
+    const { videoWidth, videoHeight } = e.target;
+    setVideoDimensions((prev) => ({
+      ...prev,
+      [index]: { width: videoWidth, height: videoHeight },
+    }));
+  };
+
+  // Build layout items based on mapping length
+  const items = layoutMap.map((entry, i) => ({
     id: i + 1,
-    type: i % 2 === 0 ? "single" : "stacked",
-    color: i % 2 === 0 ? "#A7F3D0" : "#BFDBFE",
-    label: `Block ${i + 1}`,
+    type: Array.isArray(entry) ? "stacked" : "single",
+    content: entry,
   }));
 
+  // Repeat for infinite scroll
   const doubledItems = [...items, ...items];
 
   const openModal = (item) => {
@@ -95,6 +125,7 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
   return (
     <>
       <div className="relative pt-2 md:pt-10 bg-[#0F172A] text-white">
+        {/* Fade right effect */}
         <div
           className="pointer-events-none absolute top-0 right-0 md:h-full w-[100px] md:w-[300px]"
           style={{
@@ -104,11 +135,11 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
           }}
         />
 
+        {/* Side text + mouse */}
         <div className="absolute right-0 top-1/2 md:top-2/3 -translate-y-1/2 z-10 md:pr-6 flex flex-col items-end gap-6">
           <div className="writing-vertical text-[30px] inter font-bold tracking-widest text-white rotate-180">
             EXPLORE WORKS
           </div>
-
           <div className="absolute right-10 md:right-15 bottom-15 flex space-x-2">
             <span className="text-white uppercase tracking-widest text-[16px] font-medium inter">
               SCROLL
@@ -117,12 +148,12 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
               TO
             </span>
           </div>
-
           <div className="mt-auto pb-2 pr-2">
             <img src={mouse} alt="mouse icon" className="w-[35px]" />
           </div>
         </div>
 
+        {/* Scroll section */}
         <div
           id="works-scroll"
           ref={scrollRef}
@@ -135,46 +166,75 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
         >
           <style>{`#works-scroll::-webkit-scrollbar { display: none; }`}</style>
           <div className="flex gap-1 w-max items-center">
-            {doubledItems.map((item, idx) =>
-              item.type === "single" ? (
-                <div
-                  key={idx}
-                  className="h-[600px] w-[300px] flex items-center justify-center rounded text-black text-xl font-semibold cursor-pointer hover:opacity-90 transition"
-                  style={{ backgroundColor: item.color }}
-                  onClick={() => openModal(item)}
-                >
-                  {item.label}
-                </div>
-              ) : (
-                <div
-                  key={idx}
-                  className="relative w-[300px] h-[600px] overflow-hidden"
-                >
-                  <div className="flex flex-col gap-1 absolute top-0 left-0">
-                    {[1, 2, 3].map((blockNum) => (
-                      <div
-                        key={blockNum}
-                        className="h-[250px] w-[300px] flex items-center justify-center rounded text-black text-xl font-semibold cursor-pointer hover:opacity-90 transition"
-                        style={{ backgroundColor: item.color }}
-                        onClick={() => openModal(item)}
-                      >
-                        {item.label} Part {blockNum}
-                      </div>
-                    ))}
+            {doubledItems.map((item, idx) => {
+              if (item.type === "single") {
+                return (
+                  <div
+                    key={idx}
+                    className="h-[600px] w-[300px] flex items-center justify-center rounded bg-gray-300 text-black text-xl font-semibold cursor-pointer overflow-hidden"
+                    onClick={() => openModal(item)}
+                  >
+                    {item.content ? (
+                      <video
+                        src={item.content}
+                        onLoadedMetadata={(e) => handleMetadata(idx, e)}
+                        autoPlay
+                        muted
+                        playsInline
+                        loop
+                        className="h-full w-full object-cover"
+                      />
+                    ) : (
+                      `Box ${item.id}`
+                    )}
                   </div>
-                </div>
-              )
-            )}
+                );
+              } else {
+                return (
+                  <div
+                    key={idx}
+                    className="relative w-[300px] h-[600px] overflow-hidden"
+                  >
+                    <div className="flex flex-col gap-1 absolute top-0 left-0">
+                      {item.content.map((subVideo, subIdx) => (
+                        <div
+                          key={subIdx}
+                          className="h-[200px] w-[300px] flex items-center justify-center rounded bg-gray-400 text-black text-xl font-semibold cursor-pointer overflow-hidden"
+                          onClick={() => openModal(item)}
+                        >
+                          {subVideo ? (
+                            <video
+                              src={subVideo}
+                              onLoadedMetadata={(e) =>
+                                handleMetadata(`${idx}-${subIdx}`, e)
+                              }
+                              autoPlay
+                              muted
+                              playsInline
+                              loop
+                              className="h-full w-full object-cover"
+                            />
+                          ) : (
+                            `Box ${item.id} Part ${subIdx + 1}`
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                );
+              }
+            })}
           </div>
         </div>
       </div>
 
+      {/* Modal */}
       <dialog id="my_modal_2" className="modal">
         <div className="modal-box">
           <h3 className="font-bold text-lg">
-            {selectedItem ? selectedItem.label : "No item selected"}
+            {selectedItem ? `Item ${selectedItem.id}` : "No item selected"}
           </h3>
-          <p className="py-4">This is more detail about the block.</p>
+          <p className="py-4">This is more detail about the item.</p>
         </div>
         <form method="dialog" className="modal-backdrop">
           <button onClick={() => setIsModalOpen(false)}>close</button>
