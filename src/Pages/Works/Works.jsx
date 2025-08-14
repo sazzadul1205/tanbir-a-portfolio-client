@@ -7,6 +7,8 @@ import video1 from "../../assets/Videos/Vid-1.mp4";
 import video2 from "../../assets/Videos/Vid-2.mp4";
 import video3 from "../../assets/Videos/Vid-3.mp4";
 import video4 from "../../assets/Videos/Vid-4.mp4";
+import video5 from "../../assets/Videos/Vid-5.mp4";
+import video6S from "../../assets/Videos/Vid-5-S.mp4";
 
 const Works = ({ setActiveDot, TOTAL_DOTS }) => {
   const scrollRef = useRef(null);
@@ -27,17 +29,13 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
   // Layout with single and stacked video groups
   const layoutMap = [
     video2,
-    [video1, video1, video1],
+    [video1, video6S, video1],
     video3,
-    [video1, video1, video1],
+    [video1, video6S, video1],
     video4,
-    [video1, video1, video1],
-    video2,
-    [video1, video1, video1],
-    video3,
-    [video1, video1, video1],
-    video4,
-    [video1, video1, video1],
+    [video1, video6S, video1],
+    video5,
+    [video1, video6S, video1],
   ];
 
   const smoothScroll = () => {
@@ -198,13 +196,13 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
           }}
         >
           <style>{`#works-scroll::-webkit-scrollbar { display: none; }`}</style>
-          <div className="flex gap-1 w-max items-center">
+          <div className="flex gap-[9px] w-max items-center">
             {doubledItems.map((item, idx) => {
               if (item.type === "single") {
                 return (
                   <div
                     key={idx}
-                    className="h-[600px] w-[300px] flex items-center justify-center rounded bg-[#0F172A] text-black border border-gray-700 text-xl font-semibold cursor-pointer overflow-hidden relative"
+                    className="h-[600px] w-[300px] flex items-center justify-center bg-[#0F172A] text-black border border-gray-700 text-xl font-semibold cursor-pointer overflow-hidden relative"
                     onClick={() => openModal(item)}
                   >
                     {/* Spinner Overlay */}
@@ -231,14 +229,14 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
                     key={idx}
                     className="relative w-[300px] h-[600px] overflow-hidden"
                   >
-                    <div className="flex flex-col absolute top-0 left-0 space-y-3.5">
+                    <div className="flex flex-col absolute top-0 left-0 space-y-[13px]">
                       {item.content.map((subVideo, subIdx) => {
                         const flatIndex = `${idx}-${subIdx}`; // unique per sub-video
 
                         return (
                           <div
                             key={subIdx}
-                            className="h-[250px] w-[300px] flex items-center justify-center rounded bg-[#0F172A] text-black border border-gray-700 text-xl font-semibold cursor-pointer overflow-hidden relative"
+                            className="h-[250px] w-[300px] flex items-center justify-center bg-[#0F172A] text-black border border-gray-700 text-xl font-semibold cursor-pointer overflow-hidden relative"
                             onClick={() => openModal(item)}
                           >
                             {/* Loader overlay per sub-video */}
