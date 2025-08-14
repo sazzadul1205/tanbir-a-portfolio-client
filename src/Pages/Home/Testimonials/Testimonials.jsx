@@ -1,15 +1,17 @@
 // Icons
 import { FaArrowRight } from "react-icons/fa6";
-import { IoLocationOutline } from "react-icons/io5";
 
 // Assets
 import UpWorkICon from "../../../assets/UpWorkSymbol1.png";
+import Avatar from "../../../assets/Testimonials/Avatar.jpeg";
+
+// Function + Component
 import CountUpOnView from "./CountUpOnView/CountUpOnView ";
 
 const Testimonials = () => {
   return (
     <div className="max-w-7xl mx-auto md:pt-20">
-      <div className="flex flex-col md:flex-row gap-4">
+      <div className="flex flex-col md:flex-row  gap-4">
         {/* Sidebar */}
         <div className="w-full md:w-1/4 flex flex-col gap-[19px] ">
           {/* Title */}
@@ -28,30 +30,32 @@ const Testimonials = () => {
           </div>
 
           {/* Image */}
-          <div className="bg-white py-1 px-6 flex items-center gap-3">
-            {/* Avatar */}
-            <div className="avatar avatar-online">
+          {/* <div className="bg-white py-1 px-6 flex items-center gap-3"> */}
+          {/* Avatar */}
+          {/* <div className="avatar avatar-online">
               <div className="w-24 rounded-full">
                 <img src="https://img.daisyui.com/images/profile/demo/gordon@192.webp" />
               </div>
-            </div>
+            </div> */}
 
-            {/* Information */}
-            <div className="text-black">
+          {/* Information */}
+          {/* <div className="text-black">
               <h3 className="font-semibold text-lg">TANBIR A.</h3>
               <div className="flex items-center gap-1">
                 <IoLocationOutline />
                 <p>Dhaka, Bangladesh</p>
               </div>
-            </div>
-          </div>
+            </div> */}
+          {/* </div> */}
+
+          <img src={Avatar} alt="Avatar Image" className="w-full h-auto" />
         </div>
 
         {/* Single Testimonial */}
         <div className="w-full md:w-3/4 relative">
           <div className="relative w-full">
             <div className="absolute inset-0 transition-all duration-1000 ease-in-out opacity-100 animate-fade-slide">
-              <div className="bg-white shadow-md relative w-full h-[181px]  md:h-[381px] overflow-hidden">
+              <div className="bg-white shadow-md relative w-full h-[181px] md:h-[381px] overflow-hidden">
                 {/* Image */}
                 <div className="w-full max-w-full">
                   <img
@@ -101,7 +105,7 @@ const Testimonials = () => {
 
                 <>
                   {/* Available Now */}
-                  <div className="absolute bottom-0 right-10 bg-[#0F172A] rounded-tl-3xl rounded-tr-3xl px-2 pt-2 overflow-hidden">
+                  <div className="absolute bottom-0 right-10 bg-[#0F172A] rounded-tl-3xl rounded-tr-3xl px-3 pt-2 overflow-hidden">
                     <button className="relative flex items-center gap-2 bg-white text-black py-1 md:py-[8px] px-4 md:px-7 rounded-full cursor-pointer">
                       <span
                         className="w-2 h-2 bg-[#33BD51] rounded-full"
@@ -114,7 +118,7 @@ const Testimonials = () => {
                   </div>
 
                   {/* Sticky Corner */}
-                  <div className="pbmit-sticky-corner-bottom bottom-0 right-[19px] md:right-[11px] bg-white z-30 ">
+                  <div className="pbmit-sticky-corner-bottom bottom-0 right-[20px] md:right-[11px] bg-white z-30 ">
                     <svg
                       width="30"
                       height="30"
@@ -127,7 +131,7 @@ const Testimonials = () => {
                   </div>
 
                   {/* Sticky Corner */}
-                  <div className="pbmit-sticky-corner-bottom-2 bottom-0 right-[173px] md:right-[218px] bg-white z-30 ">
+                  <div className="pbmit-sticky-corner-bottom-2 bottom-0 right-[182px] md:right-[218px] bg-white z-30 ">
                     <svg
                       width="30"
                       height="30"
@@ -177,21 +181,21 @@ const Testimonials = () => {
             targetNumber={1500}
             className="italianno-regular text-7xl"
           />
-          <p className="text-lg" >Project Completed</p>
+          <p className="text-lg">Project Completed</p>
         </div>
         <div className="flex flex-col text-center">
           <CountUpOnView
             targetNumber={17}
             className="italianno-regular text-7xl"
           />
-          <p className="text-lg" >Years Of Experience</p>
+          <p className="text-lg">Years Of Experience</p>
         </div>
         <div className="flex flex-col text-center">
           <CountUpOnView
             targetNumber={98}
             className="italianno-regular text-7xl"
           />
-          <p className="text-lg" >Client Satisfaction</p>
+          <p className="text-lg">Client Satisfaction</p>
         </div>
       </div>
     </div>

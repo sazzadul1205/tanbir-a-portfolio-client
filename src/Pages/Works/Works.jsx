@@ -130,7 +130,7 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
 
   const doubledItems = [...items, ...items];
 
-  const openModal = (item) => {
+  const openModal = () => {
     const modal = document.getElementById("my_modal_2");
     if (modal) modal.showModal();
   };
