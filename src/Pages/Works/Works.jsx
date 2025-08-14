@@ -9,6 +9,7 @@ import video3 from "../../assets/Videos/Vid-3.mp4";
 import video4 from "../../assets/Videos/Vid-4.mp4";
 import video5 from "../../assets/Videos/Vid-5.webm";
 import videoS1 from "../../assets/Videos/Vid-S-1.webm";
+import videoM1 from "../../assets/Videos/Vid-M-1.webm";
 
 const Works = ({ setActiveDot, TOTAL_DOTS }) => {
   const scrollRef = useRef(null);
@@ -29,13 +30,13 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
   // Layout with single and stacked video groups
   const layoutMap = [
     video2,
-    [video1, videoS1, video1],
+    [video1, videoS1, videoM1],
     video3,
-    [video1, videoS1, video1],
+    [videoM1, videoS1, video1],
     video4,
-    [video1, videoS1, video1],
+    [video1, videoS1, videoM1],
     video5,
-    [video1, videoS1, video1],
+    [video1, videoS1, videoM1],
   ];
 
   const smoothScroll = () => {
