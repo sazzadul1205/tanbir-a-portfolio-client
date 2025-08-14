@@ -21,7 +21,7 @@ const Testimonials = () => {
           </h3>
 
           {/* Up Work Icon */}
-          <div className="bg-[#174153] h-[142px]">
+          <div className="bg-[#174153] h-[130px]">
             <img
               src={UpWorkICon}
               alt="Up Work Icon"
@@ -131,7 +131,7 @@ const Testimonials = () => {
                   </div>
 
                   {/* Sticky Corner */}
-                  <div className="pbmit-sticky-corner-bottom-2 bottom-0 right-[182px] md:right-[218px] bg-white z-30 ">
+                  <div className="pbmit-sticky-corner-bottom-2 bottom-0 right-[182px] md:right-[225px] bg-white z-30 ">
                     <svg
                       width="30"
                       height="30"

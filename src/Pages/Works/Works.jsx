@@ -95,6 +95,7 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
       el.removeEventListener("wheel", handleWheel);
       el.removeEventListener("scroll", handleScroll);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Initialize loading states
@@ -114,6 +115,7 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
     // Clear all loaders after 2 seconds as fallback
     const timer = setTimeout(() => setLoadingStates({}), 2000);
     return () => clearTimeout(timer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleMetadata = (key, e) => {
@@ -207,15 +209,22 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
                   <div className="flex flex-col space-y-[10px]">
                     {item.content.map((subVideo, subIdx) => {
                       const flatIndex = `${idx}-${subIdx}`;
-                      const videoHeight =
-                        subIdx === item.content.length - 1
-                          ? "h-[100px]"
-                          : "h-[250px]";
+                      // eslint-disable-next-line react-hooks/rules-of-hooks
+                      const [videoHeight, setVideoHeight] = useState(null);
+
+                      const handleLoadedMetadata = (e) => {
+                        const vid = e.target;
+                        const aspectRatio = vid.videoHeight / vid.videoWidth;
+                        const containerWidth = 300; // since you use w-[300px]
+                        setVideoHeight(containerWidth * aspectRatio);
+                        handleMetadata(flatIndex, e);
+                      };
 
                       return (
                         <div
                           key={subIdx}
-                          className={`${videoHeight} w-[300px] flex items-center justify-center bg-[#0F172A] border border-gray-700 text-xl font-semibold cursor-pointer overflow-hidden relative`}
+                          style={{ height: videoHeight ? `${videoHeight}px` : "250px" }}
+                          className="w-[300px] flex items-center justify-center bg-[#0F172A] border border-gray-700 text-xl font-semibold cursor-pointer overflow-hidden relative"
                           onClick={() => openModal(item)}
                         >
                           {loadingStates[flatIndex] && (
@@ -230,13 +239,12 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
                             playsInline
                             loop
                             className="h-full w-full object-cover"
-                            onLoadedMetadata={(e) =>
-                              handleMetadata(flatIndex, e)
-                            }
+                            onLoadedMetadata={handleLoadedMetadata}
                           />
                         </div>
                       );
                     })}
+
                   </div>
                 </div>
               );
