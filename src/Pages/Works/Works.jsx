@@ -7,8 +7,8 @@ import video1 from "../../assets/Videos/Vid-1.mp4";
 import video2 from "../../assets/Videos/Vid-2.mp4";
 import video3 from "../../assets/Videos/Vid-3.mp4";
 import video4 from "../../assets/Videos/Vid-4.mp4";
-import video5 from "../../assets/Videos/Vid-5.mp4";
-import video6S from "../../assets/Videos/Vid-5-S.mp4";
+import video5 from "../../assets/Videos/Vid-5.webm";
+import videoS1 from "../../assets/Videos/Vid-S-1.webm";
 
 const Works = ({ setActiveDot, TOTAL_DOTS }) => {
   const scrollRef = useRef(null);
@@ -29,13 +29,13 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
   // Layout with single and stacked video groups
   const layoutMap = [
     video2,
-    [video1, video6S, video1],
+    [video1, videoS1, video1],
     video3,
-    [video1, video6S, video1],
+    [video1, videoS1, video1],
     video4,
-    [video1, video6S, video1],
+    [video1, videoS1, video1],
     video5,
-    [video1, video6S, video1],
+    [video1, videoS1, video1],
   ];
 
   const smoothScroll = () => {
@@ -196,7 +196,7 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
           }}
         >
           <style>{`#works-scroll::-webkit-scrollbar { display: none; }`}</style>
-          <div className="flex gap-[9px] w-max items-center">
+          <div className="flex gap-[10px] w-max items-center">
             {doubledItems.map((item, idx) => {
               if (item.type === "single") {
                 return (
@@ -229,7 +229,7 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
                     key={idx}
                     className="relative w-[300px] h-[600px] overflow-hidden"
                   >
-                    <div className="flex flex-col absolute top-0 left-0 space-y-[13px]">
+                    <div className="flex flex-col absolute top-0 left-0 space-y-[10px]">
                       {item.content.map((subVideo, subIdx) => {
                         const flatIndex = `${idx}-${subIdx}`; // unique per sub-video
 
