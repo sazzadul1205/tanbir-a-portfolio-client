@@ -170,7 +170,7 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
       <div
         id="works-scroll"
         ref={scrollRef}
-        className="overflow-x-auto"
+        className="overflow-x-auto h-[600px]"
         style={{
           scrollBehavior: "auto",
           scrollbarWidth: "none",

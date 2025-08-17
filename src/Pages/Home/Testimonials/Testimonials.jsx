@@ -1,6 +1,9 @@
 // Icons
 import { FaArrowRight } from "react-icons/fa6";
 
+// Icons
+import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
+
 // Assets
 import UpWorkICon from "../../../assets/UpWorkSymbol1.png";
 import Avatar from "../../../assets/Testimonials/Avatar.jpeg";
@@ -105,20 +108,23 @@ const Testimonials = () => {
 
                 <>
                   {/* Available Now */}
-                  <div className="absolute bottom-0 right-10 bg-[#0F172A] rounded-tl-3xl rounded-tr-3xl px-3 pt-2 overflow-hidden">
-                    <button className="relative flex items-center gap-2 bg-white text-black py-1 md:py-[8px] px-4 md:px-7 rounded-full cursor-pointer">
-                      <span
-                        className="w-2 h-2 bg-[#33BD51] rounded-full"
-                        style={{ animation: "blink 1.5s infinite ease-in-out" }}
-                      />
-                      <p className="text-xs md:text-sm font-semibold">
-                        Available Now
-                      </p>
-                    </button>
+                  <div className="absolute bottom-0 right-[86px] bg-[#0F172A] rounded-tl-3xl rounded-tr-3xl px-3 pt-2 overflow-hidden">
+                    <div className="flex gap-[10px] bg-white p-1 rounded-full " >
+
+                      {/* Right Icon */}
+                      <button className="group bg-[#33BD51] hover:bg-white p-2 rounded-full cursor-pointer transition-colors duration-300">
+                        <BsArrowLeft className="text-white transition-colors duration-300 group-hover:text-[#33BD51]" />
+                      </button>
+
+                      {/* Left Icon */}
+                      <button className="group bg-[#33BD51] hover:bg-white p-2 rounded-full cursor-pointer transition-colors duration-300">
+                        <BsArrowRight className="text-white transition-colors duration-300 group-hover:text-[#33BD51]" />
+                      </button>
+                    </div>
                   </div>
 
                   {/* Sticky Corner */}
-                  <div className="pbmit-sticky-corner-bottom bottom-0 right-[20px] md:right-[11px] bg-white z-30 ">
+                  <div className="pbmit-sticky-corner-bottom bottom-0 right-[20px] md:right-[56px] bg-white z-30 ">
                     <svg
                       width="30"
                       height="30"
@@ -131,7 +137,7 @@ const Testimonials = () => {
                   </div>
 
                   {/* Sticky Corner */}
-                  <div className="pbmit-sticky-corner-bottom-2 bottom-0 right-[182px] md:right-[225px] bg-white z-30 ">
+                  <div className="pbmit-sticky-corner-bottom-2 bottom-0 right-[182px] md:right-[192px] bg-white z-30 ">
                     <svg
                       width="30"
                       height="30"
