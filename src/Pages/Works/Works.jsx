@@ -178,7 +178,7 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
         }}
       >
         <style>{`#works-scroll::-webkit-scrollbar { display: none; }`}</style>
-        <div className="flex gap-[10px] w-max items-center">
+        <div className="flex gap-[10px] h-[600px] w-max items-center">
           {doubledItems.map((item, idx) => {
             if (item.type === "single") {
               return (
@@ -198,7 +198,7 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
                     muted
                     playsInline
                     loop
-                    className="h-full w-full object-cover"
+                    className="h-[600px] w-full object-cover"
                     onLoadedMetadata={(e) => handleMetadata(idx, e)}
                   />
                 </div>
@@ -223,7 +223,9 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
                       return (
                         <div
                           key={subIdx}
-                          style={{ height: videoHeight ? `${videoHeight}px` : "250px" }}
+                          style={{
+                            height: videoHeight ? `${videoHeight}px` : "250px",
+                          }}
                           className="w-[300px] flex items-center justify-center bg-[#0F172A] border border-gray-700 text-xl font-semibold cursor-pointer overflow-hidden relative"
                           onClick={() => openModal(item)}
                         >
@@ -244,7 +246,6 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
                         </div>
                       );
                     })}
-
                   </div>
                 </div>
               );
