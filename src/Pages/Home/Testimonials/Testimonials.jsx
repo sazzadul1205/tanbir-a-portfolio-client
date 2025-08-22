@@ -60,11 +60,11 @@ const Testimonials = () => {
             <div className="absolute inset-0 transition-all duration-1000 ease-in-out opacity-100 animate-fade-slide">
               <div className="bg-white shadow-md relative w-full h-[181px] md:h-[381px] overflow-hidden">
                 {/* Image */}
-                <div className="w-full max-w-full">
+                <div className="w-auto max-w-full">
                   <img
                     src="https://i.ibb.co/FLqg6rMP/Screenshot-1-1.png"
                     alt="Screenshot"
-                    className="w-full h-auto object-contain"
+                    className="w-auto h-auto object-contain"
                   />
                 </div>
 
@@ -109,8 +109,7 @@ const Testimonials = () => {
                 <>
                   {/* Available Now */}
                   <div className="absolute bottom-0 right-[86px] bg-[#0F172A] rounded-tl-3xl rounded-tr-3xl px-3 pt-2 overflow-hidden">
-                    <div className="flex gap-[10px] bg-white p-1 rounded-full " >
-
+                    <div className="flex gap-[10px] bg-white p-1 rounded-full ">
                       {/* Right Icon */}
                       <button className="group bg-[#33BD51] hover:bg-white p-2 rounded-full cursor-pointer transition-colors duration-300">
                         <BsArrowLeft className="text-white transition-colors duration-300 group-hover:text-[#33BD51]" />

@@ -198,7 +198,7 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
                     muted
                     playsInline
                     loop
-                    className="h-[600px] w-full object-cover"
+                    className="h-[600px] w-full object-cover block absolute inset-0"
                     onLoadedMetadata={(e) => handleMetadata(idx, e)}
                   />
                 </div>
