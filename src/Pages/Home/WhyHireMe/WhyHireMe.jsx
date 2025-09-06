@@ -120,7 +120,7 @@ const WhyHireMe = ({ id }) => {
         </button>
 
         {/* WhatsApp Now */}
-        <button className="flex items-center gap-2 bg-white text-black py-2 px-6 rounded-full cursor-pointer w-auto self-center">
+        {/* <button className="flex items-center gap-2 bg-white text-black py-2 px-6 rounded-full cursor-pointer w-auto self-center">
           <span
             className="p-1 bg-[#33BD51] rounded-full w-2 h-2"
             style={{
@@ -129,7 +129,7 @@ const WhyHireMe = ({ id }) => {
             }}
           />
           <p className="text-sm font-medium">WhatsApp Now</p>
-        </button>
+        </button> */}
       </div>
     </section>
   );

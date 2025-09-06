@@ -41,18 +41,39 @@ const services = [
 
 const MyServices = ({ id }) => {
   return (
-    <section id={id} className="pb-[101px] pt-10 md:pt-0 px-4 text-white">
-      {/* Title */}
-      <h3 className="inter text-[40px] font-semibold text-center pb-[106px]">
-        My Services Include
-      </h3>
+    <section
+      id={id}
+      className="relative pb-[101px] pt-10 md:pt-0 px-4 text-white overflow-hidden"
+    >
+      {/* Background Items */}
+      <div className="absolute inset-0 pointer-events-none z-0">
+        {/* Rotated square */}
+        <div className="border-2 border-[#BFDBFE]/20 w-[90.15px] h-[90.15px] rotate-45 absolute top-1/2 left-[200px]" />
+
+        {/* Yellow circle */}
+        <div className="rounded-full bg-[#FACC15]/10 w-[229.4px] h-[221.3px] absolute bottom-0 left-[480px]" />
+      </div>
+
+      {/* Header */}
+      <div className="relative mx-auto w-[600px] z-10 text-center pb-[106px]">
+        {/* Title */}
+        <h3 className="inter text-[40px] font-semibold pb-6">
+          My Services Include
+        </h3>
+
+        {/* Sub Title */}
+        <p>
+          To deliver performance-driven creative, <br />I work with
+          industry-standard platforms and next-gen generative tools
+        </p>
+      </div>
 
       {/* Services List */}
-      <div className="max-w-[1100px] mx-auto flex flex-col">
+      <div className="relative z-10 max-w-[1100px] mx-auto flex flex-col">
         {services.map((service, idx) => (
           <div
             key={idx}
-            className="relative group flex flex-col items-center md:flex-row md:items-center justify-center md:justify-between  md:gap-[45px] py-[15px] md:py-[27.5px] px-[36.5px] first:border-t first:border-gray-500 border-b border-gray-500 overflow-hidden"
+            className="relative group flex flex-col items-center md:flex-row md:items-center justify-center md:justify-between md:gap-[45px] py-[15px] md:py-[27.5px] px-[36.5px] first:border-t first:border-gray-500 border-b border-gray-500 overflow-hidden"
           >
             {/* Animated Bottom Border */}
             <span className="pointer-events-none absolute bottom-0 left-0 h-[1px] bg-[#2FA94C] w-0 group-hover:w-full transition-all duration-500 ease-in-out" />
@@ -84,7 +105,7 @@ const MyServices = ({ id }) => {
                   <FaArrowRightLong className="text-md text-white rotate-[-45deg] transition-all duration-500" />
                 </div>
 
-                {/* Incoming Yellow Arrow */}
+                {/* Incoming Green Arrow */}
                 <div className="absolute left-[-100%] bottom-[-100%] opacity-0 group-hover:left-0 group-hover:bottom-0 group-hover:opacity-100 transition-all duration-500 ease-in-out flex items-center justify-center w-full h-full">
                   <FaArrowRightLong className="text-md text-[#2FA94C] rotate-[-45deg] transition-all duration-500" />
                 </div>
