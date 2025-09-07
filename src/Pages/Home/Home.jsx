@@ -1,13 +1,14 @@
 // Components
+import Cards from "./Cards/Cards";
 import Tools from "./Tools/Tools";
 import AboutMe from "./AboutMe/AboutMe";
-import MyServices from "./MyServices/MyServices";
 import WhyHireMe from "./WhyHireMe/WhyHireMe";
+import MyServices from "./MyServices/MyServices";
 import Testimonials from "./Testimonials/Testimonials";
 
 const Home = () => {
   return (
-    <div className="text-white" >
+    <div className="text-white">
       <AboutMe id="about-me" />
 
       <MyServices id="my-services" />
@@ -17,6 +18,8 @@ const Home = () => {
       <WhyHireMe id="why-hire-me" />
 
       <Testimonials id="testimonials" />
+
+      <Cards id="blogs" />
     </div>
   );
 };
