@@ -1,20 +1,61 @@
+import { useEffect, useState } from "react";
+
 // Icons
 import { FaArrowRight } from "react-icons/fa6";
 
 // Icons
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
+import { HiBadgeCheck } from "react-icons/hi";
+import { IoLocationOutline } from "react-icons/io5";
+import { MdOutlineEdit } from "react-icons/md";
 
 // Assets
 import UpWorkICon from "../../../assets/UpWorkSymbol1.png";
-import Avatar from "../../../assets/Testimonials/Avatar.jpeg";
 
 // Function + Component
 import CountUpOnView from "./CountUpOnView/CountUpOnView ";
 
+// Testimonials Assets
+import feedback1 from "../../../assets/Testimonials/feedback-1.jpg";
+import feedback2 from "../../../assets/Testimonials/feedback-2.jpg";
+import feedback3 from "../../../assets/Testimonials/feedback-3.jpg";
+import feedback4 from "../../../assets/Testimonials/feedback-4.jpg";
+
 const Testimonials = () => {
+  const feedbackImages = [feedback1, feedback2, feedback3, feedback4];
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
+
+  // Manual navigation
+  const handlePrev = () => {
+    setIsAnimating(true);
+    setCurrentIndex((prev) =>
+      prev === 0 ? feedbackImages.length - 1 : prev - 1
+    );
+  };
+
+  const handleNext = () => {
+    setIsAnimating(true);
+    setCurrentIndex((prev) =>
+      prev === feedbackImages.length - 1 ? 0 : prev + 1
+    );
+  };
+
+  // Slow auto-next
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIsAnimating(true);
+      setCurrentIndex((prev) =>
+        prev === feedbackImages.length - 1 ? 0 : prev + 1
+      );
+    }, 8000); // Change every 8 seconds
+    return () => clearInterval(interval);
+  }, [feedbackImages.length]);
+
   return (
     <div className="max-w-7xl mx-auto md:pt-20">
-      <div className="flex flex-col md:flex-row  gap-4">
+      {/* Testimonials */}
+      <div className="flex flex-col md:flex-row gap-4">
         {/* Sidebar */}
         <div className="w-full md:w-1/4 flex flex-col gap-[19px] ">
           {/* Title */}
@@ -32,40 +73,70 @@ const Testimonials = () => {
             />
           </div>
 
-          {/* Image */}
-          {/* <div className="bg-white py-1 px-6 flex items-center gap-3"> */}
-          {/* Avatar */}
-          {/* <div className="avatar avatar-online">
-              <div className="w-24 rounded-full">
-                <img src="https://img.daisyui.com/images/profile/demo/gordon@192.webp" />
-              </div>
-            </div> */}
+          {/* Avatar Image
+          <img src={Avatar} alt="Avatar Image" className="w-full h-auto" /> */}
 
-          {/* Information */}
-          {/* <div className="text-black">
-              <h3 className="font-semibold text-lg">TANBIR A.</h3>
-              <div className="flex items-center gap-1">
-                <IoLocationOutline />
+          {/* Avatar */}
+          <div className="bg-white flex gap-3 items-center">
+            {/* Avatar with Green Dot */}
+            <div className="avatar p-2">
+              <div className="w-24 relative overflow-visible">
+                {/* Profile Image */}
+                <img
+                  src="https://img.daisyui.com/images/profile/demo/gordon@192.webp"
+                  className="rounded-full"
+                />
+
+                {/* Green Blinking Dot (top-left with white border) */}
+                <span className="absolute top-1 left-1 block h-5 w-5 rounded-full bg-green-500 border-2 border-white animate-ping"></span>
+                <span className="absolute top-1 left-1 block h-5 w-5 rounded-full bg-green-500 border-2 border-white"></span>
+
+                {/* Edit Icon (bottom-right) */}
+                <span className="absolute bottom-0 right-0 flex items-center justify-center p-[6px] rounded-full bg-white shadow-md border-2 border-green-700 cursor-pointer">
+                  <MdOutlineEdit className="h-5 w-5 text-green-600" />
+                </span>
+              </div>
+            </div>
+
+            {/* Name & Location */}
+            <div className="text-black pb-5">
+              {/* Name */}
+              <div className="flex gap-2 items-center">
+                <h3 className="text-[32px] font-semibold">Tanbir A.</h3>
+                <HiBadgeCheck className="text-[32px] text-blue-500" />
+              </div>
+
+              {/* Location */}
+              <div className="flex text-gray-500 font-semibold gap-2 items-center">
+                <IoLocationOutline className="text-[22px]" />
                 <p>Dhaka, Bangladesh</p>
               </div>
-            </div> */}
-          {/* </div> */}
-
-          <img src={Avatar} alt="Avatar Image" className="w-full h-auto" />
+            </div>
+          </div>
         </div>
 
         {/* Single Testimonial */}
         <div className="w-full md:w-3/4 relative">
+          {/* Single Feedback */}
           <div className="relative w-full">
+            {/* Feedback Card */}
             <div className="absolute inset-0 transition-all duration-1000 ease-in-out opacity-100 animate-fade-slide">
+              {/* Feedback Card */}
               <div className="bg-white shadow-md relative w-full h-[181px] md:h-[381px] overflow-hidden">
-                {/* Image */}
-                <div className="w-auto max-w-full">
-                  <img
-                    src="https://i.ibb.co/FLqg6rMP/Screenshot-1-1.png"
-                    alt="Screenshot"
-                    className="w-auto h-auto object-contain"
-                  />
+                {/* Fading Images (behind everything) */}
+                <div className="relative w-full h-full z-0">
+                  {feedbackImages.map((img, index) => (
+                    <img
+                      key={index}
+                      src={img}
+                      alt={`Feedback ${index + 1}`}
+                      className={`absolute inset-0 w-auto max-w-full h-auto object-contain transition-opacity duration-1000 ease-in-out ${
+                        index === currentIndex
+                          ? "opacity-100 z-0"
+                          : "opacity-0 z-0"
+                      }`}
+                    />
+                  ))}
                 </div>
 
                 {/* Arrow at top-right */}
@@ -108,16 +179,22 @@ const Testimonials = () => {
 
                 <>
                   {/* Available Now */}
-                  <div className="absolute bottom-0 right-[86px] bg-[#0F172A] rounded-tl-3xl rounded-tr-3xl px-3 pt-2 overflow-hidden">
+                  <div className="absolute bottom-0 right-[86px] bg-[#0F172A] rounded-tl-3xl rounded-tr-3xl px-3 pt-2 overflow-hidden z-30">
                     <div className="flex gap-[10px] bg-white p-1 rounded-full ">
-                      {/* Right Icon */}
-                      <button className="group bg-[#33BD51] hover:bg-white p-2 rounded-full cursor-pointer transition-colors duration-300">
-                        <BsArrowLeft className="text-white transition-colors duration-300 group-hover:text-[#33BD51]" />
+                      {/* Previous */}
+                      <button
+                        className="group bg-[#33BD51] hover:bg-white p-2 rounded-full cursor-pointer transition-colors duration-300"
+                        onClick={handlePrev}
+                      >
+                        <BsArrowLeft className="text-white group-hover:text-[#33BD51]" />
                       </button>
 
-                      {/* Left Icon */}
-                      <button className="group bg-[#33BD51] hover:bg-white p-2 rounded-full cursor-pointer transition-colors duration-300">
-                        <BsArrowRight className="text-white transition-colors duration-300 group-hover:text-[#33BD51]" />
+                      {/* Next */}
+                      <button
+                        className="group bg-[#33BD51] hover:bg-white p-2 rounded-full cursor-pointer transition-colors duration-300"
+                        onClick={handleNext}
+                      >
+                        <BsArrowRight className="text-white group-hover:text-[#33BD51]" />
                       </button>
                     </div>
                   </div>
@@ -206,37 +283,5 @@ const Testimonials = () => {
     </div>
   );
 };
-
-// Text formatter
-// const formatTestimonial = (text, showMore, toggle) => {
-//   const sentences = text.split(". ").filter(Boolean);
-//   if (sentences.length === 0) return null;
-
-//   const firstSentence = sentences[0].trim() + ".";
-//   const rest = sentences
-//     .slice(1)
-//     .map((s) => (s.trim().endsWith(".") ? s.trim() : s.trim() + "."));
-
-//   const displayed = showMore ? rest : rest.slice(0, 5);
-
-//   return (
-//     <div className="text-gray-600 text-md inter font-medium leading-6 mt-3">
-//       <p className="font-bold pb-3">{firstSentence}</p>
-//       {displayed.map((sentence, i) => (
-//         <p key={i} className="mt-[1px]">
-//           {sentence}
-//         </p>
-//       ))}
-//       {!showMore && (
-//         <button
-//           className="mt-2 text-[#33BD51] underline text-sm"
-//           onClick={toggle}
-//         >
-//           Show more
-//         </button>
-//       )}
-//     </div>
-//   );
-// };
 
 export default Testimonials;
