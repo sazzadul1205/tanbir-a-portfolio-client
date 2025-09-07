@@ -10,8 +10,10 @@ import video4 from "../../assets/Videos/Vid-4.mp4";
 import video5 from "../../assets/Videos/Vid-5.webm";
 import videoS1 from "../../assets/Videos/Vid-S-1.webm";
 import videoM1 from "../../assets/Videos/Vid-M-1.webm";
+import Image1 from "../../assets/Videos/Img-1.jpg";
+import ImageM1 from "../../assets/Videos/img-M-1.jpg";
 
-// Layout: single and stacked videos
+// Layout: single and stacked media (video or image)
 const layoutMap = [
   video2,
   [video1, videoS1, videoM1],
@@ -21,7 +23,13 @@ const layoutMap = [
   [video1, videoS1, videoM1],
   video5,
   [video1, videoS1, videoM1],
+  Image1,
+  [ImageM1, videoS1, videoM1],
 ];
+
+// Helpers to detect media type
+const isVideo = (file) => /\.(mp4|webm|mov)$/i.test(file);
+const isImage = (file) => /\.(jpg|jpeg|png|webp|gif)$/i.test(file);
 
 const Works = ({ setActiveDot, TOTAL_DOTS }) => {
   const scrollRef = useRef(null);
@@ -29,65 +37,54 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
   const scrollVelocity = useRef(0);
   const containerWidth = useRef(0);
 
-  // Active dot state
+  // Loading state for each media
   const [loadingStates, setLoadingStates] = useState({});
 
   // Smooth horizontal scroll
   const smoothScroll = () => {
-    // Check if scrolling
     if (!scrollRef.current) return;
-
-    // Get scroll element
     const scrollEl = scrollRef.current;
 
-    // Check if scrolling is finished
+    // Infinite scroll wrap
     if (scrollEl.scrollLeft >= containerWidth.current) {
       scrollEl.scrollLeft -= containerWidth.current;
     } else if (scrollEl.scrollLeft < 0) {
       scrollEl.scrollLeft += containerWidth.current;
     }
 
-    // Decelerate
+    // Decelerate scroll
     if (Math.abs(scrollVelocity.current) < 0.1) {
       scrollVelocity.current = 0;
       isScrolling.current = false;
       return;
     }
 
-    // Apply scroll
     scrollEl.scrollLeft += scrollVelocity.current;
     scrollVelocity.current *= 0.35;
 
-    // Update active dot
     updateActiveDot(scrollEl.scrollLeft);
     requestAnimationFrame(smoothScroll);
   };
 
-  // Update active dot based on scroll position
+  // Update active dot
   const updateActiveDot = (scrollLeft) => {
-    // Check if scrolling
     if (!containerWidth.current || !scrollRef.current) return;
-
-    // Calculate progress
     const progress = Math.max(
       0,
       Math.min(1, scrollLeft / containerWidth.current)
     );
-
-    // Determine active dot
     const dotIndex = Math.min(
       TOTAL_DOTS - 1,
       Math.floor(progress * TOTAL_DOTS)
     );
-
-    // Update active dot
     setActiveDot(dotIndex);
   };
 
-  // Mouse/touch drag support
+  // Mouse/touch drag and wheel support
   useEffect(() => {
     const el = scrollRef.current;
     if (!el) return;
+
     containerWidth.current = el.scrollWidth / 2;
     updateActiveDot(el.scrollLeft);
 
@@ -109,29 +106,21 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
       }
     };
 
-    // Mouse drag
-
-    // Mouse down
+    // Mouse events
     const handleMouseDown = (e) => {
       isDragging = true;
       startX = e.pageX - el.offsetLeft;
       scrollLeftStart = el.scrollLeft;
       el.classList.add("cursor-grabbing");
     };
-
-    // Mouse leave and up
     const handleMouseLeave = () => {
       isDragging = false;
       el.classList.remove("cursor-grabbing");
     };
-
-    // Mouse up
     const handleMouseUp = () => {
       isDragging = false;
       el.classList.remove("cursor-grabbing");
     };
-
-    // Mouse move
     const handleMouseMove = (e) => {
       if (!isDragging) return;
       e.preventDefault();
@@ -141,17 +130,13 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
       updateActiveDot(el.scrollLeft);
     };
 
-    // Touch drag for mobile
+    // Touch events
     let touchStartX = 0;
     let touchScrollStart = 0;
-
-    // Touch start
     const handleTouchStart = (e) => {
       touchStartX = e.touches[0].pageX;
       touchScrollStart = el.scrollLeft;
     };
-
-    // Touch move
     const handleTouchMove = (e) => {
       const x = e.touches[0].pageX;
       const walk = (x - touchStartX) * 1.5;
@@ -202,11 +187,18 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
     return () => clearTimeout(timer);
   }, [layoutMap]);
 
+  // Handle media loaded
   const handleMetadata = (key, e) => {
-    e.target.play().catch(() => console.log("play blocked"));
+    const video = e.target;
+    if (isVideo(video.src)) {
+      video.muted = true;
+      video.playsInline = true;
+      video.play().catch((err) => console.error("Video play blocked:", err));
+    }
     setLoadingStates((prev) => ({ ...prev, [key]: false }));
   };
 
+  // Prepare items
   const items = layoutMap.map((entry, i) => ({
     id: i + 1,
     type: Array.isArray(entry) ? "stacked" : "single",
@@ -217,6 +209,45 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
   const openModal = () => {
     const modal = document.getElementById("my_modal_2");
     if (modal) modal.showModal();
+  };
+
+  // Render media dynamically
+  const renderMedia = (mediaSrc, key) => {
+    if (isVideo(mediaSrc)) {
+      return (
+        <video
+          key={key}
+          src={mediaSrc}
+          autoPlay
+          muted
+          playsInline
+          loop
+          className="h-full w-full object-cover"
+          onLoadedMetadata={(e) => handleMetadata(key, e)}
+          onError={(e) => {
+            console.error("Video load failed:", mediaSrc, e);
+            setLoadingStates((prev) => ({ ...prev, [key]: false }));
+          }}
+        />
+      );
+    } else if (isImage(mediaSrc)) {
+      return (
+        <img
+          key={key}
+          src={mediaSrc}
+          alt={`Media ${key}`}
+          className="h-full w-full object-cover"
+          onLoad={() => setLoadingStates((prev) => ({ ...prev, [key]: false }))}
+          onError={(e) => {
+            console.error(`Image failed to load: ${mediaSrc}`, e);
+            setLoadingStates((prev) => ({ ...prev, [key]: false }));
+          }}
+        />
+      );
+    } else {
+      console.warn(`Unsupported media type: ${mediaSrc}`);
+      return null;
+    }
   };
 
   return (
@@ -232,25 +263,17 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
 
       {/* Side text */}
       <div className="absolute right-0 top-1/2 md:top-2/3 -translate-y-1/2 z-10 md:pr-6 flex flex-col items-end gap-6">
-        {/* Title */}
         <div className="writing-vertical text-[30px] font-bold tracking-widest text-white rotate-180">
           EXPLORE WORKS
         </div>
-
-        {/* Scroll text */}
         <div className="absolute right-10 md:right-15 bottom-15 flex space-x-2">
-          {/* Scroll text */}
           <span className="text-white uppercase tracking-widest text-[16px] font-medium">
             SCROLL
           </span>
-
-          {/* To */}
           <span className="text-white uppercase tracking-widest text-[16px] font-medium">
             TO
           </span>
         </div>
-
-        {/* Mouse */}
         <div className="mt-auto pb-2 pr-2">
           <img src={mouse} alt="mouse icon" className="w-[35px]" />
         </div>
@@ -282,15 +305,7 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
                       <div className="w-10 h-10 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
                     </div>
                   )}
-                  <video
-                    src={item.content}
-                    autoPlay
-                    muted
-                    playsInline
-                    loop
-                    className="h-[600px] w-full object-cover block absolute inset-0"
-                    onLoadedMetadata={(e) => handleMetadata(idx, e)}
-                  />
+                  {renderMedia(item.content, idx)}
                 </div>
               );
             } else {
@@ -299,13 +314,13 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
                   key={idx}
                   className="relative w-[300px] overflow-hidden flex flex-col gap-[10px]"
                 >
-                  {item.content.map((subVideo, subIdx) => {
-                    let videoHeight = subIdx === 0 || subIdx === 1 ? 250 : 80;
+                  {item.content.map((subMedia, subIdx) => {
                     const flatIndex = `${idx}-${subIdx}`;
+                    let mediaHeight = subIdx === 0 || subIdx === 1 ? 250 : 80;
                     return (
                       <div
                         key={subIdx}
-                        style={{ height: `${videoHeight}px` }}
+                        style={{ height: `${mediaHeight}px` }}
                         className="w-[300px] flex items-center justify-center bg-[#0F172A] border border-gray-700 text-xl font-semibold cursor-pointer overflow-hidden relative"
                         onClick={() => openModal(item)}
                       >
@@ -314,15 +329,7 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
                             <div className="w-8 h-8 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
                           </div>
                         )}
-                        <video
-                          src={subVideo}
-                          autoPlay
-                          muted
-                          playsInline
-                          loop
-                          className="h-full w-full object-cover"
-                          onLoadedMetadata={(e) => handleMetadata(flatIndex, e)}
-                        />
+                        {renderMedia(subMedia, flatIndex)}
                       </div>
                     );
                   })}

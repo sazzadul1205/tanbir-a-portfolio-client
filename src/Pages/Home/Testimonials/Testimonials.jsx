@@ -24,6 +24,7 @@ import feedback4 from "../../../assets/Testimonials/feedback-4.jpg";
 const Testimonials = () => {
   const feedbackImages = [feedback1, feedback2, feedback3, feedback4];
   const [currentIndex, setCurrentIndex] = useState(0);
+  // eslint-disable-next-line no-unused-vars
   const [isAnimating, setIsAnimating] = useState(false);
 
   // Manual navigation
