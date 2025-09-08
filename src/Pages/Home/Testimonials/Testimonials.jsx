@@ -233,7 +233,7 @@ const Testimonials = () => {
       </div>
 
       {/* Good To know - Desktop */}
-      <div className="hidden md:flex flex-col md:flex-row gap-5 items-center justify-around pt-[250px] md:pt-8 p-24 md:pb-44">
+      <div className="hidden md:flex flex-col md:flex-row gap-5 items-center justify-around pt-[250px] md:pt-8">
         <div className="flex flex-col text-center">
           <CountUpOnView
             targetNumber={1500}

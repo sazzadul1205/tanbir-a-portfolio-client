@@ -38,16 +38,16 @@ const cardsData = [
 
 const Cards = () => {
   return (
-    <div className="bg-white py-[62px]">
+    <div className="bg-white py-[62px] mt-20">
       {/* Heder */}
       <div className="text-black text-center">
         {/* Title */}
-        <h3 className="text-[40px] font-semibold Inter">
+        <h3 className="inter font-semibold text-3xl md:text-4xl text-center text-black">
           Upwork Project catalog
         </h3>
 
         {/* Description */}
-        <p className="Inter text-[18px] pt-[15px]">
+        <p className="inter text-base md:text-lg text-center text-black pt-4 px-5 mx-auto">
           Get started working with Me quickly with these predefined projects.
         </p>
       </div>
