@@ -11,7 +11,7 @@ import video5 from "../../assets/Videos/Vid-5.webm";
 import videoS1 from "../../assets/Videos/Vid-S-1.webm";
 import videoM1 from "../../assets/Videos/Vid-M-1.webm";
 import Image1 from "../../assets/Videos/Img-1.jpg";
-import ImageM1 from "../../assets/Videos/img-M-1.jpg";
+import ImageM1 from "../../assets/Videos/Img-M-1.jpg";
 
 // Layout: single and stacked media (video or image)
 const layoutMap = [
