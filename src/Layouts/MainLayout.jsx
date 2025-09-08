@@ -59,11 +59,11 @@ const MainLayout = () => {
       behavior: "smooth",
     });
 
-    setActiveDot(dotIndex); 
+    setActiveDot(dotIndex);
   };
 
   return (
-    <div className="bg-[#0F172A]">
+    <div className="bg-[#0F172A] fix-glitch">
       <Navbar />
 
       <Works setActiveDot={setActiveDot} TOTAL_DOTS={TOTAL_DOTS} />
