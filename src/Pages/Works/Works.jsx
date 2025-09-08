@@ -3,28 +3,35 @@ import PropTypes from "prop-types";
 import mouse from "../../assets/Subtract.png";
 
 // Import videos
-import video1 from "../../assets/Videos/Vid-1.mp4";
-import video2 from "../../assets/Videos/Vid-2.mp4";
-import video3 from "../../assets/Videos/Vid-3.mp4";
-import video4 from "../../assets/Videos/Vid-4.mp4";
-import video5 from "../../assets/Videos/Vid-5.webm";
-import videoS1 from "../../assets/Videos/Vid-S-1.webm";
-import videoM1 from "../../assets/Videos/Vid-M-1.webm";
-import Image1 from "../../assets/Videos/Img-1.jpg";
-import ImageM1 from "../../assets/Videos/Img-M-1.jpg";
+import Banner_1 from "../../assets/Videos/Banner-1.jpg";
+import Banner_2 from "../../assets/Videos/Banner-2.mp4";
+import Banner_3 from "../../assets/Videos/Banner-3.mp4";
+import Banner_4 from "../../assets/Videos/Banner-4.mp4";
+import Banner_6 from "../../assets/Videos/Banner-6.gif";
+import Banner_5 from "../../assets/Videos/Banner-5.webm";
+
+import M_Banner_1 from "../../assets/Videos/M-Banner-1.jpg";
+import M_Banner_2 from "../../assets/Videos/M-Banner-2.mp4";
+import M_Banner_3 from "../../assets/Videos/M-Banner-3.mp4";
+import M_Banner_4 from "../../assets/Videos/M-Banner-4.gif";
+import M_Banner_5 from "../../assets/Videos/M-Banner-5.webm";
+
+import S_Banner_1 from "../../assets/Videos/S-Banner-1.webm";
 
 // Layout: single and stacked media (video or image)
 const layoutMap = [
-  video2,
-  [video1, videoS1, videoM1],
-  video3,
-  [video1, videoS1, videoM1],
-  video4,
-  [video1, videoS1, videoM1],
-  video5,
-  [video1, videoS1, videoM1],
-  Image1,
-  [ImageM1, videoS1, videoM1],
+  Banner_1,
+  [M_Banner_1, M_Banner_2, S_Banner_1],
+  Banner_2,
+  [M_Banner_3, M_Banner_4, S_Banner_1],
+  Banner_3,
+  [M_Banner_1, M_Banner_2, S_Banner_1],
+  Banner_4,
+  [M_Banner_3, M_Banner_4, S_Banner_1],
+  Banner_6,
+  [M_Banner_1, M_Banner_2, S_Banner_1],
+  Banner_5,
+  [M_Banner_3, M_Banner_5, S_Banner_1],
 ];
 
 // Helpers to detect media type
