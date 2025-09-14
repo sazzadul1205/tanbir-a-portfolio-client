@@ -25,13 +25,13 @@ const layoutMap = [
   Banner_2,
   [M_Banner_3, M_Banner_4, S_Banner_1],
   Banner_3,
-  [M_Banner_1, M_Banner_2, S_Banner_1],
+  [M_Banner_5, M_Banner_1, S_Banner_1],
   Banner_4,
-  [M_Banner_3, M_Banner_4, S_Banner_1],
+  [M_Banner_2, M_Banner_3, S_Banner_1],
+  Banner_5,
+  [M_Banner_4, M_Banner_5, S_Banner_1],
   Banner_6,
   [M_Banner_1, M_Banner_2, S_Banner_1],
-  Banner_5,
-  [M_Banner_3, M_Banner_5, S_Banner_1],
 ];
 
 // Helpers to detect media type

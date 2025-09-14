@@ -7,7 +7,7 @@ import { FaArrowRight } from "react-icons/fa6";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import { HiBadgeCheck } from "react-icons/hi";
 import { IoLocationOutline } from "react-icons/io5";
-import { MdOutlineEdit } from "react-icons/md";
+import { MdElectricBolt, MdOutlineEdit } from "react-icons/md";
 
 // Assets
 import UpWorkICon from "../../../assets/UpWorkSymbol1.png";
@@ -103,14 +103,23 @@ const Testimonials = () => {
             <div className="text-black pb-5">
               {/* Name */}
               <div className="flex gap-2 items-center">
-                <h3 className="text-[32px] font-semibold">Tanbir A.</h3>
-                <HiBadgeCheck className="text-[32px] text-blue-500" />
+                <h3 className="text-[30px] font-semibold">Tanbir A.</h3>
+                <HiBadgeCheck className="text-[30px] text-blue-500" />
               </div>
 
               {/* Location */}
               <div className="flex text-gray-500 font-semibold gap-2 items-center">
                 <IoLocationOutline className="text-[22px]" />
                 <p>Dhaka, Bangladesh</p>
+              </div>
+
+              {/* Location */}
+              <div className="flex text-gray-500 text-sm font-semibold gap-2 items-center">
+                5:34 PM Local Time
+              </div>
+
+              <div className="flex gap-2 items-center text-xs font-semibold bg-[#f7f4fb] text-purple-900 mt-2 py-1 px-2 rounded-full w-[130px]">
+                <MdElectricBolt /> <span>Available Now</span>
               </div>
             </div>
           </div>
@@ -123,7 +132,7 @@ const Testimonials = () => {
             {/* Feedback Card */}
             <div className="absolute inset-0 transition-all duration-1000 ease-in-out opacity-100 animate-fade-slide">
               {/* Feedback Card */}
-              <div className="bg-white shadow-md relative w-full h-[181px] md:h-[381px] overflow-hidden">
+              <div className="bg-white shadow-md relative w-full h-[181px] md:h-[410px] overflow-hidden">
                 {/* Fading Images (behind everything) */}
                 <div className="relative w-full h-full z-0">
                   {feedbackImages.map((img, index) => (
@@ -236,7 +245,7 @@ const Testimonials = () => {
       <div className="hidden md:flex flex-col md:flex-row gap-5 items-center justify-around pt-[250px] md:pt-8">
         <div className="flex flex-col text-center">
           <CountUpOnView
-            targetNumber={1500}
+            targetNumber={50}
             className="italianno-regular text-5xl"
           />
           <p>Project Completed</p>
@@ -261,7 +270,7 @@ const Testimonials = () => {
       <div className="flex md:hidden flex-col gap-5 items-center justify-center px-4 py-20 pt-[260px] md:p-24 md:pb-44">
         <div className="flex flex-col text-center">
           <CountUpOnView
-            targetNumber={1500}
+            targetNumber={50}
             className="italianno-regular text-7xl"
           />
           <p className="text-lg">Project Completed</p>

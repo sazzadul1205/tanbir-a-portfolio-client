@@ -2,37 +2,41 @@
 import { FaStar } from "react-icons/fa6";
 import { IoMdTimer } from "react-icons/io";
 
+import Card1 from "../../../assets/Cards/Card-1.jpg";
+import Card2 from "../../../assets/Cards/Card-2.jpg";
+import Card3 from "../../../assets/Cards/Card-3.jpg";
+
 // Card data
 const cardsData = [
   {
     id: 1,
-    title: "Eye-Catching HTML5 Banners | High-impact, Animated & Click-Worth",
-    image:
-      "https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp",
-    delivery: "3 Day Delivery",
-    price: "$ 40",
+    title:
+      "You will get Professional Modern Banners for Google Ads, Social Media and Website",
+    image: Card1,
+    delivery: "2 Day Delivery",
+    price: "$ 30",
     author: "Tanbir A.",
     rating: "4.8 (48)",
   },
   {
     id: 2,
-    title: "Responsive Web Design | Modern, User-Friendly, and Fast",
-    image:
-      "https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp",
-    delivery: "5 Day Delivery",
-    price: "$ 60",
+    title:
+      "You will get Premium Static Banner Design | Web, Social Media & Ad Campaigns",
+    image: Card2,
+    delivery: "1 Day Delivery",
+    price: "$ 40",
     author: "Tanbir A.",
-    rating: "4.9 (120)",
+    rating: "4.8 (48)",
   },
   {
     id: 3,
-    title: "Custom React Components | Clean, Reusable & Scalable",
-    image:
-      "https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp",
-    delivery: "7 Day Delivery",
-    price: "$ 100",
+    title:
+      "You will get Eye-Catching HTML5 Banners | High-Impact, Animated & Click-Worthy",
+    image: Card3,
+    delivery: "3 Day Delivery",
+    price: "$ 90",
     author: "Tanbir A.",
-    rating: "5.0 (80)",
+    rating: "4.8 (48)",
   },
 ];
 
@@ -57,7 +61,7 @@ const Cards = () => {
         {cardsData.map((card) => (
           <div
             key={card.id}
-            className="card bg-white text-black w-[330px] rounded-xl shadow-xl hover:shadow-2xl"
+            className="card bg-white text-black w-[400px] rounded-xl shadow-xl hover:shadow-2xl"
           >
             {/* Card Image */}
             <figure>

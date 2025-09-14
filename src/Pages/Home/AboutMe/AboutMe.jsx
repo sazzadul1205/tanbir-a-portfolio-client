@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 
 // Assets
 import Desktop from "../../../assets/Desktop.png";
+import { Link } from "react-router";
 
 const AboutMe = ({ id }) => {
   return (
@@ -46,28 +47,21 @@ const AboutMe = ({ id }) => {
       {/* Buttons */}
       <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
         {/* Start Your Project */}
-        <button className="flex items-center gap-2 bg-white text-black py-2 px-6 rounded-full shadow hover:shadow-lg transition cursor-pointer">
-          <span
-            className="p-1 bg-[#33BD51] rounded-full w-2 h-2"
-            style={{
-              animation: "blink 1.5s infinite",
-              animationTimingFunction: "ease-in-out",
-            }}
-          />
-          <p className="text-sm font-semibold inter">Hire Me Now</p>
-        </button>
-
-        {/* WhatsApp Now */}
-        {/* <button className="flex items-center gap-2 bg-white text-black py-2 px-6 rounded-full shadow hover:shadow-lg transition cursor-pointer">
-          <span
-            className="p-1 bg-[#33BD51] rounded-full w-2 h-2"
-            style={{
-              animation: "blink 1.5s infinite",
-              animationTimingFunction: "ease-in-out",
-            }}
-          />
-          <p className="text-sm font-semibold inter">WhatsApp Now</p>
-        </button> */}
+        <Link
+          to={"https://www.upwork.com/freelancers/tanbirahmed2?mp_source=share"}
+          target="_blank"
+        >
+          <button className="flex items-center gap-2 bg-white text-black py-2 px-6 rounded-full shadow hover:shadow-lg transition cursor-pointer">
+            <span
+              className="p-1 bg-[#33BD51] rounded-full w-2 h-2"
+              style={{
+                animation: "blink 1.5s infinite",
+                animationTimingFunction: "ease-in-out",
+              }}
+            />
+            <p className="text-sm font-semibold inter">Hire Me Now</p>
+          </button>
+        </Link>
       </div>
 
       {/* Image */}

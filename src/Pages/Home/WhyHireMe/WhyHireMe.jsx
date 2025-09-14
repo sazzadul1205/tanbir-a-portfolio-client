@@ -1,6 +1,12 @@
+import { Link } from "react-router";
+
+// Packages
 import PropTypes from "prop-types";
+
+// Icons
 import { FaArrowRight } from "react-icons/fa6";
 
+// Hire Me Data
 const whyHireMeData = [
   {
     title: "Fast Delivery Without Compromise",
@@ -108,28 +114,21 @@ const WhyHireMe = ({ id }) => {
       {/* Button */}
       <div className="flex flex-col md:flex-row justify-center items-center gap-4 py-11">
         {/* Start Your Project */}
-        <button className="flex items-center gap-2 bg-white text-black py-2 px-6 rounded-full cursor-pointer w-auto self-center">
-          <span
-            className="p-1 bg-[#33BD51] rounded-full w-2 h-2"
-            style={{
-              animation: "blink 1.5s infinite",
-              animationTimingFunction: "ease-in-out",
-            }}
-          />
-          <p className="text-sm font-medium">Hire Me Now</p>
-        </button>
-
-        {/* WhatsApp Now */}
-        {/* <button className="flex items-center gap-2 bg-white text-black py-2 px-6 rounded-full cursor-pointer w-auto self-center">
-          <span
-            className="p-1 bg-[#33BD51] rounded-full w-2 h-2"
-            style={{
-              animation: "blink 1.5s infinite",
-              animationTimingFunction: "ease-in-out",
-            }}
-          />
-          <p className="text-sm font-medium">WhatsApp Now</p>
-        </button> */}
+        <Link
+          to={"https://www.upwork.com/freelancers/tanbirahmed2?mp_source=share"}
+          target="_blank"
+        >
+          <button className="flex items-center gap-2 bg-white text-black py-2 px-6 rounded-full cursor-pointer w-auto self-center">
+            <span
+              className="p-1 bg-[#33BD51] rounded-full w-2 h-2"
+              style={{
+                animation: "blink 1.5s infinite",
+                animationTimingFunction: "ease-in-out",
+              }}
+            />
+            <p className="text-sm font-medium">Hire Me Now</p>
+          </button>
+        </Link>
       </div>
     </section>
   );
