@@ -3,14 +3,14 @@ import PropTypes from "prop-types";
 import mouse from "../../assets/Subtract.png";
 
 // Import videos
-import Banner_1 from "../../assets/Videos/Banner-1.jpg";
+// import Banner_1 from "../../assets/Videos/Banner-1.jpg";
 import Banner_2 from "../../assets/Videos/Banner-2.mp4";
 import Banner_3 from "../../assets/Videos/Banner-3.mp4";
 import Banner_4 from "../../assets/Videos/Banner-4.mp4";
 import Banner_6 from "../../assets/Videos/Banner-6.gif";
 import Banner_5 from "../../assets/Videos/Banner-5.webm";
 
-import M_Banner_1 from "../../assets/Videos/M-Banner-1.jpg";
+// import M_Banner_1 from "../../assets/Videos/M-Banner-1.jpg";
 import M_Banner_2 from "../../assets/Videos/M-Banner-2.mp4";
 import M_Banner_3 from "../../assets/Videos/M-Banner-3.mp4";
 import M_Banner_4 from "../../assets/Videos/M-Banner-4.gif";
@@ -20,18 +20,20 @@ import S_Banner_1 from "../../assets/Videos/S-Banner-1.webm";
 
 // Layout: single and stacked media (video or image)
 const layoutMap = [
-  Banner_1,
-  [M_Banner_1, M_Banner_2, S_Banner_1],
   Banner_2,
-  [M_Banner_3, M_Banner_4, S_Banner_1],
-  Banner_3,
-  [M_Banner_5, M_Banner_1, S_Banner_1],
-  Banner_4,
   [M_Banner_2, M_Banner_3, S_Banner_1],
-  Banner_5,
+
+  Banner_3,
   [M_Banner_4, M_Banner_5, S_Banner_1],
+
+  Banner_4,
+  [M_Banner_2, M_Banner_4, S_Banner_1],
+
+  Banner_5,
+  [M_Banner_3, M_Banner_2, S_Banner_1],
+
   Banner_6,
-  [M_Banner_1, M_Banner_2, S_Banner_1],
+  [M_Banner_2, M_Banner_5, S_Banner_1],
 ];
 
 // Helpers to detect media type
@@ -211,7 +213,6 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
     type: Array.isArray(entry) ? "stacked" : "single",
     content: entry,
   }));
-  const doubledItems = [...items, ...items];
 
   const openModal = () => {
     const modal = document.getElementById("my_modal_2");
@@ -299,7 +300,7 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
       >
         <style>{`#works-scroll::-webkit-scrollbar { display: none; }`}</style>
         <div className="flex gap-[10px] h-[600px] w-max items-center">
-          {doubledItems.map((item, idx) => {
+          {items.map((item, idx) => {
             if (item.type === "single") {
               return (
                 <div
