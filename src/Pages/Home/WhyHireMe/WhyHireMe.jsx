@@ -71,9 +71,9 @@ const WhyHireMe = ({ id }) => {
 
             {/* Icon */}
             <div className="absolute p-2 -right-2 -bottom-2 cursor-pointer">
-              <div className="bg-[#0F172A] rounded-tl-2xl p-2">
-                <div className="bg-[#0F172A] border border-white p-3 rounded-full flex items-center justify-center cursor-pointer relative transition-all duration-300 transform rotate-[-45deg] hover:rotate-0 z-50">
-                  <FaArrowRight className="text-white text-xl" />
+              <div className="bg-[#0F172A] rounded-tl-2xl p-2 group">
+                <div className="bg-[#0F172A] border border-white  group-hover:border-green-500  p-3 rounded-full flex items-center justify-center cursor-pointer relative  transition-all duration-300 transform rotate-[-45deg] group-hover:rotate-0 z-50">
+                  <FaArrowRight className="text-white text-xl transition-colors duration-300 group-hover:text-green-500" />
                 </div>
               </div>
             </div>

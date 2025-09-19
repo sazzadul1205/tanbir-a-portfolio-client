@@ -153,9 +153,9 @@ const Testimonials = () => {
                 <>
                   {/* Arrow */}
                   <div className="absolute -top-2 -right-2 z-20">
-                    <div className="bg-[#0F172A] rounded-bl-2xl p-2">
+                    <div className="bg-[#0F172A] rounded-bl-2xl p-2 group">
                       <div className="bg-white p-2 md:p-4 rounded-full cursor-pointer relative transition-all duration-300 transform rotate-[-45deg] hover:rotate-0 z-50">
-                        <FaArrowRight className="text-black text-md md:text-xl" />
+                        <FaArrowRight className="text-black text-md md:text-xl group-hover:text-green-500" />
                       </div>
                     </div>
                   </div>
@@ -242,7 +242,7 @@ const Testimonials = () => {
       </div>
 
       {/* Good To know - Desktop */}
-      <div className="hidden md:flex flex-col md:flex-row gap-5 items-center justify-around pt-[250px] md:pt-8">
+      <div className="hidden md:flex flex-col md:flex-row gap-5 justify-around pt-[250px] md:py-10">
         <div className="flex flex-col text-center">
           <CountUpOnView
             targetNumber={50}

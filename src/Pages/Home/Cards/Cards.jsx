@@ -1,3 +1,5 @@
+import { Link } from "react-router";
+
 // Icons
 import { FaStar } from "react-icons/fa6";
 import { IoMdTimer } from "react-icons/io";
@@ -17,6 +19,7 @@ const cardsData = [
     price: "$ 30",
     author: "Tanbir A.",
     rating: "4.8 (48)",
+    link: "https://www.upwork.com/services/product/design-eye-catching-html5-banners-high-impact-animated-click-worthy-1894109721557598859?ref=fl_profile",
   },
   {
     id: 2,
@@ -27,6 +30,7 @@ const cardsData = [
     price: "$ 40",
     author: "Tanbir A.",
     rating: "4.8 (48)",
+    link: "https://www.upwork.com/services/product/design-premium-static-banner-design-web-social-media-ad-campaigns-1894450460526764745?ref=fl_profile",
   },
   {
     id: 3,
@@ -37,12 +41,13 @@ const cardsData = [
     price: "$ 90",
     author: "Tanbir A.",
     rating: "4.8 (48)",
+    link: "https://www.upwork.com/services/product/design-professional-modern-banners-for-google-ads-social-media-and-website-1964053843167491359?ref=fl_profile",
   },
 ];
 
 const Cards = () => {
   return (
-    <div className="bg-white py-[62px] mt-20">
+    <div className="bg-white py-[62px]">
       {/* Heder */}
       <div className="text-black text-center">
         {/* Title */}
@@ -57,11 +62,12 @@ const Cards = () => {
       </div>
 
       {/* Cards */}
-      <div className="flex flex-wrap justify-center gap-6 pt-[50px]">
+      <div className="flex flex-wrap justify-center gap-8 pt-[50px]">
         {cardsData.map((card) => (
-          <div
+          <Link
             key={card.id}
-            className="card bg-white text-black w-[400px] rounded-xl shadow-xl hover:shadow-2xl"
+            to={card.link}
+            className="card bg-white text-black w-[400px] rounded-xl shadow-xl hover:shadow-2xl group"
           >
             {/* Card Image */}
             <figure>
@@ -70,7 +76,9 @@ const Cards = () => {
 
             {/* Card Body */}
             <div className="card-body px-3">
-              <h2 className="card-title">{card.title}</h2>
+              <h2 className="card-title transition-all duration-500 ease-in-out group-hover:text-green-600 group-hover:underline">
+                {card.title}
+              </h2>
 
               {/* Time & Price */}
               <div className="flex justify-between items-center">
@@ -110,7 +118,7 @@ const Cards = () => {
                 <p>{card.rating}</p>
               </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </div>

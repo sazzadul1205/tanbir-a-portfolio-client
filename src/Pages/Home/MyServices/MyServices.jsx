@@ -48,10 +48,10 @@ const MyServices = ({ id }) => {
       {/* Background Items */}
       <div className="absolute inset-0 pointer-events-none z-0">
         {/* Rotated square */}
-        <div className="border-2 border-[#BFDBFE]/20 w-[90.15px] h-[90.15px] rotate-45 absolute top-1/2 left-[200px]" />
+        <div className="border-2 border-[#BFDBFE]/20 w-[90.15px] h-[90.15px] rotate-45 absolute top-1/2 left-[200px] square-float" />
 
         {/* Yellow circle */}
-        <div className="rounded-full bg-[#FACC15]/10 w-[229.4px] h-[221.3px] absolute bottom-0 left-[480px]" />
+        <div className="rounded-full bg-[#FACC15]/10 w-[229.4px] h-[221.3px] absolute bottom-0 left-[480px] circle-float" />
       </div>
 
       {/* Header */}
