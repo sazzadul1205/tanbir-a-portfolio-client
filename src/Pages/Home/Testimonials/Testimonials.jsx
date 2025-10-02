@@ -242,25 +242,25 @@ const Testimonials = () => {
       </div>
 
       {/* Good To know - Desktop */}
-      <div className="hidden md:flex flex-col md:flex-row gap-5 justify-around pt-[250px] md:py-10">
+      <div className="hidden md:flex flex-col md:flex-row gap-5 justify-around pt-[270px] md:py-20">
         <div className="flex flex-col text-center">
           <CountUpOnView
             targetNumber={50}
-            className="italianno-regular text-5xl"
+            className="italianno-regular text-6xl"
           />
           <p>Project Completed</p>
         </div>
         <div className="flex flex-col text-center">
           <CountUpOnView
             targetNumber={17}
-            className="italianno-regular text-5xl"
+            className="italianno-regular text-6xl"
           />
           <p>Years Of Experience</p>
         </div>
         <div className="flex flex-col text-center">
           <CountUpOnView
             targetNumber={98}
-            className="italianno-regular text-5xl"
+            className="italianno-regular text-6xl"
           />
           <p>Client Satisfaction</p>
         </div>
