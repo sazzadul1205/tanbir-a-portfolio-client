@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { FiMenu } from "react-icons/fi";
 
 const Navbar = () => {
@@ -73,7 +73,13 @@ const Navbar = () => {
 
         {/* Right Badge */}
         <div>
-          <div className="flex items-center gap-2 bg-white text-black py-1 px-5 rounded-full">
+          <Link
+            to={
+              "https://www.upwork.com/freelancers/tanbirahmed2?mp_source=share"
+            }
+            target="_blank"
+            className="flex items-center gap-2 bg-white text-black py-1 px-5 rounded-full"
+          >
             <span
               className="p-1 bg-[#33BD51] rounded-full w-2 h-2"
               style={{
@@ -82,7 +88,7 @@ const Navbar = () => {
               }}
             />
             <p className="text-sm font-medium">Available Now</p>
-          </div>
+          </Link>
         </div>
       </div>
 

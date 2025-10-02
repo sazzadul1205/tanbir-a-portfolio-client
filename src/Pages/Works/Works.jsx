@@ -48,6 +48,7 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
 
   // Loading state for each media
   const [loadingStates, setLoadingStates] = useState({});
+  const [hoveredIndex, setHoveredIndex] = useState(null);
 
   // Smooth horizontal scroll
   const smoothScroll = () => {
@@ -298,15 +299,25 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
           msOverflowStyle: "none",
         }}
       >
-        <style>{`#works-scroll::-webkit-scrollbar { display: none; }`}</style>
         <div className="flex gap-[10px] h-[600px] w-max items-center">
           {items.map((item, idx) => {
             if (item.type === "single") {
               return (
                 <div
                   key={idx}
-                  className="h-[600px] w-[300px] flex items-center justify-center bg-[#0F172A] border border-gray-700 text-xl font-semibold cursor-pointer overflow-hidden relative"
+                  className={`h-[600px] w-[300px] flex items-center justify-center bg-[#0F172A] 
+            border-4 text-xl font-semibold cursor-pointer overflow-hidden relative 
+            transition-all duration-300
+            ${
+              hoveredIndex === idx
+                ? "border-[#33BD51] z-20 opacity-100"
+                : hoveredIndex !== null
+                ? "border-transparent opacity-30"
+                : "border-transparent opacity-100"
+            }`}
                   onClick={() => openModal(item)}
+                  onMouseEnter={() => setHoveredIndex(idx)}
+                  onMouseLeave={() => setHoveredIndex(null)}
                 >
                   {loadingStates[idx] && (
                     <div className="absolute inset-0 flex items-center justify-center bg-[#0F172A] bg-opacity-50 z-10">
@@ -329,8 +340,19 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
                       <div
                         key={subIdx}
                         style={{ height: `${mediaHeight}px` }}
-                        className="w-[300px] flex items-center justify-center bg-[#0F172A] border border-gray-700 text-xl font-semibold cursor-pointer overflow-hidden relative"
+                        className={`w-[300px] flex items-center justify-center bg-[#0F172A] 
+                  border-4 text-xl font-semibold cursor-pointer overflow-hidden relative 
+                  transition-all duration-300
+                  ${
+                    hoveredIndex === flatIndex
+                      ? "border-[#33BD51] z-20 opacity-100"
+                      : hoveredIndex !== null
+                      ? "border-transparent opacity-30"
+                      : "border-transparent opacity-100"
+                  }`}
                         onClick={() => openModal(item)}
+                        onMouseEnter={() => setHoveredIndex(flatIndex)}
+                        onMouseLeave={() => setHoveredIndex(null)}
                       >
                         {loadingStates[flatIndex] && (
                           <div className="absolute inset-0 flex items-center justify-center bg-[#0F172A] bg-opacity-50 z-10">
