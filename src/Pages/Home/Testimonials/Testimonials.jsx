@@ -21,6 +21,9 @@ import feedback2 from "../../../assets/Testimonials/feedback-2.jpg";
 import feedback3 from "../../../assets/Testimonials/feedback-3.jpg";
 import feedback4 from "../../../assets/Testimonials/feedback-4.jpg";
 
+// Profile Image
+import Profile from "../../../assets/Profile.jpeg";
+
 const Testimonials = () => {
   const feedbackImages = [feedback1, feedback2, feedback3, feedback4];
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -83,10 +86,7 @@ const Testimonials = () => {
             <div className="avatar p-2">
               <div className="w-24 relative overflow-visible">
                 {/* Profile Image */}
-                <img
-                  src="https://img.daisyui.com/images/profile/demo/gordon@192.webp"
-                  className="rounded-full"
-                />
+                <img src={Profile} className="rounded-full" />
 
                 {/* Green Blinking Dot (top-left with white border) */}
                 <span className="absolute top-1 left-1 block h-5 w-5 rounded-full bg-green-500 border-2 border-white animate-ping"></span>

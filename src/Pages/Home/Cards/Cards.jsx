@@ -4,9 +4,13 @@ import { Link } from "react-router";
 import { FaStar } from "react-icons/fa6";
 import { IoMdTimer } from "react-icons/io";
 
+// Card Images
 import Card1 from "../../../assets/Cards/Card-1.jpg";
 import Card2 from "../../../assets/Cards/Card-2.jpg";
 import Card3 from "../../../assets/Cards/Card-3.jpg";
+
+// Profile Image
+import Profile from "../../../assets/Profile.jpeg";
 
 // Card data
 const cardsData = [
@@ -101,10 +105,7 @@ const Cards = () => {
               {/* Author */}
               <div className="flex items-center gap-3">
                 <div className="relative w-16 h-16">
-                  <img
-                    src="https://img.daisyui.com/images/profile/demo/gordon@192.webp"
-                    className="w-16 h-16 rounded-full"
-                  />
+                  <img src={Profile} className="w-16 h-16 rounded-full" />
                   <span className="absolute top-0 left-0 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></span>
                 </div>
                 <h3 className="text-black text-lg inter font-semibold">

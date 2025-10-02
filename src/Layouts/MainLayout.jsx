@@ -5,8 +5,13 @@ import Navbar from "../Shared/Navbar/Navbar";
 
 // Pages
 import Works from "../Pages/Works/Works";
-import Home from "../Pages/Home/Home";
 import Footer from "../Shared/Footer/Footer";
+import AboutMe from "../Pages/Home/AboutMe/AboutMe";
+import MyServices from "../Pages/Home/MyServices/MyServices";
+import Tools from "../Pages/Home/Tools/Tools";
+import WhyHireMe from "../Pages/Home/WhyHireMe/WhyHireMe";
+import Testimonials from "../Pages/Home/Testimonials/Testimonials";
+import Cards from "../Pages/Home/Cards/Cards";
 
 const MainLayout = () => {
   const [activeDot, setActiveDot] = useState(0); // For Dots
@@ -33,6 +38,7 @@ const MainLayout = () => {
     <div className="bg-[#0F172A] fix-glitch">
       <Navbar />
 
+      {/* Works */}
       <Works setActiveDot={setActiveDot} TOTAL_DOTS={TOTAL_DOTS} />
 
       {/* Page Nav */}
@@ -56,8 +62,25 @@ const MainLayout = () => {
         </div>
       </div>
 
-      <Home />
+      {/* About Me */}
+      <AboutMe id="about-me" />
 
+      {/* My Services */}
+      <MyServices id="my-services" />
+
+      {/* Tools */}
+      <Tools id="tools" />
+
+      {/* Why Hire Me */}
+      <WhyHireMe id="why-hire-me" />
+
+      {/* Testimonials */}
+      <Testimonials id="testimonials" />
+
+      {/* Cards */}
+      <Cards id="blogs" />
+
+      {/* Footer */}
       <Footer />
     </div>
   );
