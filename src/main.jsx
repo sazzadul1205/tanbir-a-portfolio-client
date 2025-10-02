@@ -14,6 +14,8 @@ createRoot(document.getElementById("root")).render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<MainLayout />} />
+
+        <Route path="" />
       </Routes>
     </BrowserRouter>
   </StrictMode>
