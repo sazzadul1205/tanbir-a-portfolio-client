@@ -7,7 +7,7 @@ import { FaArrowRight } from "react-icons/fa6";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import { HiBadgeCheck } from "react-icons/hi";
 import { IoLocationOutline } from "react-icons/io5";
-import { MdElectricBolt, MdOutlineEdit } from "react-icons/md";
+import { MdElectricBolt } from "react-icons/md";
 
 // Assets
 import UpWorkICon from "../../../assets/UpWorkSymbol1.png";
@@ -77,9 +77,6 @@ const Testimonials = () => {
             />
           </div>
 
-          {/* Avatar Image
-          <img src={Avatar} alt="Avatar Image" className="w-full h-auto" /> */}
-
           {/* Avatar */}
           <div className="bg-white flex gap-3 items-center">
             {/* Avatar with Green Dot */}
@@ -91,11 +88,6 @@ const Testimonials = () => {
                 {/* Green Blinking Dot (top-left with white border) */}
                 <span className="absolute top-1 left-1 block h-5 w-5 rounded-full bg-green-500 border-2 border-white animate-ping"></span>
                 <span className="absolute top-1 left-1 block h-5 w-5 rounded-full bg-green-500 border-2 border-white"></span>
-
-                {/* Edit Icon (bottom-right) */}
-                <span className="absolute bottom-0 right-0 flex items-center justify-center p-[6px] rounded-full bg-white shadow-md border-2 border-green-700 cursor-pointer">
-                  <MdOutlineEdit className="h-5 w-5 text-green-600" />
-                </span>
               </div>
             </div>
 
@@ -246,21 +238,21 @@ const Testimonials = () => {
         <div className="flex flex-col text-center">
           <CountUpOnView
             targetNumber={50}
-            className="italianno-regular text-6xl"
+            className="italianno-regular text-5xl"
           />
           <p>Project Completed</p>
         </div>
         <div className="flex flex-col text-center">
           <CountUpOnView
             targetNumber={17}
-            className="italianno-regular text-6xl"
+            className="italianno-regular text-5xl"
           />
           <p>Years Of Experience</p>
         </div>
         <div className="flex flex-col text-center">
           <CountUpOnView
             targetNumber={98}
-            className="italianno-regular text-6xl"
+            className="italianno-regular text-5xl"
           />
           <p>Client Satisfaction</p>
         </div>
