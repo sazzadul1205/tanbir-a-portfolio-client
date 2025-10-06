@@ -11,40 +11,39 @@ import mouse from "../../assets/Subtract.png";
 import L_Banner_1 from "../../assets/Videos/Banner-1.jpg";
 import L_Banner_2 from "../../assets/Videos/Banner-6.gif";
 import L_Banner_3 from "../../assets/Videos/Banner-5.webm";
-import L_Banner_4 from "../../assets/L_Videos/300x600_1.mp4";
-import L_Banner_5 from "../../assets/L_Videos/300x600_2.mp4";
-import L_Banner_6 from "../../assets/L_Videos/300x600_3.mp4";
-import L_Banner_7 from "../../assets/L_Videos/300x600_4.mp4";
-import L_Banner_8 from "../../assets/L_Videos/300x600_5.mp4";
-import L_Banner_9 from "../../assets/L_Videos/300x600_6.mp4";
-import L_Banner_10 from "../../assets/L_Videos/300x600_7.mp4";
-import L_Banner_11 from "../../assets/L_Videos/300x600_8.mp4";
-import L_Banner_12 from "../../assets/L_Videos/300x600_9.mp4";
-import L_Banner_13 from "../../assets/L_Videos/300x600_10.mp4";
-import L_Banner_14 from "../../assets/L_Videos/300x600_11.mp4";
+import L_Banner_4 from "../../assets/L_Videos/L_Videos_1.mp4";
+import L_Banner_5 from "../../assets/L_Videos/L_Videos_2.mp4";
+import L_Banner_6 from "../../assets/L_Videos/L_Videos_3.mp4";
+import L_Banner_7 from "../../assets/L_Videos/L_Videos_4.mp4";
+import L_Banner_8 from "../../assets/L_Videos/L_Videos_5.mp4";
+import L_Banner_9 from "../../assets/L_Videos/L_Videos_6.mp4";
+import L_Banner_10 from "../../assets/L_Videos/L_Videos_7.mp4";
+import L_Banner_11 from "../../assets/L_Videos/L_Videos_8.mp4";
+import L_Banner_12 from "../../assets/L_Videos/L_Videos_9.mp4";
+import L_Banner_13 from "../../assets/L_Videos/L_Videos_10.mp4";
+import L_Banner_14 from "../../assets/L_Videos/L_Videos_11.mp4";
 
 // Medium Banners
-import M_Banner_1 from "../../assets/M_Videos/300x250-1.mp4";
-import M_Banner_2 from "../../assets/M_Videos/300x250-2.mp4";
-import M_Banner_3 from "../../assets/M_Videos/300x250-3.mp4";
-import M_Banner_4 from "../../assets/M_Videos/300x250-4.mp4";
-import M_Banner_5 from "../../assets/M_Videos/300x250-5.mp4";
-import M_Banner_6 from "../../assets/M_Videos/300x250-6.mp4";
-import M_Banner_7 from "../../assets/M_Videos/300x250-7.mp4";
-import M_Banner_8 from "../../assets/M_Videos/300x250-8.mp4";
-import M_Banner_9 from "../../assets/M_Videos/300x250-9.mp4";
+import M_Banner_1 from "../../assets/M_Videos/M_Videos_1.mp4";
+import M_Banner_2 from "../../assets/M_Videos/M_Videos_2.mp4";
+import M_Banner_3 from "../../assets/M_Videos/M_Videos_3.mp4";
+import M_Banner_4 from "../../assets/M_Videos/M_Videos_4.mp4";
+import M_Banner_5 from "../../assets/M_Videos/M_Videos_5.mp4";
+import M_Banner_6 from "../../assets/M_Videos/M_Videos_6.mp4";
+import M_Banner_7 from "../../assets/M_Videos/M_Videos_7.mp4";
+import M_Banner_8 from "../../assets/M_Videos/M_Videos_8.mp4";
+import M_Banner_9 from "../../assets/M_Videos/M_Videos_9.mp4";
 import M_Banner_14 from "../../assets/Videos/M-Banner-1.jpg";
-import M_Banner_10 from "../../assets/M_Videos/300x250-10.mp4";
-import M_Banner_11 from "../../assets/M_Videos/300x250-11.mp4";
-import M_Banner_12 from "../../assets/M_Videos/300x250-12.mp4";
+import M_Banner_10 from "../../assets/M_Videos/M_Videos_10.mp4";
+import M_Banner_11 from "../../assets/M_Videos/M_Videos_11.mp4";
+import M_Banner_12 from "../../assets/M_Videos/M_Videos_12.mp4";
 import M_Banner_15 from "../../assets/Videos/M-Banner-4.gif";
-import M_Banner_13 from "../../assets/M_Videos/300x250-13.mp4";
+import M_Banner_13 from "../../assets/M_Videos/M_Videos_13.mp4";
 import M_Banner_16 from "../../assets/Videos/M-Banner-5.webm";
 
 // Small Banner
 import S_Banner_1 from "../../assets/Videos/S-Banner-1.webm";
 
-// Layout: single and stacked media (video or image)
 // Layout: single and stacked media (video or image)
 const layoutMap = [
   // 1

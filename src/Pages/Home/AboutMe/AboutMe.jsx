@@ -9,21 +9,21 @@ const AboutMe = ({ id }) => {
   return (
     <section id={id} className="py-1 pt-10 md:pt-16 md:py-10 px-1 md:px-4">
       {/* Title */}
-      <h4 className="text-2xl sm:text-3xl md:text-4xl font-semibold inter max-w-5xl text-center mx-auto leading-snug md:leading-tight">
+      <h4 className="text-2xl sm:text-3xl md:text-4xl font-semibold inter max-w-5xl text-center leading-snug md:leading-tight text-white mx-auto">
         Motion Graphics & High-Impact
-        <span className="overline decoration-[#2FA94C] decoration-2 sm:decoration-3 ml-1 sm:ml-2">
+        <span className="overline decoration-[#2FA94C] decoration-2 sm:decoration-3 ml-1 sm:ml-2 text-white">
           Ad Creative
         </span>
         <br className="hidden sm:block" />
         for
-        <span className="relative inline-block ml-1 sm:ml-2 custom-underline">
+        <span className="relative inline-block ml-1 sm:ml-2 custom-underline text-white">
           Digital Marketing
         </span>{" "}
         Success
       </h4>
 
       {/* About Me */}
-      <div className="inter pt-10 pb-9 px-5 max-w-[986px] mx-auto text-center inter text-lg sm:text-base leading-relaxed">
+      <div className="inter pt-10 pb-9 px-5 max-w-[986px] mx-auto text-center text-white text-lg sm:text-base leading-relaxed">
         <p className="pt-1">
           Looking for motion graphics services that deliver fast, look stunning,
           and drive results?
