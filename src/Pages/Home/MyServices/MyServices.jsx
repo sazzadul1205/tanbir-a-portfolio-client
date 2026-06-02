@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { useState, useEffect } from "react";
 
 // Icons
 import { FaArrowRightLong } from "react-icons/fa6";
@@ -40,11 +41,64 @@ const services = [
 ];
 
 const MyServices = ({ id }) => {
+  const [loadedImages, setLoadedImages] = useState({});
+
+  // Preload all service icons
+  useEffect(() => {
+    services.forEach((service) => {
+      const img = new Image();
+      img.src = service.icon;
+      img.onload = () => {
+        setLoadedImages((prev) => ({
+          ...prev,
+          [service.icon]: true,
+        }));
+      };
+    });
+  }, []);
+
+  // JSON-LD structured data
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Motion Graphics & Digital Advertising Services",
+    "description": "Professional motion graphics, HTML5 banner ads, social media video ads, and animated UI prototypes for digital marketing success",
+    "provider": {
+      "@type": "Person",
+      "name": "Tanbir Ahmed",
+      "url": "https://www.upwork.com/freelancers/tanbirahmed2"
+    },
+    "serviceType": "Creative Design Services",
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Creative Services",
+      "itemListElement": services.map((service, index) => ({
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": service.title.replace(/<br\s*\/?>/gi, " "),
+          "description": service.desc,
+          "position": index + 1
+        }
+      }))
+    },
+    "areaServed": "Worldwide",
+    "availableChannel": {
+      "@type": "ServiceChannel",
+      "serviceUrl": "https://www.upwork.com/freelancers/tanbirahmed2"
+    }
+  };
+
   return (
     <section
       id={id}
       className="relative pb-[101px] pt-10 md:pt-0 px-4 text-white overflow-hidden"
     >
+      {/* JSON-LD Structured Data for SEO */}
+      <script type="application/ld+json">
+        {JSON.stringify(jsonLd)}
+      </script>
+
       {/* Background Items */}
       <div className="absolute inset-0 pointer-events-none z-0">
         {/* Rotated square */}
@@ -55,7 +109,7 @@ const MyServices = ({ id }) => {
       </div>
 
       {/* Header */}
-      <div className="relative mx-auto w-[600px] z-10 text-center pb-[106px]">
+      <div className="relative mx-auto max-w-[600px] z-10 text-center pb-[106px]">
         {/* Title */}
         <h3 className="inter text-[40px] font-semibold pb-6">
           My Services Include
@@ -80,12 +134,28 @@ const MyServices = ({ id }) => {
 
             {/* Content */}
             <div className="relative z-10 flex flex-col items-center md:flex-row md:items-center justify-center md:justify-between w-full gap-[20px] md:gap-[45px]">
-              {/* Icon */}
-              <img
-                src={service.icon}
-                alt={service.title.replace(/<br\s*\/?>/gi, " ")}
-                className="w-[45px] h-[45px]"
-              />
+              {/* Icon with loading optimization */}
+              <div className="relative w-[45px] h-[45px] flex-shrink-0">
+                {/* Skeleton loader */}
+                {!loadedImages[service.icon] && (
+                  <div className="absolute inset-0 bg-gray-700 rounded-md animate-pulse" />
+                )}
+
+                {/* Actual icon */}
+                <img
+                  src={service.icon}
+                  alt={service.title.replace(/<br\s*\/?>/gi, " ")}
+                  className={`w-[45px] h-[45px] transition-opacity duration-300 ${loadedImages[service.icon] ? 'opacity-100' : 'opacity-0'
+                    }`}
+                  loading="lazy"
+                  onLoad={() =>
+                    setLoadedImages((prev) => ({
+                      ...prev,
+                      [service.icon]: true,
+                    }))
+                  }
+                />
+              </div>
 
               {/* Title */}
               <h3

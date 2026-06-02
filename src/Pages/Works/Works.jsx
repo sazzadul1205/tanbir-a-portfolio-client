@@ -1,6 +1,9 @@
-import { useRef, useEffect, useState } from "react";
+// Pages/Works/Works.jsx
 
-// Packages
+// React
+import { useRef, useEffect, useState, useCallback, useMemo } from "react";
+
+// Prop types
 import PropTypes from "prop-types";
 
 // Import Images
@@ -44,81 +47,74 @@ import M_Banner_16 from "../../assets/Videos/M-Banner-5.webm";
 // Small Banner
 import S_Banner_1 from "../../assets/Videos/S-Banner-1.webm";
 
-// Layout: single and stacked media (video or image)
+// Layout configuration
 const layoutMap = [
-  // 1
   L_Banner_1,
   [M_Banner_1, M_Banner_2, S_Banner_1],
-
-  // 2
   L_Banner_2,
   [M_Banner_3, M_Banner_4, S_Banner_1],
-
-  // 3
   L_Banner_3,
   [M_Banner_5, M_Banner_6, S_Banner_1],
-
-  // 4
   L_Banner_4,
   [M_Banner_7, M_Banner_8, S_Banner_1],
-
-  // 5
   L_Banner_5,
   [M_Banner_9, M_Banner_10, S_Banner_1],
-
-  // 6
   L_Banner_6,
   [M_Banner_11, M_Banner_12, S_Banner_1],
-
-  // 7
   L_Banner_7,
   [M_Banner_13, M_Banner_14, S_Banner_1],
-
-  // 8
   L_Banner_8,
   [M_Banner_15, M_Banner_16, S_Banner_1],
-
-  // 9
   L_Banner_9,
   [M_Banner_2, M_Banner_5, S_Banner_1],
-
-  // 10
   L_Banner_10,
   [M_Banner_4, M_Banner_7, S_Banner_1],
-
-  // 11
   L_Banner_11,
   [M_Banner_9, M_Banner_11, S_Banner_1],
-
-  // 12
   L_Banner_12,
   [M_Banner_13, M_Banner_15, S_Banner_1],
-
-  // 13
   L_Banner_13,
   [M_Banner_1, M_Banner_3, S_Banner_1],
-
-  // 14
   L_Banner_14,
   [M_Banner_6, M_Banner_10, S_Banner_1],
 ];
 
-// Helpers to detect media type
+// Media type detection helpers
 const isVideo = (file) => /\.(mp4|webm|mov)$/i.test(file);
 const isImage = (file) => /\.(jpg|jpeg|png|webp|gif)$/i.test(file);
+const isGif = (file) => /\.gif$/i.test(file);
 
 const Works = ({ setActiveDot, TOTAL_DOTS }) => {
   const scrollRef = useRef(null);
   const isScrolling = useRef(false);
   const scrollVelocity = useRef(0);
   const containerWidth = useRef(0);
+  const animationFrameId = useRef(null);
 
-  // Loading state for each media
   const [loadingStates, setLoadingStates] = useState({});
   const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [isDragging, setIsDragging] = useState(false);
 
-  // Smooth horizontal scroll
-  const smoothScroll = () => {
+  // Prepare items with memoization
+  const items = useMemo(() => {
+    return layoutMap.map((entry, i) => ({
+      id: i,
+      type: Array.isArray(entry) ? "stacked" : "single",
+      content: entry,
+    }));
+  }, []);
+
+  // Update active dot based on scroll position
+  const updateActiveDot = useCallback((scrollLeft) => {
+    if (!containerWidth.current || !scrollRef.current || containerWidth.current === 0) return;
+
+    const progress = Math.max(0, Math.min(0.99, scrollLeft / containerWidth.current));
+    const dotIndex = Math.min(TOTAL_DOTS - 1, Math.floor(progress * TOTAL_DOTS));
+    setActiveDot(dotIndex);
+  }, [TOTAL_DOTS, setActiveDot]);
+
+  // Smooth scroll animation
+  const smoothScroll = useCallback(() => {
     if (!scrollRef.current) return;
     const scrollEl = scrollRef.current;
 
@@ -129,129 +125,70 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
       scrollEl.scrollLeft += containerWidth.current;
     }
 
-    // Decelerate scroll
-    if (Math.abs(scrollVelocity.current) < 0.1) {
+    // Apply velocity
+    if (Math.abs(scrollVelocity.current) > 0.01) {
+      scrollEl.scrollLeft += scrollVelocity.current;
+      scrollVelocity.current *= 0.95; // Smoother deceleration
+      updateActiveDot(scrollEl.scrollLeft);
+
+      animationFrameId.current = requestAnimationFrame(smoothScroll);
+      isScrolling.current = true;
+    } else {
       scrollVelocity.current = 0;
       isScrolling.current = false;
-      return;
-    }
-
-    scrollEl.scrollLeft += scrollVelocity.current;
-    scrollVelocity.current *= 0.35;
-
-    updateActiveDot(scrollEl.scrollLeft);
-    requestAnimationFrame(smoothScroll);
-  };
-
-  // Update active dot
-  const updateActiveDot = (scrollLeft) => {
-    if (!containerWidth.current || !scrollRef.current) return;
-    const progress = Math.max(
-      0,
-      Math.min(1, scrollLeft / containerWidth.current)
-    );
-    const dotIndex = Math.min(
-      TOTAL_DOTS - 1,
-      Math.floor(progress * TOTAL_DOTS)
-    );
-    setActiveDot(dotIndex);
-  };
-
-  // Mouse/touch drag and wheel support
-  useEffect(() => {
-    const el = scrollRef.current;
-    if (!el) return;
-
-    containerWidth.current = el.scrollWidth / 2;
-    updateActiveDot(el.scrollLeft);
-
-    let isDragging = false;
-    let startX = 0;
-    let scrollLeftStart = 0;
-
-    // Wheel scroll
-    const handleWheel = (e) => {
-      e.preventDefault();
-      scrollVelocity.current += e.deltaY * 1.1;
-      scrollVelocity.current = Math.max(
-        -50,
-        Math.min(50, scrollVelocity.current)
-      );
-      if (!isScrolling.current) {
-        isScrolling.current = true;
-        requestAnimationFrame(smoothScroll);
+      if (animationFrameId.current) {
+        cancelAnimationFrame(animationFrameId.current);
+        animationFrameId.current = null;
       }
-    };
+    }
+  }, [updateActiveDot]);
 
-    // Mouse events
-    const handleMouseDown = (e) => {
-      isDragging = true;
-      startX = e.pageX - el.offsetLeft;
-      scrollLeftStart = el.scrollLeft;
-      el.classList.add("cursor-grabbing");
-    };
-    const handleMouseLeave = () => {
-      isDragging = false;
-      el.classList.remove("cursor-grabbing");
-    };
-    const handleMouseUp = () => {
-      isDragging = false;
-      el.classList.remove("cursor-grabbing");
-    };
-    const handleMouseMove = (e) => {
-      if (!isDragging) return;
-      e.preventDefault();
-      const x = e.pageX - el.offsetLeft;
-      const walk = (x - startX) * 1.5;
-      el.scrollLeft = scrollLeftStart - walk;
-      updateActiveDot(el.scrollLeft);
-    };
+  // Handle wheel scroll
+  const handleWheel = useCallback((e) => {
+    e.preventDefault();
 
-    // Touch events
-    let touchStartX = 0;
-    let touchScrollStart = 0;
-    const handleTouchStart = (e) => {
-      touchStartX = e.touches[0].pageX;
-      touchScrollStart = el.scrollLeft;
-    };
-    const handleTouchMove = (e) => {
-      const x = e.touches[0].pageX;
-      const walk = (x - touchStartX) * 1.5;
-      el.scrollLeft = touchScrollStart - walk;
-      updateActiveDot(el.scrollLeft);
-    };
+    // Add velocity with smooth acceleration
+    const delta = e.deltaY * 0.8;
+    scrollVelocity.current += delta;
 
-    // Scroll event
-    const handleScroll = () => updateActiveDot(el.scrollLeft);
+    // Limit maximum velocity
+    scrollVelocity.current = Math.max(-30, Math.min(30, scrollVelocity.current));
 
-    // Add listeners
-    el.addEventListener("wheel", handleWheel, { passive: false });
-    el.addEventListener("scroll", handleScroll);
-    el.addEventListener("mousedown", handleMouseDown);
-    el.addEventListener("mouseleave", handleMouseLeave);
-    el.addEventListener("mouseup", handleMouseUp);
-    el.addEventListener("mousemove", handleMouseMove);
-    el.addEventListener("touchstart", handleTouchStart, { passive: true });
-    el.addEventListener("touchmove", handleTouchMove, { passive: true });
+    if (!isScrolling.current) {
+      isScrolling.current = true;
+      if (animationFrameId.current) {
+        cancelAnimationFrame(animationFrameId.current);
+      }
+      animationFrameId.current = requestAnimationFrame(smoothScroll);
+    }
+  }, [smoothScroll]);
 
-    return () => {
-      el.removeEventListener("wheel", handleWheel);
-      el.removeEventListener("scroll", handleScroll);
-      el.removeEventListener("mousedown", handleMouseDown);
-      el.removeEventListener("mouseleave", handleMouseLeave);
-      el.removeEventListener("mouseup", handleMouseUp);
-      el.removeEventListener("mousemove", handleMouseMove);
-      el.removeEventListener("touchstart", handleTouchStart);
-      el.removeEventListener("touchmove", handleTouchMove);
-    };
-  }, [TOTAL_DOTS, setActiveDot]);
+  // Handle media loading
+  const handleMediaLoad = useCallback((key) => {
+    setLoadingStates((prev) => ({ ...prev, [key]: false }));
+  }, []);
+
+  const handleVideoMetadata = useCallback((key, e) => {
+    const video = e.target;
+    if (video && isVideo(video.src)) {
+      video.muted = true;
+      video.playsInline = true;
+      video.play().catch(err => {
+        // Silent fail for autoplay restrictions
+        if (err.name !== 'AbortError') {
+          console.debug('Video autoplay prevented:', err.message);
+        }
+      });
+    }
+    handleMediaLoad(key);
+  }, [handleMediaLoad]);
 
   // Initialize loading states
   useEffect(() => {
     const initialLoadingStates = {};
-    layoutMap.forEach((entry, i) => {
-      if (Array.isArray(entry)) {
-        entry.forEach((_, subIdx) => {
+    items.forEach((item, i) => {
+      if (item.type === "stacked") {
+        item.content.forEach((_, subIdx) => {
           initialLoadingStates[`${i}-${subIdx}`] = true;
         });
       } else {
@@ -260,35 +197,130 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
     });
     setLoadingStates(initialLoadingStates);
 
-    const timer = setTimeout(() => setLoadingStates({}), 2000);
+    // Clear loading states after timeout as fallback
+    const timer = setTimeout(() => {
+      setLoadingStates(prev => {
+        const newState = { ...prev };
+        Object.keys(newState).forEach(key => {
+          newState[key] = false;
+        });
+        return newState;
+      });
+    }, 5000);
+
     return () => clearTimeout(timer);
-  }, [layoutMap]);
+  }, [items]);
 
-  // Handle media loaded
-  const handleMetadata = (key, e) => {
-    const video = e.target;
-    if (isVideo(video.src)) {
-      video.muted = true;
-      video.playsInline = true;
-      video.play().catch((err) => console.error("Video play blocked:", err));
-    }
-    setLoadingStates((prev) => ({ ...prev, [key]: false }));
-  };
+  // Setup scroll event listeners
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
 
-  // Prepare items
-  const items = layoutMap.map((entry, i) => ({
-    id: i + 1,
-    type: Array.isArray(entry) ? "stacked" : "single",
-    content: entry,
-  }));
+    // Calculate container width after DOM is ready
+    const updateWidth = () => {
+      containerWidth.current = el.scrollWidth / 2;
+      updateActiveDot(el.scrollLeft);
+    };
 
-  const openModal = () => {
-    const modal = document.getElementById("my_modal_2");
-    if (modal) modal.showModal();
-  };
+    updateWidth();
+    window.addEventListener('resize', updateWidth);
 
-  // Render media dynamically
-  const renderMedia = (mediaSrc, key) => {
+    let startX = 0;
+    let scrollLeftStart = 0;
+    let touchStartX = 0;
+    let touchScrollStart = 0;
+
+    // Mouse drag handlers
+    const handleMouseDown = (e) => {
+      if (e.button !== 0) return; // Left click only
+      setIsDragging(true);
+      startX = e.pageX - el.offsetLeft;
+      scrollLeftStart = el.scrollLeft;
+      el.style.cursor = 'grabbing';
+      el.style.userSelect = 'none';
+
+      // Stop any ongoing scroll animation
+      if (animationFrameId.current) {
+        cancelAnimationFrame(animationFrameId.current);
+        animationFrameId.current = null;
+      }
+      scrollVelocity.current = 0;
+      isScrolling.current = false;
+    };
+
+    const handleMouseMove = (e) => {
+      if (!isDragging) return;
+      e.preventDefault();
+      const x = e.pageX - el.offsetLeft;
+      const walk = (x - startX) * 1.2;
+      el.scrollLeft = scrollLeftStart - walk;
+      updateActiveDot(el.scrollLeft);
+    };
+
+    const handleMouseUp = () => {
+      setIsDragging(false);
+      el.style.cursor = 'grab';
+      el.style.userSelect = '';
+    };
+
+    // Touch handlers
+    const handleTouchStart = (e) => {
+      touchStartX = e.touches[0].pageX;
+      touchScrollStart = el.scrollLeft;
+
+      if (animationFrameId.current) {
+        cancelAnimationFrame(animationFrameId.current);
+        animationFrameId.current = null;
+      }
+      scrollVelocity.current = 0;
+      isScrolling.current = false;
+    };
+
+    const handleTouchMove = (e) => {
+      const x = e.touches[0].pageX;
+      const walk = (x - touchStartX) * 1.2;
+      el.scrollLeft = touchScrollStart - walk;
+      updateActiveDot(el.scrollLeft);
+    };
+
+    const handleScroll = () => {
+      if (!isDragging && !isScrolling.current) {
+        updateActiveDot(el.scrollLeft);
+      }
+    };
+
+    // Add event listeners
+    el.addEventListener("wheel", handleWheel, { passive: false });
+    el.addEventListener("scroll", handleScroll, { passive: true });
+    el.addEventListener("mousedown", handleMouseDown);
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mouseup", handleMouseUp);
+    el.addEventListener("touchstart", handleTouchStart, { passive: false });
+    el.addEventListener("touchmove", handleTouchMove, { passive: false });
+    el.addEventListener("touchend", handleMouseUp);
+
+    // Set initial cursor
+    el.style.cursor = 'grab';
+
+    return () => {
+      window.removeEventListener('resize', updateWidth);
+      el.removeEventListener("wheel", handleWheel);
+      el.removeEventListener("scroll", handleScroll);
+      el.removeEventListener("mousedown", handleMouseDown);
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseup", handleMouseUp);
+      el.removeEventListener("touchstart", handleTouchStart);
+      el.removeEventListener("touchmove", handleTouchMove);
+      el.removeEventListener("touchend", handleMouseUp);
+
+      if (animationFrameId.current) {
+        cancelAnimationFrame(animationFrameId.current);
+      }
+    };
+  }, [handleWheel, isDragging, updateActiveDot]);
+
+  // Render media component
+  const renderMedia = useCallback((mediaSrc, key, className = "h-full w-full object-cover") => {
     if (isVideo(mediaSrc)) {
       return (
         <video
@@ -298,47 +330,52 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
           muted
           playsInline
           loop
-          className="h-full w-full object-cover"
-          onLoadedMetadata={(e) => handleMetadata(key, e)}
-          onError={(e) => {
-            console.error("Video load failed:", mediaSrc, e);
-            setLoadingStates((prev) => ({ ...prev, [key]: false }));
-          }}
+          className={className}
+          onLoadedMetadata={(e) => handleVideoMetadata(key, e)}
+          onError={() => handleMediaLoad(key)}
         />
       );
-    } else if (isImage(mediaSrc)) {
+    } else if (isImage(mediaSrc) || isGif(mediaSrc)) {
       return (
         <img
           key={key}
           src={mediaSrc}
           alt={`Media ${key}`}
-          className="h-full w-full object-cover"
-          onLoad={() => setLoadingStates((prev) => ({ ...prev, [key]: false }))}
-          onError={(e) => {
-            console.error(`Image failed to load: ${mediaSrc}`, e);
-            setLoadingStates((prev) => ({ ...prev, [key]: false }));
-          }}
+          className={className}
+          loading="lazy"
+          onLoad={() => handleMediaLoad(key)}
+          onError={() => handleMediaLoad(key)}
         />
       );
-    } else {
-      console.warn(`Unsupported media type: ${mediaSrc}`);
-      return null;
     }
-  };
+    return null;
+  }, [handleVideoMetadata, handleMediaLoad]);
+
+  // Render loading spinner
+  const renderLoadingSpinner = (size = "w-10 h-10") => (
+    <div className="absolute inset-0 flex items-center justify-center bg-[#0F172A] bg-opacity-70 z-10 backdrop-blur-sm">
+      <div className={`${size} border-4 border-white border-t-[#33BD51] rounded-full animate-spin`}></div>
+    </div>
+  );
 
   return (
-    <div className="relative pt-2 md:pt-10 bg-[#0F172A] text-white">
-      {/* Gradient overlay */}
+    <div className="relative pt-2 md:pt-10 bg-[#0F172A] text-white overflow-hidden">
+      {/* Gradient overlays */}
       <div
-        className="pointer-events-none absolute top-0 right-0 md:h-full w-[100px] md:w-[300px]"
+        className="pointer-events-none absolute top-0 right-0 h-full w-[100px] md:w-[300px] z-10"
         style={{
-          background: "linear-gradient(to left, rgba(0,0,0,1), rgba(0,0,0,0))",
-          zIndex: 5,
+          background: "linear-gradient(to left, rgba(15,23,42,1), rgba(15,23,42,0))",
+        }}
+      />
+      <div
+        className="pointer-events-none absolute top-0 left-0 h-full w-[50px] md:w-[100px] z-10"
+        style={{
+          background: "linear-gradient(to right, rgba(15,23,42,1), rgba(15,23,42,0))",
         }}
       />
 
       {/* Side text */}
-      <div className="absolute right-0 top-1/2 md:top-2/3 -translate-y-1/2 z-10 md:pr-6 flex flex-col items-end gap-6">
+      <div className="absolute right-0 top-1/2 md:top-2/3 -translate-y-1/2 z-20 md:pr-6 flex flex-col items-end gap-6">
         <div className="writing-vertical text-[30px] font-bold tracking-widest text-white rotate-180">
           EXPLORE WORKS
         </div>
@@ -350,7 +387,7 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
             TO
           </span>
         </div>
-        <div className="mt-auto pb-2 pr-2">
+        <div className="mt-auto pb-2 pr-2 animate-bounce">
           <img src={mouse} alt="mouse icon" className="w-[35px]" />
         </div>
       </div>
@@ -359,80 +396,76 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
       <div
         id="works-scroll"
         ref={scrollRef}
-        className="overflow-x-auto h-[600px] cursor-grab"
+        className="overflow-x-auto h-[600px] select-none"
         style={{
           scrollBehavior: "auto",
           scrollbarWidth: "none",
           msOverflowStyle: "none",
+          WebkitOverflowScrolling: "touch",
         }}
       >
-        <div className="flex gap-[10px] h-[600px] w-max items-center">
+        <div className="flex gap-[10px] h-[600px] w-max items-center px-4">
           {items.map((item, idx) => {
             if (item.type === "single") {
+              const isLoading = loadingStates[idx];
+              const isHovered = hoveredIndex === idx;
+
               return (
                 <div
                   key={idx}
-                  className={`h-[600px] w-[300px] flex items-center justify-center bg-[#0F172A] 
-            border-4 text-xl font-semibold cursor-pointer overflow-hidden relative 
-            transition-all duration-300
-            ${
-              hoveredIndex === idx
-                ? "border-[#33BD51] z-20 opacity-100"
-                : hoveredIndex !== null
-                ? "border-transparent opacity-30"
-                : "border-transparent opacity-100"
-            }`}
-                  onClick={() => openModal(item)}
+                  className={`h-full w-[350px] flex items-center justify-center bg-[#0F172A] 
+                    border-2 rounded-lg overflow-hidden relative cursor-pointer
+                    transition-all duration-500 ease-out
+                    ${isHovered
+                      ? "border-[#33BD51]  shadow-2xl z-20"
+                      : hoveredIndex !== null
+                        ? "border-transparent opacity-40"
+                        : "border-transparent opacity-100"
+                    }`}
                   onMouseEnter={() => setHoveredIndex(idx)}
                   onMouseLeave={() => setHoveredIndex(null)}
                 >
-                  {loadingStates[idx] && (
-                    <div className="absolute inset-0 flex items-center justify-center bg-[#0F172A] bg-opacity-50 z-10">
-                      <div className="w-10 h-10 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
-                    </div>
-                  )}
+                  {isLoading && renderLoadingSpinner()}
                   {renderMedia(item.content, idx)}
                 </div>
               );
-            } else {
-              return (
-                <div
-                  key={idx}
-                  className="relative w-[300px] overflow-hidden flex flex-col gap-[10px]"
-                >
-                  {item.content.map((subMedia, subIdx) => {
-                    const flatIndex = `${idx}-${subIdx}`;
-                    let mediaHeight = subIdx === 0 || subIdx === 1 ? 250 : 80;
-                    return (
-                      <div
-                        key={subIdx}
-                        style={{ height: `${mediaHeight}px` }}
-                        className={`w-[300px] flex items-center justify-center bg-[#0F172A] 
-                  border-4 text-xl font-semibold cursor-pointer overflow-hidden relative 
-                  transition-all duration-300
-                  ${
-                    hoveredIndex === flatIndex
-                      ? "border-[#33BD51] z-20 opacity-100"
-                      : hoveredIndex !== null
-                      ? "border-transparent opacity-30"
-                      : "border-transparent opacity-100"
-                  }`}
-                        onClick={() => openModal(item)}
-                        onMouseEnter={() => setHoveredIndex(flatIndex)}
-                        onMouseLeave={() => setHoveredIndex(null)}
-                      >
-                        {loadingStates[flatIndex] && (
-                          <div className="absolute inset-0 flex items-center justify-center bg-[#0F172A] bg-opacity-50 z-10">
-                            <div className="w-8 h-8 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
-                          </div>
-                        )}
-                        {renderMedia(subMedia, flatIndex)}
-                      </div>
-                    );
-                  })}
-                </div>
-              );
             }
+
+            // Stacked layout
+            return (
+              <div
+                key={idx}
+                className="relative w-[350px] overflow-hidden flex flex-col gap-[10px]"
+              >
+                {item.content.map((subMedia, subIdx) => {
+                  const flatIndex = `${idx}-${subIdx}`;
+                  const isLoading = loadingStates[flatIndex];
+                  const isHovered = hoveredIndex === flatIndex;
+                  const mediaHeight = subIdx === 0 || subIdx === 1 ? 240 : 90;
+
+                  return (
+                    <div
+                      key={subIdx}
+                      style={{ height: `${mediaHeight}px` }}
+                      className={`w-full flex items-center justify-center bg-[#0F172A] 
+                        border-2 rounded-lg overflow-hidden relative cursor-pointer
+                        transition-all duration-500 ease-out
+                        ${isHovered
+                          ? "border-[#33BD51]  shadow-2xl z-20"
+                          : hoveredIndex !== null
+                            ? "border-transparent opacity-40"
+                            : "border-transparent opacity-100"
+                        }`}
+                      onMouseEnter={() => setHoveredIndex(flatIndex)}
+                      onMouseLeave={() => setHoveredIndex(null)}
+                    >
+                      {isLoading && renderLoadingSpinner("w-8 h-8")}
+                      {renderMedia(subMedia, flatIndex)}
+                    </div>
+                  );
+                })}
+              </div>
+            );
           })}
         </div>
       </div>
@@ -440,7 +473,6 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
   );
 };
 
-// Prop types
 Works.propTypes = {
   TOTAL_DOTS: PropTypes.number.isRequired,
   setActiveDot: PropTypes.func.isRequired,

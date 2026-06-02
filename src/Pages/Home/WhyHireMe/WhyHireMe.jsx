@@ -11,7 +11,7 @@ const whyHireMeData = [
   {
     title: "Fast Delivery Without Compromise",
     description:
-      "Tight schedule? No worries — I’m known for delivering motion graphics and banner ads under strict deadlines, while maintaining premium quality.",
+      "Tight schedule? No worries — I'm known for delivering motion graphics and banner ads under strict deadlines, while maintaining premium quality.",
     bgColor: "bg-white",
     textColor: "text-black",
     iconBg: "bg-[#0F172A]",
@@ -27,7 +27,7 @@ const whyHireMeData = [
   {
     title: "All-in-One Creative Partner",
     description:
-      "From concepting and storyboarding to animation, editing, and post — I offer end-to-end motion design services.",
+      "From concepting and storyBoarding to animation, editing, and post — I offer end-to-end motion design services.",
     bgColor: "bg-[#172C5C]",
     textColor: "text-white",
     iconBg: "bg-[#0F172A]",
@@ -43,8 +43,36 @@ const whyHireMeData = [
 ];
 
 const WhyHireMe = ({ id }) => {
+  // JSON-LD structured data
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Why Hire Me - Key Benefits",
+    "description": "Key reasons to hire Tanbir Ahmed for motion graphics, banner ads, and creative design services",
+    "itemListElement": whyHireMeData.map((item, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "item": {
+        "@type": "Thing",
+        "name": item.title,
+        "description": item.description
+      }
+    })),
+    "about": {
+      "@type": "Person",
+      "name": "Tanbir Ahmed",
+      "url": "https://www.upwork.com/freelancers/tanbirahmed2",
+      "description": "Professional motion graphics designer specializing in fast delivery, cross-platform expertise, and performance-optimized creative content"
+    }
+  };
+
   return (
     <section id={id} className="pt-9">
+      {/* JSON-LD Structured Data for SEO */}
+      <script type="application/ld+json">
+        {JSON.stringify(jsonLd)}
+      </script>
+
       {/* Title */}
       <h3 className="inter font-semibold text-3xl md:text-4xl text-center text-white pt-10">
         Why Hire Me?
@@ -72,7 +100,7 @@ const WhyHireMe = ({ id }) => {
             {/* Icon */}
             <div className="absolute p-2 -right-2 -bottom-2 cursor-pointer">
               <div className="bg-[#0F172A] rounded-tl-2xl p-2 group">
-                <div className="bg-[#0F172A] border border-white  group-hover:border-green-500  p-3 rounded-full flex items-center justify-center cursor-pointer relative  transition-all duration-300 transform rotate-[-45deg] group-hover:rotate-0 z-50">
+                <div className="bg-[#0F172A] border border-white group-hover:border-green-500 p-3 rounded-full flex items-center justify-center cursor-pointer relative transition-all duration-300 transform rotate-[-45deg] group-hover:rotate-0 z-50">
                   <FaArrowRight className="text-white text-xl transition-colors duration-300 group-hover:text-green-500" />
                 </div>
               </div>
@@ -88,6 +116,7 @@ const WhyHireMe = ({ id }) => {
                 viewBox="0 0 30 30"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="#0F172A"
+                aria-hidden="true"
               >
                 <path d="M30 30V0C30 16 16 30 0 30H30Z"></path>
               </svg>
@@ -103,6 +132,7 @@ const WhyHireMe = ({ id }) => {
                 viewBox="0 0 30 30"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="#0F172A"
+                aria-hidden="true"
               >
                 <path d="M30 30V0C30 16 16 30 0 30H30Z"></path>
               </svg>
@@ -117,14 +147,19 @@ const WhyHireMe = ({ id }) => {
         <Link
           to={"https://www.upwork.com/freelancers/tanbirahmed2?mp_source=share"}
           target="_blank"
+          rel="noopener noreferrer"
         >
-          <button className="flex items-center gap-2 bg-white text-black py-2 px-6 rounded-full cursor-pointer w-auto self-center">
+          <button
+            className="flex items-center gap-2 bg-white text-black py-2 px-6 rounded-full cursor-pointer w-auto self-center hover:shadow-lg transition-shadow"
+            aria-label="Hire me on UpWork"
+          >
             <span
               className="p-1 bg-[#33BD51] rounded-full w-2 h-2"
               style={{
                 animation: "blink 1.5s infinite",
                 animationTimingFunction: "ease-in-out",
               }}
+              aria-hidden="true"
             />
             <p className="text-sm font-medium">Hire Me Now</p>
           </button>
