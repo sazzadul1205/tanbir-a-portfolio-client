@@ -28,7 +28,7 @@ const Testimonials = ({ id }) => {
   );
 
   // States
-  const [setIsAnimating] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false); // FIXED: Added missing 'isAnimating'
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loadedImages, setLoadedImages] = useState({});
   const [profileLoaded, setProfileLoaded] = useState(false);
@@ -40,11 +40,13 @@ const Testimonials = ({ id }) => {
     const profileImg = new Image();
     profileImg.src = Profile;
     profileImg.onload = () => setProfileLoaded(true);
+    profileImg.onerror = () => setProfileLoaded(true); // Fallback on error
 
     // Preload UpWork icon
     const upWorkImg = new Image();
     upWorkImg.src = UpWorkICon;
     upWorkImg.onload = () => setUpWorkIconLoaded(true);
+    upWorkImg.onerror = () => setUpWorkIconLoaded(true); // Fallback on error
 
     // Preload all feedback images
     feedbackImages.forEach((img, index) => {
@@ -54,6 +56,12 @@ const Testimonials = ({ id }) => {
         setLoadedImages((prev) => ({
           ...prev,
           [index]: true,
+        }));
+      };
+      imageObj.onerror = () => {
+        setLoadedImages((prev) => ({
+          ...prev,
+          [index]: true, // Show image even on error to avoid infinite loading
         }));
       };
     });
@@ -74,6 +82,16 @@ const Testimonials = ({ id }) => {
     );
   };
 
+  // Reset animation state after transition
+  useEffect(() => {
+    if (isAnimating) {
+      const timer = setTimeout(() => {
+        setIsAnimating(false);
+      }, 1000); // Match your transition duration
+      return () => clearTimeout(timer);
+    }
+  }, [isAnimating]);
+
   // Auto-advance slides
   useEffect(() => {
     const interval = setInterval(() => {
@@ -83,7 +101,7 @@ const Testimonials = ({ id }) => {
       );
     }, 8000);
     return () => clearInterval(interval);
-  }, [feedbackImages.length, setIsAnimating]);
+  }, [feedbackImages.length]);
 
   // JSON-LD structured data
   const jsonLd = {
@@ -171,8 +189,14 @@ const Testimonials = ({ id }) => {
                 </div>
 
                 {/* Green Blinking Dot (top-left with white border) */}
-                <span className="absolute top-1 left-1 block h-5 w-5 rounded-full bg-green-500 border-2 border-white animate-ping" aria-hidden="true"></span>
-                <span className="absolute top-1 left-1 block h-5 w-5 rounded-full bg-green-500 border-2 border-white" aria-label="Online status"></span>
+                <span
+                  className="absolute top-1 left-1 block h-5 w-5 rounded-full bg-green-500 border-2 border-white animate-ping"
+                  aria-hidden="true"
+                />
+                <span
+                  className="absolute top-1 left-1 block h-5 w-5 rounded-full bg-green-500 border-2 border-white"
+                  aria-label="Online status"
+                />
               </div>
             </div>
 
@@ -181,7 +205,10 @@ const Testimonials = ({ id }) => {
               {/* Name */}
               <div className="flex gap-2 items-center">
                 <h3 className="text-[30px] font-semibold">Tanbir A.</h3>
-                <HiBadgeCheck className="text-[30px] text-blue-500" aria-label="Verified badge" />
+                <HiBadgeCheck
+                  className="text-[30px] text-blue-500"
+                  aria-label="Verified badge"
+                />
               </div>
 
               {/* Location */}
@@ -197,7 +224,8 @@ const Testimonials = ({ id }) => {
 
               {/* Availability Badge */}
               <div className="flex gap-2 items-center text-xs font-semibold bg-[#f7f4fb] text-purple-900 mt-2 py-1 px-2 rounded-full w-[130px]">
-                <MdElectricBolt aria-hidden="true" /> <span>Available Now</span>
+                <MdElectricBolt aria-hidden="true" />
+                <span>Available Now</span>
               </div>
             </div>
           </div>
@@ -208,7 +236,8 @@ const Testimonials = ({ id }) => {
           {/* Single Feedback */}
           <div className="relative w-full">
             {/* Feedback Card */}
-            <div className="absolute inset-0 transition-all duration-1000 ease-in-out opacity-100 animate-fade-slide">
+            <div className={`absolute inset-0 transition-all duration-1000 ease-in-out ${isAnimating ? 'opacity-0' : 'opacity-100'
+              }`}>
               {/* Feedback Card */}
               <div className="bg-white shadow-md relative w-full h-[181px] md:h-[410px] overflow-hidden">
                 {/* Fading Images with loading states */}
@@ -226,9 +255,7 @@ const Testimonials = ({ id }) => {
                       <img
                         src={img}
                         alt={`Client feedback ${index + 1}`}
-                        className={`absolute inset-0 w-auto max-w-full h-auto object-contain transition-opacity duration-1000 ease-in-out ${index === currentIndex
-                          ? "opacity-100 z-0"
-                          : "opacity-0 z-0"
+                        className={`absolute inset-0 w-auto max-w-full h-auto object-contain transition-opacity duration-1000 ease-in-out ${index === currentIndex ? "opacity-100 z-0" : "opacity-0 z-0"
                           } ${loadedImages[index] ? 'opacity-100' : 'opacity-0'}`}
                         loading="lazy"
                         onLoad={() =>
@@ -248,36 +275,24 @@ const Testimonials = ({ id }) => {
                   <div className="absolute -top-2 -right-2 z-20">
                     <div className="bg-[#0F172A] rounded-bl-2xl p-2 group">
                       <div className="bg-white p-2 md:p-4 rounded-full cursor-pointer relative transition-all duration-300 transform rotate-[-45deg] hover:rotate-0 z-50">
-                        <FaArrowRight className="text-black text-md md:text-xl group-hover:text-green-500" aria-hidden="true" />
+                        <FaArrowRight
+                          className="text-black text-md md:text-xl group-hover:text-green-500"
+                          aria-hidden="true"
+                        />
                       </div>
                     </div>
                   </div>
 
-                  {/* Sticky Corner */}
+                  {/* Sticky Corners */}
                   <div className="pbmit-sticky-corner top-0 right-10 md:right-15 bg-white z-30">
-                    <svg
-                      width="30"
-                      height="30"
-                      viewBox="0 0 30 30"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="#0F172A"
-                      aria-hidden="true"
-                    >
-                      <path d="M30 30V0C30 16 16 30 0 30H30Z"></path>
+                    <svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg" fill="#0F172A" aria-hidden="true">
+                      <path d="M30 30V0C30 16 16 30 0 30H30Z" />
                     </svg>
                   </div>
 
-                  {/* Sticky Corner */}
                   <div className="pbmit-sticky-corner top-10 md:top-15 right-0 bg-white z-30">
-                    <svg
-                      width="30"
-                      height="30"
-                      viewBox="0 0 30 30"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="#0F172A"
-                      aria-hidden="true"
-                    >
-                      <path d="M30 30V0C30 16 16 30 0 30H30Z"></path>
+                    <svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg" fill="#0F172A" aria-hidden="true">
+                      <path d="M30 30V0C30 16 16 30 0 30H30Z" />
                     </svg>
                   </div>
                 </>
@@ -306,31 +321,16 @@ const Testimonials = ({ id }) => {
                     </div>
                   </div>
 
-                  {/* Sticky Corner */}
+                  {/* Sticky Corners */}
                   <div className="pbmit-sticky-corner-bottom bottom-0 right-[20px] md:right-[56px] bg-white z-30">
-                    <svg
-                      width="30"
-                      height="30"
-                      viewBox="0 0 30 30"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="#0F172A"
-                      aria-hidden="true"
-                    >
-                      <path d="M30 30V0C30 16 16 30 0 30H30Z"></path>
+                    <svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg" fill="#0F172A" aria-hidden="true">
+                      <path d="M30 30V0C30 16 16 30 0 30H30Z" />
                     </svg>
                   </div>
 
-                  {/* Sticky Corner */}
                   <div className="pbmit-sticky-corner-bottom-2 bottom-0 right-[182px] md:right-[192px] bg-white z-30">
-                    <svg
-                      width="30"
-                      height="30"
-                      viewBox="0 0 30 30"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="#0F172A"
-                      aria-hidden="true"
-                    >
-                      <path d="M30 30V0C30 16 16 30 0 30H30Z"></path>
+                    <svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg" fill="#0F172A" aria-hidden="true">
+                      <path d="M30 30V0C30 16 16 30 0 30H30Z" />
                     </svg>
                   </div>
                 </>
@@ -343,24 +343,15 @@ const Testimonials = ({ id }) => {
       {/* Good To Know - Desktop */}
       <div className="hidden md:flex flex-col md:flex-row gap-5 justify-around pt-[270px] md:py-20">
         <div className="flex flex-col text-center">
-          <CountUpOnView
-            targetNumber={50}
-            className="italianno-regular text-5xl"
-          />
+          <CountUpOnView targetNumber={50} className="italianno-regular text-5xl" />
           <p>Project Completed</p>
         </div>
         <div className="flex flex-col text-center">
-          <CountUpOnView
-            targetNumber={17}
-            className="italianno-regular text-5xl"
-          />
+          <CountUpOnView targetNumber={17} className="italianno-regular text-5xl" />
           <p>Years Of Experience</p>
         </div>
         <div className="flex flex-col text-center">
-          <CountUpOnView
-            targetNumber={98}
-            className="italianno-regular text-5xl"
-          />
+          <CountUpOnView targetNumber={98} className="italianno-regular text-5xl" />
           <p>Client Satisfaction</p>
         </div>
       </div>
@@ -368,24 +359,15 @@ const Testimonials = ({ id }) => {
       {/* Good To Know - Mobile */}
       <div className="flex md:hidden flex-col gap-5 items-center justify-center px-4 py-20 pt-[260px] md:p-24 md:pb-44">
         <div className="flex flex-col text-center">
-          <CountUpOnView
-            targetNumber={50}
-            className="italianno-regular text-7xl"
-          />
+          <CountUpOnView targetNumber={50} className="italianno-regular text-7xl" />
           <p className="text-lg">Project Completed</p>
         </div>
         <div className="flex flex-col text-center">
-          <CountUpOnView
-            targetNumber={17}
-            className="italianno-regular text-7xl"
-          />
+          <CountUpOnView targetNumber={17} className="italianno-regular text-7xl" />
           <p className="text-lg">Years Of Experience</p>
         </div>
         <div className="flex flex-col text-center">
-          <CountUpOnView
-            targetNumber={98}
-            className="italianno-regular text-7xl"
-          />
+          <CountUpOnView targetNumber={98} className="italianno-regular text-7xl" />
           <p className="text-lg">Client Satisfaction</p>
         </div>
       </div>
