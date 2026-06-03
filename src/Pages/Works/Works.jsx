@@ -326,8 +326,8 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
         <video
           key={key}
           src={mediaSrc}
-          autoPlay
           muted
+          preload='metadata'
           playsInline
           loop
           className={className}

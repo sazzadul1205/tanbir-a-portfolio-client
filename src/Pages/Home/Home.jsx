@@ -11,15 +11,12 @@ import AboutMe from "./AboutMe/AboutMe";
 import WhyHireMe from "./WhyHireMe/WhyHireMe";
 import MyServices from "./MyServices/MyServices";
 import Testimonials from "./Testimonials/Testimonials";
+import DeferredSection from "../../components/DeferredSection";
 
 const Home = () => {
-  // State to track the active dot for the Works section
   const [activeDot, setActiveDot] = useState(0);
-
-  // Total number of dots (should match the number of scrollable items in Works)
   const TOTAL_DOTS = 6;
 
-  // Scroll to the corresponding work item when a dot is clicked
   const scrollToWorkDot = (dotIndex) => {
     const worksContainer = document.getElementById("works-scroll");
 
@@ -36,16 +33,12 @@ const Home = () => {
     setActiveDot(dotIndex);
   };
 
-
   return (
     <>
-      {/* Works */}
       <Works setActiveDot={setActiveDot} TOTAL_DOTS={TOTAL_DOTS} />
 
-      {/* Page Nav */}
       <div className="bg-[#0F172A] text-white w-full z-40 shadow-sm">
         <div className="flex items-center justify-center px-4 py-4 max-w-[1200px] mx-auto">
-          {/* Dot Indicators */}
           <div className="flex gap-3">
             {[...Array(TOTAL_DOTS)].map((_, i) => (
               <button
@@ -62,24 +55,29 @@ const Home = () => {
         </div>
       </div>
 
-      {/* About Me */}
-      <AboutMe id="about-me" />
+      <DeferredSection rootMargin="300px">
+        <AboutMe id="about-me" />
+      </DeferredSection>
 
-      {/* My Services */}
-      <MyServices id="my-services" />
+      <DeferredSection rootMargin="300px">
+        <MyServices id="my-services" />
+      </DeferredSection>
 
-      {/* Tools */}
-      <Tools id="tools" />
+      <DeferredSection rootMargin="300px">
+        <Tools id="tools" />
+      </DeferredSection>
 
-      {/* Why Hire Me */}
-      <WhyHireMe id="why-hire-me" />
+      <DeferredSection rootMargin="300px">
+        <WhyHireMe id="why-hire-me" />
+      </DeferredSection>
 
-      {/* Testimonials */}
-      <Testimonials id="testimonials" />
+      <DeferredSection rootMargin="300px">
+        <Testimonials id="testimonials" />
+      </DeferredSection>
 
-      {/* Cards */}
-      <Cards id="blogs" />
-
+      <DeferredSection rootMargin="300px">
+        <Cards id="blogs" />
+      </DeferredSection>
     </>
   );
 };
