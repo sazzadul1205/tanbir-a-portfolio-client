@@ -155,7 +155,7 @@ const Tools = ({ id }) => {
             { tool: toolsData[6], bottom: "352px", left: "552px" },   // Double
             { tool: toolsData[7], bottom: "292px", left: "652px" },   // Midjourney
             { tool: toolsData[8], bottom: "192px", left: "722px" },   // AdRoll
-            { tool: toolsData[9], bottom: "92px", left: "782px" },   // AdRoll
+            { tool: toolsData[9], bottom: "92px", left: "782px" },   // Dynamic Banner
           ].map(({ tool, bottom, right, left }, idx) => (
             <div
               key={idx}
@@ -165,7 +165,7 @@ const Tools = ({ id }) => {
               <div className="bg-[#172C5C] rounded-full h-20 w-20 transition-all duration-500 ease-in-out overflow-hidden flex items-center px-2 origin-left relative group-hover:delay-[300ms] group-hover:w-[220px]">
                 <div className="relative w-full h-full flex items-center">
                   {/* Tool icon with loading state */}
-                  <div className="relative flex-shrink-0 z-10">
+                  <div className="relative flex-shrink-0 z-10 p-0">
                     {!loadedImages[tool.icon] && (
                       <div className="absolute inset-0 bg-[#1a3a6e] rounded-full animate-pulse" />
                     )}
@@ -173,10 +173,10 @@ const Tools = ({ id }) => {
                       src={tool.icon}
                       alt={`${tool.name} tool`}
                       className={`transition-all duration-300 ease-in-out group-hover:scale-[0.8] ${tool.name === "AdRoll"
-                          ? "w-[71px] h-[11px]"
-                          : tool.name === "GWD" || tool.name === "Double" || tool.name === "Midjourney"
-                            ? "w-[70px] h-[40px]"
-                            : "w-[65px] h-[40px]"
+                        ? "w-[71px] h-[11px]"
+                        : tool.name === "GWD" || tool.name === "Double" || tool.name === "Midjourney"
+                          ? "w-[70px] h-[40px]"
+                          : "w-[65px] h-[40px]"
                         } ${loadedImages[tool.icon] ? 'opacity-100' : 'opacity-0'
                         }`}
                       loading="lazy"
@@ -189,8 +189,8 @@ const Tools = ({ id }) => {
                     />
                   </div>
 
-                  {/* Tool description text */}
-                  <p className="absolute left-[80px] opacity-0 transition-opacity duration-300 ease-in-out delay-[800ms] group-hover:opacity-100 pointer-events-none text-white text-[10px] leading-4 w-[120px] z-0 pr-2 py-3">
+                  {/* Tool description text - reduced gap from left-80 to left-70 */}
+                  <p className="absolute left-[70px] opacity-0 transition-opacity duration-300 ease-in-out delay-[800ms] group-hover:opacity-100 pointer-events-none text-white text-[10px] leading-4 w-[120px] z-0 pr-2 py-3">
                     {tool.desc}
                   </p>
                 </div>

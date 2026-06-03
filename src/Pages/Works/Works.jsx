@@ -414,10 +414,10 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
                 <div
                   key={idx}
                   className={`h-full w-[350px] flex items-center justify-center bg-[#0F172A] 
-                    border-2 rounded-lg overflow-hidden relative cursor-pointer
+                     overflow-hidden relative cursor-pointer
                     transition-all duration-500 ease-out
                     ${isHovered
-                      ? "border-[#33BD51]  shadow-2xl z-20"
+                      ? " shadow-2xl z-20"
                       : hoveredIndex !== null
                         ? "border-transparent opacity-40"
                         : "border-transparent opacity-100"
@@ -448,10 +448,10 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
                       key={subIdx}
                       style={{ height: `${mediaHeight}px` }}
                       className={`w-full flex items-center justify-center bg-[#0F172A] 
-                        border-2 rounded-lg overflow-hidden relative cursor-pointer
+                          overflow-hidden relative cursor-pointer
                         transition-all duration-500 ease-out
                         ${isHovered
-                          ? "border-[#33BD51]  shadow-2xl z-20"
+                          ? " shadow-2xl z-20"
                           : hoveredIndex !== null
                             ? "border-transparent opacity-40"
                             : "border-transparent opacity-100"
