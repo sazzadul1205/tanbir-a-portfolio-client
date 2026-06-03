@@ -16,15 +16,16 @@ import JS from "../../../assets/Tool/JS.svg";
 
 // Tools Data
 const toolsData = [
-  { icon: HTML5, name: "HTML5", desc: "Semantic markup for structured, accessible ad creatives and web content" },
-  { icon: CSS, name: "CSS3", desc: "Advanced styling and animations for responsive, visually engaging designs" },
-  { icon: Meta, name: "Meta Ads", desc: "Campaign management and creative optimization for Facebook and Instagram" },
-  { icon: JS, name: "JavaScript", desc: "Interactive elements and dynamic functionality for rich-media experiences" },
-  { icon: Adobe, name: "Adobe Creative Suite", desc: "Industry-standard tools for motion graphics, video editing, and design" },
-  { icon: GWD, name: "Google Web Designer", desc: "Building interactive HTML5 ads for Google Ads and DV360 platforms" },
+  { icon: HTML5, name: "HTML5", desc: "Build responsive, interactive, and standards-compliant digital advertising experiences" },
+  { icon: CSS, name: "CSS3", desc: "Create visually stunning layouts, animations, and brand-consistent designs" },
+  { icon: Meta, name: "Meta Ads", desc: "Deliver targeted campaigns across Facebook, Instagram, and Meta platforms" },
+  { icon: JS, name: "JavaScript", desc: "Power engaging interactions, dynamic content, and advanced banner functionality" },
+  { icon: Adobe, name: "Adobe Animate", desc: "Design rich HTML5 animations with smooth motion and creativity" },
+  { icon: GWD, name: "Google Web Designer", desc: "Serve, track, and optimize digital advertising campaigns with precision" },
   { icon: Double, name: "DoubleClick", desc: "Ad serving and campaign management for programmatic advertising" },
-  { icon: Midjourney, name: "Midjourney", desc: "AI-powered generative art for conceptual design and visual exploration" },
-  { icon: AdRoll, name: "AdRoll", desc: "Retargeting and programmatic advertising platform for brand awareness" },
+  { icon: AdRoll, name: "AdRoll", desc: "Retarget audiences effectively and increase conversions across multiple channels" },
+  { icon: Midjourney, name: "AI Banner Design", desc: "Generate high-performing banner creatives using advanced AI-powered design" },
+  { icon: Midjourney, name: "Dynamic Banner", desc: "Display personalized content automatically based on audience and campaign data" },
 ];
 
 const Tools = ({ id }) => {
@@ -154,6 +155,7 @@ const Tools = ({ id }) => {
             { tool: toolsData[6], bottom: "352px", left: "552px" },   // Double
             { tool: toolsData[7], bottom: "292px", left: "652px" },   // Midjourney
             { tool: toolsData[8], bottom: "192px", left: "722px" },   // AdRoll
+            { tool: toolsData[9], bottom: "92px", left: "782px" },   // AdRoll
           ].map(({ tool, bottom, right, left }, idx) => (
             <div
               key={idx}

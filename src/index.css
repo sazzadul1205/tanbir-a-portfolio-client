@@ -160,3 +160,7 @@ html {
   animation: floatX 12s ease-in-out infinite alternate,
     floatY 14s ease-in-out infinite alternate;
 }
+
+button {
+  CURSOR: POINTER;
+}
