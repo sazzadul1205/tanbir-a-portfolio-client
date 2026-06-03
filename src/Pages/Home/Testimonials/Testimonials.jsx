@@ -28,7 +28,7 @@ const Testimonials = ({ id }) => {
   );
 
   // States
-  const [isAnimating, setIsAnimating] = useState(false); // FIXED: Added missing 'isAnimating'
+  const [isAnimating, setIsAnimating] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loadedImages, setLoadedImages] = useState({});
   const [profileLoaded, setProfileLoaded] = useState(false);
@@ -40,13 +40,13 @@ const Testimonials = ({ id }) => {
     const profileImg = new Image();
     profileImg.src = Profile;
     profileImg.onload = () => setProfileLoaded(true);
-    profileImg.onerror = () => setProfileLoaded(true); // Fallback on error
+    profileImg.onerror = () => setProfileLoaded(true);
 
     // Preload UpWork icon
     const upWorkImg = new Image();
     upWorkImg.src = UpWorkICon;
     upWorkImg.onload = () => setUpWorkIconLoaded(true);
-    upWorkImg.onerror = () => setUpWorkIconLoaded(true); // Fallback on error
+    upWorkImg.onerror = () => setUpWorkIconLoaded(true);
 
     // Preload all feedback images
     feedbackImages.forEach((img, index) => {
@@ -61,7 +61,7 @@ const Testimonials = ({ id }) => {
       imageObj.onerror = () => {
         setLoadedImages((prev) => ({
           ...prev,
-          [index]: true, // Show image even on error to avoid infinite loading
+          [index]: true,
         }));
       };
     });
@@ -87,7 +87,7 @@ const Testimonials = ({ id }) => {
     if (isAnimating) {
       const timer = setTimeout(() => {
         setIsAnimating(false);
-      }, 1000); // Match your transition duration
+      }, 1000);
       return () => clearTimeout(timer);
     }
   }, [isAnimating]);
@@ -233,109 +233,101 @@ const Testimonials = ({ id }) => {
 
         {/* Single Testimonial */}
         <div className="w-full md:w-3/4 relative">
-          {/* Single Feedback */}
-          <div className="relative w-full">
-            {/* Feedback Card */}
-            <div className={`absolute inset-0 transition-all duration-1000 ease-in-out ${isAnimating ? 'opacity-0' : 'opacity-100'
-              }`}>
-              {/* Feedback Card */}
-              <div className="bg-white shadow-md relative w-full h-[181px] md:h-[410px] overflow-hidden">
-                {/* Fading Images with loading states */}
-                <div className="relative w-full h-full z-0">
-                  {feedbackImages.map((img, index) => (
-                    <div key={index} className="relative w-full h-full">
-                      {/* Skeleton loader */}
-                      {!loadedImages[index] && (
-                        <div className="absolute inset-0 bg-gray-200 animate-pulse flex items-center justify-center">
-                          <span className="text-gray-400">Loading...</span>
-                        </div>
-                      )}
-
-                      {/* Actual image */}
-                      <img
-                        src={img}
-                        alt={`Client feedback ${index + 1}`}
-                        className={`absolute inset-0 w-auto max-w-full h-auto object-contain transition-opacity duration-1000 ease-in-out ${index === currentIndex ? "opacity-100 z-0" : "opacity-0 z-0"
-                          } ${loadedImages[index] ? 'opacity-100' : 'opacity-0'}`}
-                        loading="lazy"
-                        onLoad={() =>
-                          setLoadedImages((prev) => ({
-                            ...prev,
-                            [index]: true,
-                          }))
-                        }
-                      />
+          <div className="bg-white shadow-md relative w-full h-[181px] md:h-[410px] overflow-hidden">
+            {/* Fading Images Container - Only this part fades */}
+            <div className="relative w-full h-full z-0">
+              {feedbackImages.map((img, index) => (
+                <div key={index} className="absolute inset-0">
+                  {/* Skeleton loader */}
+                  {!loadedImages[index] && (
+                    <div className="absolute inset-0 bg-gray-200 animate-pulse flex items-center justify-center">
+                      <span className="text-gray-400">Loading...</span>
                     </div>
-                  ))}
+                  )}
+
+                  {/* Actual image with fade transition */}
+                  <img
+                    src={img}
+                    alt={`Client feedback ${index + 1}`}
+                    className={`w-auto max-w-full h-auto object-contain transition-opacity duration-1000 ease-in-out ${index === currentIndex ? "opacity-100" : "opacity-0"
+                      } ${loadedImages[index] ? '' : 'opacity-0'}`}
+                    loading="lazy"
+                    onLoad={() =>
+                      setLoadedImages((prev) => ({
+                        ...prev,
+                        [index]: true,
+                      }))
+                    }
+                  />
                 </div>
-
-                {/* Arrow at top-right */}
-                <>
-                  {/* Arrow */}
-                  <div className="absolute -top-2 -right-2 z-20">
-                    <div className="bg-[#0F172A] rounded-bl-2xl p-2 group">
-                      <div className="bg-white p-2 md:p-4 rounded-full cursor-pointer relative transition-all duration-300 transform rotate-[-45deg] hover:rotate-0 z-50">
-                        <FaArrowRight
-                          className="text-black text-md md:text-xl group-hover:text-green-500"
-                          aria-hidden="true"
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Sticky Corners */}
-                  <div className="pbmit-sticky-corner top-0 right-10 md:right-15 bg-white z-30">
-                    <svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg" fill="#0F172A" aria-hidden="true">
-                      <path d="M30 30V0C30 16 16 30 0 30H30Z" />
-                    </svg>
-                  </div>
-
-                  <div className="pbmit-sticky-corner top-10 md:top-15 right-0 bg-white z-30">
-                    <svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg" fill="#0F172A" aria-hidden="true">
-                      <path d="M30 30V0C30 16 16 30 0 30H30Z" />
-                    </svg>
-                  </div>
-                </>
-
-                <>
-                  {/* Navigation Controls */}
-                  <div className="absolute bottom-0 right-[86px] bg-[#0F172A] rounded-tl-3xl rounded-tr-3xl px-3 pt-2 overflow-hidden z-30">
-                    <div className="flex gap-[10px] bg-white p-1 rounded-full">
-                      {/* Previous */}
-                      <button
-                        className="group bg-[#33BD51] hover:bg-white p-2 rounded-full cursor-pointer transition-colors duration-300"
-                        onClick={handlePrev}
-                        aria-label="Previous testimonial"
-                      >
-                        <BsArrowLeft className="text-white group-hover:text-[#33BD51]" aria-hidden="true" />
-                      </button>
-
-                      {/* Next */}
-                      <button
-                        className="group bg-[#33BD51] hover:bg-white p-2 rounded-full cursor-pointer transition-colors duration-300"
-                        onClick={handleNext}
-                        aria-label="Next testimonial"
-                      >
-                        <BsArrowRight className="text-white group-hover:text-[#33BD51]" aria-hidden="true" />
-                      </button>
-                    </div>
-                  </div>
-
-                  {/* Sticky Corners */}
-                  <div className="pbmit-sticky-corner-bottom bottom-0 right-[20px] md:right-[56px] bg-white z-30">
-                    <svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg" fill="#0F172A" aria-hidden="true">
-                      <path d="M30 30V0C30 16 16 30 0 30H30Z" />
-                    </svg>
-                  </div>
-
-                  <div className="pbmit-sticky-corner-bottom-2 bottom-0 right-[182px] md:right-[192px] bg-white z-30">
-                    <svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg" fill="#0F172A" aria-hidden="true">
-                      <path d="M30 30V0C30 16 16 30 0 30H30Z" />
-                    </svg>
-                  </div>
-                </>
-              </div>
+              ))}
             </div>
+
+            {/* Arrow at top-right - Always visible, never fades */}
+            <>
+              {/* Arrow */}
+              <div className="absolute -top-2 -right-2 z-20">
+                <div className="bg-[#0F172A] rounded-bl-2xl p-2 group">
+                  <div className="bg-white p-2 md:p-4 rounded-full cursor-pointer relative transition-all duration-300 transform rotate-[-45deg] hover:rotate-0 z-50">
+                    <FaArrowRight
+                      className="text-black text-md md:text-xl group-hover:text-green-500"
+                      aria-hidden="true"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Sticky Corners */}
+              <div className="pbmit-sticky-corner top-0 right-10 md:right-15 bg-white z-30">
+                <svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg" fill="#0F172A" aria-hidden="true">
+                  <path d="M30 30V0C30 16 16 30 0 30H30Z" />
+                </svg>
+              </div>
+
+              <div className="pbmit-sticky-corner top-10 md:top-15 right-0 bg-white z-30">
+                <svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg" fill="#0F172A" aria-hidden="true">
+                  <path d="M30 30V0C30 16 16 30 0 30H30Z" />
+                </svg>
+              </div>
+            </>
+
+            <>
+              {/* Navigation Controls - Always visible, never fades */}
+              <div className="absolute bottom-0 right-[86px] bg-[#0F172A] rounded-tl-3xl rounded-tr-3xl px-3 pt-2 overflow-hidden z-30">
+                <div className="flex gap-[10px] bg-white p-1 rounded-full">
+                  {/* Previous */}
+                  <button
+                    className="group bg-[#33BD51] hover:bg-white p-2 rounded-full cursor-pointer transition-colors duration-300"
+                    onClick={handlePrev}
+                    aria-label="Previous testimonial"
+                  >
+                    <BsArrowLeft className="text-white group-hover:text-[#33BD51]" aria-hidden="true" />
+                  </button>
+
+                  {/* Next */}
+                  <button
+                    className="group bg-[#33BD51] hover:bg-white p-2 rounded-full cursor-pointer transition-colors duration-300"
+                    onClick={handleNext}
+                    aria-label="Next testimonial"
+                  >
+                    <BsArrowRight className="text-white group-hover:text-[#33BD51]" aria-hidden="true" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Sticky Corners */}
+              <div className="pbmit-sticky-corner-bottom bottom-0 right-[20px] md:right-[56px] bg-white z-30">
+                <svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg" fill="#0F172A" aria-hidden="true">
+                  <path d="M30 30V0C30 16 16 30 0 30H30Z" />
+                </svg>
+              </div>
+
+              <div className="pbmit-sticky-corner-bottom-2 bottom-0 right-[182px] md:right-[192px] bg-white z-30">
+                <svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg" fill="#0F172A" aria-hidden="true">
+                  <path d="M30 30V0C30 16 16 30 0 30H30Z" />
+                </svg>
+              </div>
+            </>
           </div>
         </div>
       </div>

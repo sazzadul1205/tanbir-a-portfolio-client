@@ -79,10 +79,108 @@ const layoutMap = [
   [M_Banner_6, M_Banner_10, S_Banner_1],
 ];
 
+// Size constants (desktop)
+const SIZES = {
+  LARGE: { width: 300, height: 600 },     // 300x600
+  MEDIUM: { width: 300, height: 250 },    // 300x250
+  SMALL: { width: 300, height: 100 },     // 300x100
+};
+
 // Media type detection helpers
 const isVideo = (file) => /\.(mp4|webm|mov)$/i.test(file);
-const isImage = (file) => /\.(jpg|jpeg|png|webp|gif)$/i.test(file);
-const isGif = (file) => /\.gif$/i.test(file);
+
+// LazyMedia Component - Only loads when in viewport
+const LazyMedia = ({ src, className, onLoad, onMetadata }) => {
+  const [isInView, setIsInView] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const mediaRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true);
+          observer.disconnect();
+        }
+      },
+      {
+        rootMargin: '200px', // Load 200px before entering viewport
+        threshold: 0.01,
+      }
+    );
+
+    if (mediaRef.current) {
+      observer.observe(mediaRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  const handleLoad = () => {
+    setIsLoaded(true);
+    onLoad?.();
+  };
+
+  const handleError = () => {
+    setIsLoaded(true); // Hide spinner even on error
+    onLoad?.();
+  };
+
+  return (
+    <div ref={mediaRef} className="relative w-full h-full">
+      {/* Loading Spinner */}
+      {(!isInView || !isLoaded) && (
+        <div className="absolute inset-0 flex items-center justify-center bg-[#0F172A] bg-opacity-70 z-10 backdrop-blur-sm">
+          <div className="w-10 h-10 border-4 border-white border-t-[#33BD51] rounded-full animate-spin"></div>
+        </div>
+      )}
+
+      {/* Render media only when in viewport */}
+      {isInView && (
+        <>
+          {isVideo(src) ? (
+            <video
+              src={src}
+              muted
+              preload='metadata'
+              playsInline
+              loop
+              className={className}
+              onLoadedMetadata={(e) => {
+                const video = e.target;
+                video.muted = true;
+                video.playsInline = true;
+                video.play().catch(err => {
+                  if (err.name !== 'AbortError') {
+                    console.debug('Video autoplay prevented:', err.message);
+                  }
+                });
+                handleLoad();
+                onMetadata?.(e);
+              }}
+              onError={handleError}
+            />
+          ) : (
+            <img
+              src={src}
+              alt="Media"
+              className={className}
+              onLoad={handleLoad}
+              onError={handleError}
+            />
+          )}
+        </>
+      )}
+    </div>
+  );
+};
+
+LazyMedia.propTypes = {
+  src: PropTypes.string.isRequired,
+  className: PropTypes.string,
+  onLoad: PropTypes.func,
+  onMetadata: PropTypes.func,
+};
 
 const Works = ({ setActiveDot, TOTAL_DOTS }) => {
   const scrollRef = useRef(null);
@@ -91,7 +189,6 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
   const containerWidth = useRef(0);
   const animationFrameId = useRef(null);
 
-  const [loadingStates, setLoadingStates] = useState({});
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [isDragging, setIsDragging] = useState(false);
 
@@ -162,54 +259,6 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
       animationFrameId.current = requestAnimationFrame(smoothScroll);
     }
   }, [smoothScroll]);
-
-  // Handle media loading
-  const handleMediaLoad = useCallback((key) => {
-    setLoadingStates((prev) => ({ ...prev, [key]: false }));
-  }, []);
-
-  const handleVideoMetadata = useCallback((key, e) => {
-    const video = e.target;
-    if (video && isVideo(video.src)) {
-      video.muted = true;
-      video.playsInline = true;
-      video.play().catch(err => {
-        // Silent fail for autoplay restrictions
-        if (err.name !== 'AbortError') {
-          console.debug('Video autoplay prevented:', err.message);
-        }
-      });
-    }
-    handleMediaLoad(key);
-  }, [handleMediaLoad]);
-
-  // Initialize loading states
-  useEffect(() => {
-    const initialLoadingStates = {};
-    items.forEach((item, i) => {
-      if (item.type === "stacked") {
-        item.content.forEach((_, subIdx) => {
-          initialLoadingStates[`${i}-${subIdx}`] = true;
-        });
-      } else {
-        initialLoadingStates[i] = true;
-      }
-    });
-    setLoadingStates(initialLoadingStates);
-
-    // Clear loading states after timeout as fallback
-    const timer = setTimeout(() => {
-      setLoadingStates(prev => {
-        const newState = { ...prev };
-        Object.keys(newState).forEach(key => {
-          newState[key] = false;
-        });
-        return newState;
-      });
-    }, 5000);
-
-    return () => clearTimeout(timer);
-  }, [items]);
 
   // Setup scroll event listeners
   useEffect(() => {
@@ -319,45 +368,6 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
     };
   }, [handleWheel, isDragging, updateActiveDot]);
 
-  // Render media component
-  const renderMedia = useCallback((mediaSrc, key, className = "h-full w-full object-cover") => {
-    if (isVideo(mediaSrc)) {
-      return (
-        <video
-          key={key}
-          src={mediaSrc}
-          muted
-          preload='metadata'
-          playsInline
-          loop
-          className={className}
-          onLoadedMetadata={(e) => handleVideoMetadata(key, e)}
-          onError={() => handleMediaLoad(key)}
-        />
-      );
-    } else if (isImage(mediaSrc) || isGif(mediaSrc)) {
-      return (
-        <img
-          key={key}
-          src={mediaSrc}
-          alt={`Media ${key}`}
-          className={className}
-          loading="lazy"
-          onLoad={() => handleMediaLoad(key)}
-          onError={() => handleMediaLoad(key)}
-        />
-      );
-    }
-    return null;
-  }, [handleVideoMetadata, handleMediaLoad]);
-
-  // Render loading spinner
-  const renderLoadingSpinner = (size = "w-10 h-10") => (
-    <div className="absolute inset-0 flex items-center justify-center bg-[#0F172A] bg-opacity-70 z-10 backdrop-blur-sm">
-      <div className={`${size} border-4 border-white border-t-[#33BD51] rounded-full animate-spin`}></div>
-    </div>
-  );
-
   return (
     <div className="relative pt-2 md:pt-10 bg-[#0F172A] text-white overflow-hidden">
       {/* Gradient overlays */}
@@ -396,71 +406,91 @@ const Works = ({ setActiveDot, TOTAL_DOTS }) => {
       <div
         id="works-scroll"
         ref={scrollRef}
-        className="overflow-x-auto h-[600px] select-none"
+        className="overflow-x-auto select-none"
         style={{
+          height: `${SIZES.LARGE.height}px`, // 600px height to match large banner
           scrollBehavior: "auto",
           scrollbarWidth: "none",
           msOverflowStyle: "none",
           WebkitOverflowScrolling: "touch",
         }}
       >
-        <div className="flex gap-[10px] h-[600px] w-max items-center px-4">
+        <div
+          className="flex gap-[10px] w-max items-center px-4"
+          style={{ height: `${SIZES.LARGE.height}px` }}
+        >
           {items.map((item, idx) => {
             if (item.type === "single") {
-              const isLoading = loadingStates[idx];
               const isHovered = hoveredIndex === idx;
 
               return (
                 <div
                   key={idx}
-                  className={`h-full w-[350px] flex items-center justify-center bg-[#0F172A] 
-                     overflow-hidden relative cursor-pointer
+                  style={{
+                    width: `${SIZES.LARGE.width}px`,
+                    height: `${SIZES.LARGE.height}px`
+                  }}
+                  className={`flex items-center justify-center bg-[#0F172A] 
+                     overflow-hidden relative cursor-pointer flex-shrink-0
                     transition-all duration-500 ease-out
                     ${isHovered
-                      ? " shadow-2xl z-20"
+                      ? "shadow-2xl z-20 scale-105"
                       : hoveredIndex !== null
-                        ? "border-transparent opacity-40"
-                        : "border-transparent opacity-100"
+                        ? "opacity-40"
+                        : "opacity-100"
                     }`}
                   onMouseEnter={() => setHoveredIndex(idx)}
                   onMouseLeave={() => setHoveredIndex(null)}
                 >
-                  {isLoading && renderLoadingSpinner()}
-                  {renderMedia(item.content, idx)}
+                  <LazyMedia
+                    src={item.content}
+                    className="h-full w-full object-cover"
+                  />
                 </div>
               );
             }
 
-            // Stacked layout
+            // Stacked layout (M + M + S = 250 + 250 + 100 = 600)
             return (
               <div
                 key={idx}
-                className="relative w-[350px] overflow-hidden flex flex-col gap-[10px]"
+                className="flex flex-col gap-[10px] flex-shrink-0"
+                style={{
+                  width: `${SIZES.MEDIUM.width}px`,
+                  height: `${SIZES.LARGE.height}px`
+                }}
               >
                 {item.content.map((subMedia, subIdx) => {
                   const flatIndex = `${idx}-${subIdx}`;
-                  const isLoading = loadingStates[flatIndex];
                   const isHovered = hoveredIndex === flatIndex;
-                  const mediaHeight = subIdx === 0 || subIdx === 1 ? 240 : 90;
+                  // M = 250px, S = 100px
+                  const mediaHeight = subIdx === 0 || subIdx === 1
+                    ? SIZES.MEDIUM.height
+                    : SIZES.SMALL.height;
 
                   return (
                     <div
                       key={subIdx}
-                      style={{ height: `${mediaHeight}px` }}
-                      className={`w-full flex items-center justify-center bg-[#0F172A] 
-                          overflow-hidden relative cursor-pointer
+                      style={{
+                        width: `${SIZES.MEDIUM.width}px`,
+                        height: `${mediaHeight}px`
+                      }}
+                      className={`flex items-center justify-center bg-[#0F172A] 
+                          overflow-hidden relative cursor-pointer flex-shrink-0
                         transition-all duration-500 ease-out
                         ${isHovered
-                          ? " shadow-2xl z-20"
+                          ? "shadow-2xl z-20 scale-105"
                           : hoveredIndex !== null
-                            ? "border-transparent opacity-40"
-                            : "border-transparent opacity-100"
+                            ? "opacity-40"
+                            : "opacity-100"
                         }`}
                       onMouseEnter={() => setHoveredIndex(flatIndex)}
                       onMouseLeave={() => setHoveredIndex(null)}
                     >
-                      {isLoading && renderLoadingSpinner("w-8 h-8")}
-                      {renderMedia(subMedia, flatIndex)}
+                      <LazyMedia
+                        src={subMedia}
+                        className="h-full w-full object-cover"
+                      />
                     </div>
                   );
                 })}
