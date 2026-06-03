@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 
 // Assets
 import Desktop from "../../../assets/Desktop.png";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 
 const AboutMe = ({ id }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
