@@ -12,6 +12,7 @@ import WhyHireMe from "./WhyHireMe/WhyHireMe";
 import MyServices from "./MyServices/MyServices";
 import Testimonials from "./Testimonials/Testimonials";
 import DeferredSection from "../../components/DeferredSection";
+import { Helmet } from "react-helmet-async";
 
 const Home = () => {
   const [activeDot, setActiveDot] = useState(0);
@@ -35,6 +36,21 @@ const Home = () => {
 
   return (
     <>
+
+      {/* SEO Meta Tags and Structured Data */}
+      <Helmet>
+        <title>Tanbir Ahmed | Motion Graphics & GIF Advertising Portfolio</title>
+        <link rel="canonical" href="/" />
+        <meta name="description" content="Portfolio of Tanbir Ahmed, a motion graphics designer and digital ads creative specializing in GIF banners, animated social media ads, and brand storytelling for agencies and businesses." />
+        <meta name="keywords" content="motion graphics, GIF ads, digital advertising, banner ads, social media ads, After Effects, web animation, ad creative portfolio" />
+        <meta name="author" content="Tanbir Ahmed" />
+        <meta name="robots" content="index, follow" />
+        <meta property="og:url" content="/" />
+        <meta property="og:title" content="Tanbir Ahmed | Motion Graphics & GIF Advertising Portfolio" />
+        <meta property="og:description" content="Discover motion graphics, GIF banners, and creative digital ad work from Tanbir Ahmed. Expert in fast, high-impact ad design for brands and agencies." />
+        <meta property="og:type" content="website" />
+      </Helmet>
+
       <Works setActiveDot={setActiveDot} TOTAL_DOTS={TOTAL_DOTS} />
 
       <div className="bg-[#0F172A] text-white w-full z-40 shadow-sm">

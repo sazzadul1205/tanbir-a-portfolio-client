@@ -35,14 +35,16 @@ const Navbar = () => {
           <label htmlFor="mobile-drawer" className="lg:hidden cursor-pointer">
             <FiMenu className="text-2xl" />
           </label>
-          <p className="text-xl font-semibold tracking-wide">TANBIR A.</p>
+          <Link to={'/'} >
+            <h2 className="text-xl font-semibold tracking-wide">TANBIR A.</h2>
+          </Link>
         </div>
 
         {/* Center Menu (Desktop Only) */}
         <div className="hidden lg:flex flex-col items-center">
-          <h3 className="text-[22px] font-medium uppercase">
+          <h1 className="text-[22px] font-medium uppercase">
             Digital Advertising Production
-          </h3>
+          </h1>
           <ul className="flex items-center space-x-4 mt-2">
             {menuData.map((item, index) => (
               <React.Fragment key={index}>
@@ -55,9 +57,8 @@ const Navbar = () => {
                       <>
                         {item.label}
                         <span
-                          className={`absolute left-1/2 -translate-x-1/2 bottom-[-4px] h-[1.5px] bg-white/50 transition-all duration-300 ${
-                            isActive ? "w-full" : "w-0 group-hover:w-full"
-                          }`}
+                          className={`absolute left-1/2 -translate-x-1/2 bottom-[-4px] h-[1.5px] bg-white/50 transition-all duration-300 ${isActive ? "w-full" : "w-0 group-hover:w-full"
+                            }`}
                         />
                       </>
                     )}

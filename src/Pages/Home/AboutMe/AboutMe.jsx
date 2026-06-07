@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
 
 // Assets
-import Desktop from "../../../assets/Desktop.png";
+import Desktop from "../../../assets/Desktop2.png";
 import { Link } from "react-router-dom";
 
 const AboutMe = ({ id }) => {
@@ -16,7 +16,7 @@ const AboutMe = ({ id }) => {
     img.onload = () => setImageLoaded(true);
   }, []);
 
-  // JSON-LD structured data
+  // JSON-LD structured data with image
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Person",
@@ -24,6 +24,7 @@ const AboutMe = ({ id }) => {
     "jobTitle": "Motion Graphics Designer & Ad Creative Specialist",
     "description": "Motion graphics services delivering fast, stunning visuals for brands, agencies, and marketing teams. Specializing in After Effects animation, HTML5 banner design, and social media ad production.",
     "url": "https://www.upwork.com/freelancers/tanbirahmed2",
+    "image": Desktop, // Add the image URL here
     "knowsAbout": [
       "Motion Graphics",
       "After Effects Animation",
